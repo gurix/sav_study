@@ -24,6 +24,7 @@ module SavStudy
 
     config.generators do |g|
       g.orm :mongoid
+      g.template_engine :slim
     end
   end
 end
