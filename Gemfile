@@ -18,6 +18,15 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Library that generates fake data.
+gem 'faker'
+
+# A fixtures replacement with a straightforward definition syntax
+gem "factory_girl_rails", "~> 4.0"
+
+# Collecting Locale data for Ruby on Rails
+gem 'rails-i18n'
+
 # Simple Form aims to be as flexible as possible while helping you with powerful components to create your forms.
 gem 'simple_form'
 
@@ -41,8 +50,24 @@ gem 'mongoid', '~> 6.0.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  
   # Testing framework for Rails 3.x, 4.x and 5.0.
   gem 'rspec-rails', '~> 3.5'
+  
+  # RSpec matches for Mongoid models, including association and validation matchers
+  gem 'mongoid-rspec'
+  
+  # Acceptance test framework for web applications
+  gem 'capybara'
+  
+  # RSpec::CollectionMatchers lets you express expected outcomes on collections of an object in an example
+  gem 'rspec-collection_matchers'
+  
+  # A PhantomJS driver for Capybara
+  gem 'poltergeist'
+  
+  # Helper class for launching cross-platform applications in a fire and forget manner.
+  gem 'launchy'
 end
 
 group :development do
