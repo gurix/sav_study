@@ -25,6 +25,7 @@ module SavStudy
     config.generators do |g|
       g.orm :mongoid
       g.template_engine :slim
+      g.test_framework :rspec
     end
   end
 end
