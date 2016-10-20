@@ -1,0 +1,7 @@
+| &nbsp;
+.well
+  - Faker::Lorem.paragraphs(4).each do | p |
+    p= p
+  
+  p
+    .text-center= link_to t('.start'), '#', class: 'btn btn-large btn-success'
