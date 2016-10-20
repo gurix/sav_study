@@ -34,6 +34,8 @@ gem 'mongoid', '~> 6.0.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  # Testing framework for Rails 3.x, 4.x and 5.0.
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
