@@ -1,0 +1,2 @@
+class ByFoot < Movement
+end

@@ -3,5 +3,10 @@
   - Faker::Lorem.paragraphs(4).each do | p |
     p= p
   
+  .p.text-center
+    = link_to t('.start'), new_subject_path, class: 'btn btn-lg btn-success'
   p
-    .text-center= link_to t('.start'), '#', class: 'btn btn-large btn-success'
+  - if @subject
+    p.text-center
+      = link_to t('.continue'), [@subject, :routes], class: 'btn btn-lg btn-primary'
+        

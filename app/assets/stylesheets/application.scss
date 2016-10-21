@@ -1,3 +1,26 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-slider/bootstrap-slider";
+
+body {
+  margin-top: 12px;
+}
+
+.form-group {
+  
+  .slider.slider-horizontal {
+    width:95%;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
+
+label {
+  display: block;
+}
+
+.table td.fit{
+    white-space: nowrap;
+    width: 1%;
+}

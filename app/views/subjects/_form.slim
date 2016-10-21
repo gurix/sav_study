@@ -1,0 +1,9 @@
+= simple_form_for @subject do |f|
+  .row
+    .col-xs-12.col-sm-6
+      = f.input :email, placeholder: t('subjects.placeholders.email')
+      = f.input :birthyear, placeholder: t('subjects.placeholders.birthyear')
+  .row
+    .col-xs-12
+      .form-group
+          = f.submit value: t('.submit'), class: 'btn btn-success'

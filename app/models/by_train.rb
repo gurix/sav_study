@@ -1,0 +1,2 @@
+class ByTrain < Movement
+end

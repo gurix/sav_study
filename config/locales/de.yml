@@ -1,0 +1,59 @@
+de:
+  shared:
+    save: Speichern
+    cancel: Abbrechen
+    edit: Bearbeiten
+    delete: Löschen
+    next: Weiter
+    ask_for_delete_entry: Wollen Sie diesen Eintrag wirklich löschen?
+    error: Die Eingabe konnte nicht gespeichert werden, überprüfen Sie bitte ihre Eingaben
+    
+  pages:
+      index:
+        start: Neue Befragung beginnen
+        continue: Befragung fortführen
+  subjects:
+    placeholders:
+      email: hans@muster.ch
+      birthyear: "1982"
+    
+    new:
+      title: Befragung starten ...
+    
+    form:
+      submit: Weiter
+  
+  routes:
+    purposes:
+      work: ... um zur Arbeit zu gehen.
+      shopping: ... um einzukaufen.
+      recreational: ... in meiner Freizeit. (Beispielsweise um Freunde zu besuchen oder um ins Vereinslokal zu gelangen.)
+
+    index:
+      title: Meine Strecken
+      new: Zusätzliche Strecke erfassen
+    
+    new:
+      title: Neue Strecke definieren
+      
+    form:
+      optional_start_and_end_point: Die Angabe von Start- und Endpunkt ist optional
+      
+    empty_routes:
+      new: Meine erste Stecke definieren ...
+      
+  mongoid:
+     attributes:
+        route:
+          purpose: Ich lege diese Strecke zurück ...
+          interval: Wie­viel­mal pro Woche legen Sie diese Strecke zurück?
+          start_point: Startpunkt
+          end_point: Zielpunkt
+        
+        by_foot:
+          distance: Wieviele Kilometer laufen Sie zu Fuss?
+          duration: Wieviele Minuten sind Sie zu Fuss unterwegs?
+        
+        by_train:
+          distance: Wieviele Kilometer fahren Sie mit dem Zug?
+          duration: Wieviele Minuten sind Sie mit den Zug unterwegs?

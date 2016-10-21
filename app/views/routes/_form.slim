@@ -1,0 +1,28 @@
+= simple_form_for [@subject, @route] do |f|
+  .row
+    .col-xs-12
+      = f.input :purpose, as: :radio_buttons, collection: t('routes.purposes').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
+      = f.input :interval, input_html: { data: { provide: 'slider','slider-value': f.object.interval, 'slider-min': 1, 'slider-max': 7, 'slider-ticks': [1,2,3,4,5,6,7], 'slider-ticks-labels': [1,2,3,4,5,6,7] }}
+  .row
+    .col-xs-12
+      .well
+        i = t('.optional_start_and_end_point')
+        .row
+          .col-xs-12.col-md-6
+            = f.input :start_point
+          
+          .col-xs-12.col-md-6
+            = f.input :end_point
+
+  .row
+    .col-xs-12
+      = f.simple_fields_for :by_foot do |f_by_foot|
+        = render 'by_foot', f: f_by_foot
+  .row
+    .col-xs-12
+      = f.simple_fields_for :by_train do |f_by_train|
+        = render 'by_train', f: f_by_train
+  .row
+    .col-xs-12
+      .form-group
+        = f.submit value: t('shared.save'), class: 'btn btn-success'

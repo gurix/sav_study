@@ -1,0 +1,7 @@
+.well
+  .lead 
+    - Faker::Lorem.paragraphs(4).each do | p |
+      p= p
+  
+  p
+    .text-center= link_to t('.new'), new_subject_route_path(@subject), class: 'btn btn-lg btn-success'

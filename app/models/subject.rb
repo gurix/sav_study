@@ -29,7 +29,7 @@ class Subject
   private
 
   def generate_token(size)
-    SecureRandom.base64(size).delete('/+=')[0, size]
+    SecureRandom.base64(size).downcase.delete('/+=')[0, size]
   end
 
   def unique_token?
