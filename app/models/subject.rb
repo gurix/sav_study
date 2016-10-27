@@ -16,6 +16,15 @@ class Subject
   field :token, type: String
 
   validates :token, uniqueness: true
+  validates :gender, presence: true, if: :routes_added?
+  validates :birthyear, presence: true, if: :routes_added?
+  validates :education, presence: true, if: :routes_added?
+  validates :income, presence: true, if: :routes_added?
+  validates :pt_connection_duration, presence: true, if: :routes_added?
+  validates :pt_connection_interval, presence: true, if: :routes_added?
+  #validates :plz, presence: true, if: :routes_added?
+  #validates :city, presence: true, if: :routes_added?
+  validates :email, presence: true, if: :routes_added?
 
   index created_at: 1
   index updated_at: 1
@@ -27,6 +36,10 @@ class Subject
   end
 
   private
+  
+  def routes_added?
+    routes.any?
+  end
 
   def generate_token(size)
     SecureRandom.base64(size).downcase.delete('/+=')[0, size]

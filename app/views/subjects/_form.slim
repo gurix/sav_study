@@ -1,8 +1,18 @@
 = simple_form_for @subject do |f|
   .row
     .col-xs-12.col-sm-6
+      = f.input :pt_connection_duration, input_html: { data: { provide: 'slider', 'slider-value': f.object.pt_connection_duration, 'slider-ticks': [0,5,10,20,30,60], 'slider-ticks-labels': [0,5,10,20,30,60],'slider-ticks-positions': [0,8.3,16.6,33.3,50,100], 'slider-value':0}}, hint: t('.duration_hint')
+    .col-xs-12.col-sm-6
+      = f.input :pt_connection_interval, as: :radio_buttons, collection: t('subjects.pt_connection_interval').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first,  hint: t('.interval_hint')
+  hr
+  .row
+    .col-xs-12.col-sm-6
+      = f.input :gender, as: :radio_buttons, collection: t('subjects.gender').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
+      = f.input :birthyear, as: :integer, placeholder: t('subjects.placeholders.birthyear')
+      = f.input :education, as: :radio_buttons, collection: t('subjects.education').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
+    .col-xs-12.col-sm-6
+      = f.input :income, as: :radio_buttons, collection: t('subjects.income').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
       = f.input :email, placeholder: t('subjects.placeholders.email')
-      = f.input :birthyear, placeholder: t('subjects.placeholders.birthyear')
   .row
     .col-xs-12
       .form-group

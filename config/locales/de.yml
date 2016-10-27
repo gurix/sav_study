@@ -7,53 +7,101 @@ de:
     next: Weiter
     ask_for_delete_entry: Wollen Sie diesen Eintrag wirklich löschen?
     error: Die Eingabe konnte nicht gespeichert werden, überprüfen Sie bitte ihre Eingaben
-    
+
   pages:
       index:
+        title: ZHAW SAV Studie
         start: Neue Befragung beginnen
         continue: Befragung fortführen
+
   subjects:
     placeholders:
       email: hans@muster.ch
       birthyear: "1982"
-    
+
     new:
       title: Befragung starten ...
-    
+
     form:
       submit: Weiter
-  
+
+  subjects:
+    gender:
+      male: ♂ Männlich
+      female: ♀ Weiblich
+      neutrois: ⚲ Geschlechtsneutral
+
+    education:
+      0: kein Schulabschluss / nur obligatorische Schule
+      1: weiterführende Schule (10. Schuljahr, DMS, FMS, Verkehrsschule)
+      2: Berufslehre
+      3: Maturität (Gymnasiale, Berufs-, Fachmaturität)
+      4: HF/Nachdimplom oder Ähnliches
+      5: Bachelor
+      6: Lizenziat / Master / Doktorat
+
+    income:
+      0: Weniger als 2'000 Fr. / Monat
+      1: 2'001 – 5'000 Fr. / Monat
+      2: 5'001 – 8'000 Fr. / Monat
+      3: 8'001 – 11'000 Fr. / Monat
+      4: mehr als 11’000 Fr. / Monat
+
+    pt_connection_interval:
+      0: alle paar Minuten
+      1: jede halbe Stunde
+      2: jede Stunde
+      3: 3 - 4 mal am Tag
+      4: einmal am Tag
+      5: weniger als einmal pro Tag
+
+    form:
+      duration_hint: Falls sie keinen direkten ÖV-Anschluss haben, geben Sie 60 Minuten an.
+      interval_hint: Falls sie keinen direkten ÖV-Anschluss haben, geben Sie weniger als einmal pro Tag an.
+
+    edit:
+      title: Angaben zu ihrer Person
+
   routes:
     purposes:
       work: ... um zur Arbeit zu gehen.
       shopping: ... um einzukaufen.
       recreational: ... in meiner Freizeit. (Beispielsweise um Freunde zu besuchen oder um ins Vereinslokal zu gelangen.)
-
+  
     index:
       title: Meine Strecken
       new: Zusätzliche Strecke erfassen
-    
+
     new:
       title: Neue Strecke definieren
-      
+
     form:
       optional_start_and_end_point: Die Angabe von Start- und Endpunkt ist optional
-      
+
     empty_routes:
       new: Meine erste Stecke definieren ...
-      
+
   mongoid:
      attributes:
+        subject:
+          gender: Geschlecht
+          birthyear: Geburtsjahr
+          email: E-Mail-Adresse
+          education: Höchster Bildungsabschuss
+          income: Einkommen
+          pt_connection_duration: Wieviele Minuten benötigen sie zu Fuss zur nächsten öffentliche Haltestelle (Bus, Zug, Tram, etc.)
+          pt_connection_interval: In welchem durchschnittlichen Abstand haben Sie dort eine Verbindung? 
+
         route:
           purpose: Ich lege diese Strecke zurück ...
           interval: Wie­viel­mal pro Woche legen Sie diese Strecke zurück?
           start_point: Startpunkt
           end_point: Zielpunkt
-        
+
         by_foot:
           distance: Wieviele Kilometer laufen Sie zu Fuss?
           duration: Wieviele Minuten sind Sie zu Fuss unterwegs?
-        
+
         by_train:
           distance: Wieviele Kilometer fahren Sie mit dem Zug?
           duration: Wieviele Minuten sind Sie mit den Zug unterwegs?

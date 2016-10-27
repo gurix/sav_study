@@ -50,6 +50,12 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   
+  # Pry is a powerful alternative to the standard IRB shell for Ruby
+  gem 'pry'
+  
+  # Causes rails console to open pry
+  gem 'pry-rails'
+  
   # Testing framework for Rails 3.x, 4.x and 5.0.
   gem 'rspec-rails', '~> 3.5'
   

@@ -27,6 +27,7 @@ class SubjectsController < ApplicationController
   end
   
   def subject_form_params
-    params.require(:subject).permit(:email, :birthyear)
+    params.require(:subject).permit(:email, :birthyear, :gender, :income, :pt_connection_duration, :pt_connection_interval,
+                                    :plz, :city, :education)
   end
 end
