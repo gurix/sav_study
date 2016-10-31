@@ -5,8 +5,12 @@ de:
     edit: Bearbeiten
     delete: Löschen
     next: Weiter
+    back: Zurück
     ask_for_delete_entry: Wollen Sie diesen Eintrag wirklich löschen?
     error: Die Eingabe konnte nicht gespeichert werden, überprüfen Sie bitte ihre Eingaben
+    duration_in_minutes: "%{minutes} Minuten"
+    distance_in_kilometer: "%{kilometers} Km"
+    total: Total
 
   pages:
       index:
@@ -15,6 +19,9 @@ de:
         continue: Befragung fortführen
 
   subjects:
+    errors:
+      to_young: Der angegebene Jahrgang ist zu jung
+      to_old: Der angegebene Jahrgang ist zu alt
     placeholders:
       email: hans@muster.ch
       birthyear: "1982"
@@ -22,10 +29,6 @@ de:
     new:
       title: Befragung starten ...
 
-    form:
-      submit: Weiter
-
-  subjects:
     gender:
       male: ♂ Männlich
       female: ♀ Weiblich
@@ -58,9 +61,26 @@ de:
     form:
       duration_hint: Falls sie keinen direkten ÖV-Anschluss haben, geben Sie 60 Minuten an.
       interval_hint: Falls sie keinen direkten ÖV-Anschluss haben, geben Sie weniger als einmal pro Tag an.
+      submit: Befragung abschliessen
 
     edit:
       title: Angaben zu ihrer Person
+    
+    update:
+      thanks_for_participating: Besten Dank für Ihre Teilnahme
+  cars:
+    form:
+      title: Was für ein Fahrzeug fahren Sie?
+    
+    types_of_power:
+      gasoline: Konventionelles Fahrzeug betrieben mit Benzin oder Diesel
+      hybrid: Hybridelektrokraftfahrzeug mit Benzin oder Diesel
+      electro: Batteriebetriebenes Elektrofahrzeug
+
+    categories: 
+      fullsize: SUV, Oberklasse, Offroader, Transporter (10 Liter / 100 Kilometer oder mehr)
+      compact: Mittel- und Kompaktklasse (6 - 10 Liter / 100 Kilometer oder mehr)
+      micro: Kleinklasse und Minis (6 Liter / 100 Kilometer oder weniger)
 
   routes:
     purposes:
@@ -72,14 +92,21 @@ de:
       title: Meine Strecken
       new: Zusätzliche Strecke erfassen
 
-    new:
-      title: Neue Strecke definieren
-
     form:
+      title: Strecke bearbeiten
       optional_start_and_end_point: Die Angabe von Start- und Endpunkt ist optional
 
     empty_routes:
       new: Meine erste Stecke definieren ...
+    
+    by_train:
+      title: Anteil der Strecke, die ich mit dem Zug zurücklege
+    
+    by_car:
+      title: Anteil der Strecke, die ich mit meinem Auto zurücklege
+    
+    by_foot:  
+      title: Anteil der Strecke, die ich zu Fuss gehe (Beispielsweise um zur Haltestelle zu gelangen oder zum Parplatz zu gehen)
 
   mongoid:
      attributes:
@@ -92,6 +119,9 @@ de:
           pt_connection_duration: Wieviele Minuten benötigen sie zu Fuss zur nächsten öffentliche Haltestelle (Bus, Zug, Tram, etc.)
           pt_connection_interval: In welchem durchschnittlichen Abstand haben Sie dort eine Verbindung? 
 
+        car:
+          category: Fahrzeugkategorie
+          type_of_power: Antriebsart
         route:
           purpose: Ich lege diese Strecke zurück ...
           interval: Wie­viel­mal pro Woche legen Sie diese Strecke zurück?

@@ -8,5 +8,5 @@ h1 = title t('.title')
   p
   - if @subject
     p.text-center
-      = link_to t('.continue'), [@subject, :routes], class: 'btn btn-lg btn-primary'
+      = link_to t('.continue'), [:edit, @subject, :car], class: 'btn btn-lg btn-primary'
         

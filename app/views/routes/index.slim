@@ -2,6 +2,9 @@ h1 = title(t '.title')
 - if @routes.blank?
   = render 'empty_routes'
 - else
+  .well
+    - Faker::Lorem.paragraphs(4).each do | p |
+      p= p
   table.table.table-collapse
     tr
       th Zweck
@@ -13,16 +16,23 @@ h1 = title(t '.title')
       tr
         td = "#{route.interval} x #{route.purpose}"
         td 
-          = route.start_point if route.start_point
-          = " - #{route.end_point}" if route.end_point
-        td = route.duration
-        td = route.distance
-        td.btn-group
-          = link_to t('shared.edit'), edit_subject_route_path(@subject, route), class: 'btn btn-default btn-primary-spacing'
-          = link_to t('shared.delete'), subject_route_path(@subject, route), class: 'btn btn-danger btn-primary-spacing', method: :delete, 
-                                                                                  data: {confirm: t('shared.ask_for_delete_entry')}
-          
-  p.text-center= link_to t('.new'), new_subject_route_path(@subject), class: 'btn btn-lg btn-primary'
-  p.text-center= link_to t('shared.next'), edit_subject_path(@subject), class: 'btn btn-lg btn-success'
-  
-        
+          = route.start_point unless route.start_point.blank?
+          = " - #{route.end_point}" unless route.end_point.blank?
+        td = t('shared.duration_in_minutes', minutes: route.total_duration) 
+        td = t('shared.distance_in_kilometer', kilometers: route.total_distance)
+        td
+          .btn-group.pull-right
+            = link_to t('shared.edit'), edit_subject_route_path(@subject, route), class: 'btn btn-default btn-primary-spacing'
+            = link_to t('shared.delete'), subject_route_path(@subject, route), class: 'btn btn-danger btn-primary-spacing', method: :delete,  
+                                                                              data: {confirm: t('shared.ask_for_delete_entry')}
+    tr
+      th colspan='2' = t('shared.total') 
+      th = t('shared.duration_in_minutes', minutes: @subject.total_duration) 
+      th = t('shared.distance_in_kilometer', kilometers: @subject.total_distance)
+      td= link_to t('.new'), new_subject_route_path(@subject), class: 'btn btn-primary pull-right'                                                                       
+    
+  .row
+    .col-xs-6
+      = link_to t('shared.back'), [:edit, @subject, :car], class: 'btn btn-default'
+    .col-xs-6
+      = link_to t('shared.next'), edit_subject_path(@subject), class: 'btn btn-success pull-right'

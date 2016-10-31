@@ -3,13 +3,12 @@ class Subject
   include Mongoid::Timestamps
 
   embeds_many :routes
+  embeds_one :car
 
   field :gender, type: String
   field :birthyear, type: Integer
   field :education, type: Integer
   field :income, type: Integer
-  field :pt_connection_duration, type: Integer
-  field :pt_connection_interval, type: Integer
   field :plz, type: Integer
   field :city, type: String
   field :email, type: String
@@ -20,23 +19,37 @@ class Subject
   validates :birthyear, presence: true, if: :routes_added?
   validates :education, presence: true, if: :routes_added?
   validates :income, presence: true, if: :routes_added?
-  validates :pt_connection_duration, presence: true, if: :routes_added?
-  validates :pt_connection_interval, presence: true, if: :routes_added?
-  #validates :plz, presence: true, if: :routes_added?
-  #validates :city, presence: true, if: :routes_added?
-  validates :email, presence: true, if: :routes_added?
+  # validates :plz, presence: true, if: :routes_added?
+  # validates :city, presence: true, if: :routes_added?
+
+  validate :correct_age, if: :routes_added?
 
   index created_at: 1
   index updated_at: 1
 
   before_create :reset_token
 
+  def correct_age
+    return unless birthyear
+    this_year = DateTime.now.year
+    errors.add(:birthyear, I18n.t('subjects.errors.to_old')) if birthyear < this_year - 100
+    errors.add(:birthyear, I18n.t('subjects.errors.to_young')) if birthyear > this_year - 12
+  end
+
   def reset_token
     self.token = generate_token(4) until unique_token?
   end
 
+  def total_duration
+    routes.sum(&:total_duration)
+  end
+
+  def total_distance
+    routes.sum(&:total_distance)
+  end
+
   private
-  
+
   def routes_added?
     routes.any?
   end

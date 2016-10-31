@@ -1,0 +1,12 @@
+h1 = title(t '.title')
+
+= simple_form_for @car, url: subject_car_path(@subject) do |f|
+  .row
+    .col-xs-12
+      = f.input :category, as: :radio_buttons, collection: t('cars.categories').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, class_method: :first
+      = f.input :type_of_power, as: :radio_buttons, collection: t('cars.types_of_power').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
+
+  .row
+    .col-xs-12
+      .form-group
+        = f.submit value: t('shared.next'), class: 'btn btn-success'
