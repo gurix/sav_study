@@ -1,0 +1,2 @@
+class FutureProfilesController < ProfilesController
+end

@@ -1,0 +1,25 @@
+h1 = title 'Mein zukünftiges Mobilitätsprofil'
+ul#myTabs.nav.nav-tabs.nav-justified
+  li.active 
+    a href="#model" data-toggle="tab" Mobilitätsmodel
+  li
+    a href="#profile" data-toggle="tab" Profil
+.tab-content
+  #model.tab-pane.active
+    p Sie werden 25% weniger Zeit benötigen.
+    .row
+      .col-xs-6
+        = link_to t('shared.back'), :back, class: 'btn btn-default'
+      .col-xs-6
+      = link_to t('shared.next'), 'javascript: $("#myTabs a:last").tab("show")', class: 'btn btn-success pull-right'
+
+  #profile.tab-pane
+    .lead
+      | Sie sind in der in der Woche #{distance_of_time_in_words(@subject.total_duration_per_week.minutes*0.75)} unterwegs 
+      | und legen dabei eine Strecke von #{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)} zurück.
+
+    .row
+      .col-xs-6
+        = link_to t('shared.back'), 'javascript: $("#myTabs a:first").tab("show")', class: 'btn btn-default'
+      .col-xs-6
+      = link_to t('shared.next'), edit_subject_path(@subject), class: 'btn btn-success pull-right'

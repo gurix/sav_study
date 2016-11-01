@@ -9,7 +9,7 @@ de:
     ask_for_delete_entry: Wollen Sie diesen Eintrag wirklich löschen?
     error: Die Eingabe konnte nicht gespeichert werden, überprüfen Sie bitte ihre Eingaben
     duration_in_minutes: "%{minutes} Minuten"
-    distance_in_kilometer: "%{kilometers} Km"
+    distance_in_kilometer: "%{kilometers} Kilometer"
     total: Total
 
   pages:

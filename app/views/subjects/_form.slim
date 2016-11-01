@@ -1,15 +1,11 @@
 = simple_form_for @subject do |f|
+  = f.input :gender, as: :radio_buttons, required: true, collection: t('subjects.gender').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
   .row
-    .col-xs-12.col-sm-6
-      = f.input :gender, as: :radio_buttons, required: true, collection: t('subjects.gender').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
-      = f.input :birthyear, as: :integer, required: true, placeholder: t('subjects.placeholders.birthyear')
-    .col-xs-12.col-sm-6
-      = f.input :income, as: :radio_buttons, required: true, collection: t('subjects.income').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
-      = f.input :education, as: :radio_buttons, required: true, collection: t('subjects.education').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
+    .col-xs-12.col-sm-2
+      = f.input :birthyear, as: :integer, required: true, placeholder: t('subjects.placeholders.birthyear')   
+  = f.input :income, as: :radio_buttons, required: true, collection: t('subjects.income').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
+  = f.input :education, as: :radio_buttons, required: true, collection: t('subjects.education').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
   .row
-    .col-xs-12
+    .col-xs-12.col-sm-4
       = f.input :email, placeholder: t('subjects.placeholders.email')
-  .row
-    .col-xs-12
-      .form-group
-          = f.submit value: t('.submit'), class: 'btn btn-success'
+  = f.submit value: t('.submit'), class: 'btn btn-success'

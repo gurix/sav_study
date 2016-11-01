@@ -1,0 +1,2 @@
+class PresentProfilesController < ProfilesController
+end

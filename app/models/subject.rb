@@ -48,6 +48,14 @@ class Subject
     routes.sum(&:total_distance)
   end
 
+  def total_duration_per_week
+    routes.sum(&:total_duration_per_week)
+  end
+
+  def total_distance_per_week
+    routes.sum(&:total_distance_per_week)
+  end
+
   private
 
   def routes_added?

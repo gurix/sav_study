@@ -1,0 +1,10 @@
+h1 = title 'Mein aktuelles Mobilitätsprofil'
+.lead
+ | Sie sind in der in der Woche #{distance_of_time_in_words(@subject.total_duration_per_week.minutes)} unterwegs 
+ | und legen dabei eine Strecke von #{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)} zurück.
+
+.row
+  .col-xs-6
+    = link_to t('shared.back'), :back, class: 'btn btn-default'
+  .col-xs-6
+  = link_to t('shared.next'), subject_future_profile_path(@subject), class: 'btn btn-success pull-right'

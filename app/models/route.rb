@@ -25,8 +25,16 @@ class Route
     movements.inject(0) { |a, e| a + e.total_duration }
   end
 
+  def total_duration_per_week
+    2 * total_duration * interval
+  end
+
   def total_distance
     movements.inject(0) { |a, e| a + e.total_distance }
+  end
+
+  def total_distance_per_week
+    2 * total_distance * interval
   end
 
   def movements
