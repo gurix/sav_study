@@ -1,0 +1,34 @@
+h1 = title('Ein paar indiskrete Fragen')
+ruby:
+  @default_slider = {
+    ticks: [1,2,3,4],
+    labels: ['Trifft gar<br>nicht zu', 'Trifft<br>nicht zu', 'Trifft zu', 'Trifft<br>völlig zu'],
+    ticks_position: [0, 33, 66, 100]
+  }
+
+= simple_form_for @questionary, url: subject_questionary_path(@subject) do |f|
+  .row
+    .col-xs-12
+      = f.input :version, as: :hidden, value: 1
+      = f.input :page, as: :hidden
+  
+  - if f.object.page == 1
+    .row
+      .col-xs-12
+        = f.input :answer_1, label: 'Im Auto brülle ich oft den Vordermann an.', input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_1, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+    .row
+      .col-xs-12
+        = f.input :answer_2,label: 'Im Zug stelle ich die Tasche extra auf den Nebensitz, damit niemand sich zumir setzen kann.', input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_2, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+ 
+  - if f.object.page == 2
+      .row
+        .col-xs-12
+          = f.input :answer_3, label:'Ich finde alle Leute doof', input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_3, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+
+  .row
+      .col-xs-6
+        = link_to t('shared.cancel'), :back, class: 'btn btn-default'
+      .col-xs-6
+        = f.submit value: t('shared.next'), class: 'btn btn-success pull-right'
+
+  

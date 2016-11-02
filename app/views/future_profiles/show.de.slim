@@ -6,7 +6,10 @@ ul#myTabs.nav.nav-tabs.nav-justified
     a href="#profile" data-toggle="tab" Profil
 .tab-content
   #model.tab-pane.active
-    p Sie werden 25% weniger Zeit benötigen.
+    p 
+      b Sie werden 25% weniger Zeit benötigen.
+    - Faker::Lorem.paragraphs(8).each do | p |
+      p= p
     .row
       .col-xs-6
         = link_to t('shared.back'), :back, class: 'btn btn-default'
@@ -14,9 +17,10 @@ ul#myTabs.nav.nav-tabs.nav-justified
       = link_to t('shared.next'), 'javascript: $("#myTabs a:last").tab("show")', class: 'btn btn-success pull-right'
 
   #profile.tab-pane
-    .lead
-      | Sie sind in der in der Woche #{distance_of_time_in_words(@subject.total_duration_per_week.minutes*0.75)} unterwegs 
-      | und legen dabei eine Strecke von #{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)} zurück.
+    p 
+      b Sie sind in der in der Woche #{distance_of_time_in_words(@subject.total_duration_per_week.minutes*0.75)} unterwegs und legen dabei eine Strecke von #{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)} zurück.
+    - Faker::Lorem.paragraphs(8).each do | p |
+      p= p
 
     .row
       .col-xs-6
