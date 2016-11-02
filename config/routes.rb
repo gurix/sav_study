@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   resources :subjects do
     resource :car
+    resources :routes
     resource :present_profile, only: :show
     resource :future_profile, only: :show
-    resources :routes
+    resource :questionary
   end
 end

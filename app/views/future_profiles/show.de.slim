@@ -22,4 +22,4 @@ ul#myTabs.nav.nav-tabs.nav-justified
       .col-xs-6
         = link_to t('shared.back'), 'javascript: $("#myTabs a:first").tab("show")', class: 'btn btn-default'
       .col-xs-6
-      = link_to t('shared.next'), edit_subject_path(@subject), class: 'btn btn-success pull-right'
+      = link_to t('shared.next'), new_subject_questionary_path(@subject), class: 'btn btn-success pull-right'

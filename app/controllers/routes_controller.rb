@@ -1,6 +1,6 @@
 class RoutesController < ApplicationController
-  before_filter :load_subject
-  before_filter :load_route, only: [:edit, :update, :destroy]
+  before_action :load_subject
+  before_action :load_route, only: [:edit, :update, :destroy]
 
   def index
     @routes = @subject.routes

@@ -4,6 +4,7 @@ class Subject
 
   embeds_many :routes
   embeds_one :car
+  embeds_one :questionary
 
   field :gender, type: String
   field :birthyear, type: Integer

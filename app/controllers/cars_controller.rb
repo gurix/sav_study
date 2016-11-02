@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-  before_filter :load_subject
+  before_action :load_subject
 
   def create
     render :new unless update_or_create

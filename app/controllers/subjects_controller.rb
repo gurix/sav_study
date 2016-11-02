@@ -1,5 +1,5 @@
 class SubjectsController < ApplicationController
-  before_filter :load_subject, only: [:edit, :update]
+  before_action :load_subject, only: [:edit, :update]
 
   def new
     @subject = Subject.new
@@ -18,6 +18,7 @@ class SubjectsController < ApplicationController
       cookies.delete :subject_id # Delte cookie so that the questionary is no longer availabel to continue
       redirect_to '/'
     else
+      flash[:error] = t 'shared.error'
       render :edit
     end
   end

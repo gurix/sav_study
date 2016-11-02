@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_filter :load_subject
+  before_action :load_subject
 
   private
 

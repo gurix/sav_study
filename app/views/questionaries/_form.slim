@@ -1,0 +1,34 @@
+h1 = title(t '.title')
+ruby:
+  @default_slider = {
+    ticks: [1,2,3,4],
+    labels: ['Ich stimme gar<br>nicht zu', 'Ich stimme<br>nicht zu', 'Ich stimme zu', 'Ich stimme<br>völlig zu'],
+    ticks_position: [0, 33, 66, 100]
+  }
+
+= simple_form_for @questionary, url: subject_questionary_path(@subject) do |f|
+  .row
+    .col-xs-12
+      = f.input :version, as: :numeric, value: 0
+      = f.input :page, as: :numeric, value: 0
+  
+  - if f.object.page == 1
+    .row
+      .col-xs-12
+        = f.input :answer_1, input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_1, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+    .row
+      .col-xs-12
+        = f.input :answer_2, input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_2, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+ 
+  - if f.object.page == 2
+      .row
+        .col-xs-12
+          = f.input :answer_3, input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_3, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+
+  .row
+      .col-xs-6
+        = link_to t('shared.cancel'), :back, class: 'btn btn-default'
+      .col-xs-6
+        = f.submit value: t('shared.next'), class: 'btn btn-success pull-right'
+
+  
