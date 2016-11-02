@@ -16,3 +16,6 @@
 # Ignore Byebug command history file.
 .byebug_history
 spec/examples.txt
+
+# Ignore ruby version
+.ruby-version
