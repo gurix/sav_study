@@ -114,6 +114,9 @@ de:
     
     by_foot:  
       title: Anteil der Strecke, die ich zu Fuss gehe (Beispielsweise um zur Haltestelle zu gelangen oder zum Parplatz zu gehen)
+    
+    by_bicycle:  
+      title: Anteil der Strecke, die ich mit dem Fahrrad zurücklege
 
   mongoid:
      attributes:
@@ -149,3 +152,7 @@ de:
           distance: Wie viele Kilometer fahren Sie mit dem Auto?
           duration: Wie viele Minuten sind Sie mit den Auto unterwegs? (inklusive stockendem Verkehr)
           stopp_and_go: Wie viele Minuten stehen Sie dabei in stockendem Verkehr?
+        
+        by_bicycle:
+          distance: Wie viele Kilometer fahren Sie mit dem Fahrrad?
+          duration: Wie viele Minuten sind Sie mit dem Fahrrad unterwegs?

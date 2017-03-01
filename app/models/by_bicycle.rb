@@ -1,0 +1,2 @@
+class ByBicycle < Movement
+end

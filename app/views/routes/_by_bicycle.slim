@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title 
+      a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseByBicycle" 
+        = t('.title')
+  #collapseByBicycle.panel-collapse.collapse.in
+    .panel-body
+      = f.input :distance, input_html: { data: { provide: 'slider', 'slider-value': f.object.distance, 'slider-ticks': [0,1,2,3,4,5], 'slider-ticks-labels': [0,1,2,3,4,5], 'slider-ticks-positions': [0,20,40,60,80,100]}}
+      = f.input :duration, input_html: { data: { provide: 'slider', 'slider-value': f.object.duration, 'slider-ticks': [0,1,5,10,20,30,60], 'slider-ticks-labels': [0,1,5,10,20,30,60], 'slider-ticks-positions': [0,1.6,8.3,16,33,50,100] }}
