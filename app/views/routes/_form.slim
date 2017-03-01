@@ -1,8 +1,12 @@
 h1 = title(t '.title')
 = simple_form_for [@subject, @route] do |f|
   .row
-    .col-xs-12
+    .col-xs-6
       = f.input :purpose, as: :radio_buttons, collection: t('routes.purposes').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
+    .col-xs-6
+      = f.input :cargo, as: :boolean
+  .row
+    .col-xs-12
       = f.input :interval, input_html: { data: { provide: 'slider','slider-value': f.object.interval, 'slider-ticks': [1,2,3,4,5,6,7], 'slider-ticks-labels': [1,2,3,4,5,6,7] }}
   .row
     .col-xs-12

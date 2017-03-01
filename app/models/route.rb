@@ -14,10 +14,11 @@ class Route
   accepts_nested_attributes_for :by_car
   accepts_nested_attributes_for :by_train
 
-  field :purpose, type: String
-  field :interval, type: Integer, default: 1
+  field :purpose,     type: String
+  field :interval,    type: Integer, default: 1
   field :start_point, type: String
-  field :end_point, type: String
+  field :end_point,   type: String
+  field :cargo,       type: Boolean
 
   validates :purpose, presence: true
 

@@ -50,7 +50,7 @@ class RoutesController < ApplicationController
   end
 
   def route_form_params
-    params.require(:route).permit(:start_point, :end_point, :purpose, :interval,
+    params.require(:route).permit(:start_point, :end_point, :purpose, :cargo, :interval,
                                   by_car_attributes: [:id, :distance, :duration, :stopp_and_go],
                                   by_foot_attributes: [:id, :distance, :duration],
                                   by_train_attributes: [:id, :distance, :duration])
