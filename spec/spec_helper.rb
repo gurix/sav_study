@@ -1,6 +1,5 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
-
 require 'rspec/rails'
 require 'rails/mongoid'
 require 'mongoid-rspec'
@@ -12,6 +11,7 @@ require 'capybara/poltergeist'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include Mongoid::Matchers, type: :model
+  config.include ApplicationHelper
 
   config.before(:suite) do
     FactoryGirl.reload
@@ -104,4 +104,8 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  config.expose_dsl_globally = true
+
+  config.infer_spec_type_from_file_location!
 end

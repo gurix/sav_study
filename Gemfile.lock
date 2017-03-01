@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/mongoid-rspec/mongoid-rspec.git
+  revision: 799cd96cede0f7214d8c79f93f7b933f671966b4
+  specs:
+    mongoid-rspec (4.0.0.pre.alpha1)
+      mongoid (~> 6.0)
+      rake
+      rspec (~> 3.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -109,10 +118,6 @@ GEM
     mongoid (6.0.3)
       activemodel (~> 5.0)
       mongo (~> 2.3)
-    mongoid-rspec (1.10.0)
-      mongoid (>= 3.0.1)
-      rake
-      rspec (>= 2.14)
     multi_json (1.12.1)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
@@ -253,7 +258,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   mongoid (~> 6.0.0)
-  mongoid-rspec
+  mongoid-rspec!
   poltergeist
   pry
   pry-rails

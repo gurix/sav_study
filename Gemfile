@@ -61,7 +61,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   
   # RSpec matches for Mongoid models, including association and validation matchers
-  gem 'mongoid-rspec'
+  gem 'mongoid-rspec', github: 'mongoid-rspec/mongoid-rspec'
   
   # Acceptance test framework for web applications
   gem 'capybara'
