@@ -129,6 +129,7 @@ de:
         car:
           category: Fahrzeugkategorie
           type_of_power: Antriebsart
+
         route:
           purpose: Ich lege diese Strecke zurück ...
           cargo: Ich befördere ein grössere Gepäckstücke, den Einkauf oder ein Haustier.
@@ -137,9 +138,14 @@ de:
           end_point: Zielpunkt
 
         by_foot:
-          distance: Wieviele Kilometer laufen Sie zu Fuss?
-          duration: Wieviele Minuten sind Sie zu Fuss unterwegs?
+          distance: Wie viele Kilometer laufen Sie zu Fuss?
+          duration: Wie viele Minuten sind Sie zu Fuss unterwegs?
 
         by_train:
-          distance: Wieviele Kilometer fahren Sie mit dem Zug?
-          duration: Wieviele Minuten sind Sie mit den Zug unterwegs?
+          distance: Wie viele Kilometer fahren Sie mit dem Zug?
+          duration: Wie viele Minuten sind Sie mit den Zug unterwegs?
+        
+        by_car:
+          distance: Wie viele Kilometer fahren Sie mit dem Auto?
+          duration: Wie viele Minuten sind Sie mit den Auto unterwegs? (inklusive stockendem Verkehr)
+          stopp_and_go: Wie viele Minuten stehen Sie dabei in stockendem Verkehr?
