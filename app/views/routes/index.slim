@@ -12,16 +12,19 @@ h1 = title(t '.title')
       th Dauer
       th Distanz
       th Fahrten pro Woche
+      th Gepäck oder Haustiere
       th
     - @routes.each do | route |
       tr
-        td = "route.purpose"
+        td 
+          = t("routes.short_purposes.#{route.purpose}")  
         td 
           = route.start_point unless route.start_point.blank?
           = " - #{route.end_point}" unless route.end_point.blank?
         td = t('shared.duration_in_minutes', minutes: route.total_duration) 
         td = t('shared.distance_in_kilometer', kilometers: route.total_distance)
         td = route.interval
+        td = t("shared.#{route.cargo ? 'yes':'no'}")  
         td
           .btn-group.pull-right
             = link_to t('shared.edit'), edit_subject_route_path(@subject, route), class: 'btn btn-default btn-primary-spacing'
@@ -32,6 +35,7 @@ h1 = title(t '.title')
       th = t('shared.duration_in_minutes', minutes: @subject.total_duration) 
       th = t('shared.distance_in_kilometer', kilometers: @subject.total_distance)
       th 
+      th
       td= link_to t('.new'), new_subject_route_path(@subject), class: 'btn btn-primary pull-right'                                                                       
     
   .row

@@ -11,6 +11,8 @@ de:
     duration_in_minutes: "%{minutes} Minuten"
     distance_in_kilometer: "%{kilometers} Kilometer"
     total: Total
+    "yes": Ja
+    "no": Nein
 
   pages:
       index:
@@ -87,10 +89,15 @@ de:
       work: ... um zur Arbeit zu gehen.
       shopping: ... um einzukaufen.
       recreational: ... in meiner Freizeit. (Beispielsweise um Freunde zu besuchen oder um ins Vereinslokal zu gelangen.)
+    short_purposes:
+      work: Arbeit
+      shopping: Einkauf
+      recreational: Freizeit
   
     index:
       title: Meine Strecken
       new: Zusätzliche Strecke erfassen
+      cargo: inkl. Gepäck oder Haustiere
 
     form:
       title: Strecke bearbeiten
