@@ -18,9 +18,9 @@ class QuestionariesController < ApplicationController
       if @questionary.page == 3
         redirect_to edit_subject_path(@subject)
         return
-      end         
+      end
     end
-     render :edit
+    render :edit
   end
 
   def load_subject

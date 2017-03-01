@@ -22,7 +22,7 @@ class Route
   validates :purpose, presence: true
 
   def total_duration
-    movements.inject(0) { |a, e| a + e.total_duration }
+    movements.inject(0) { |acc, elem| acc + elem.total_duration }
   end
 
   def total_duration_per_week
@@ -30,7 +30,7 @@ class Route
   end
 
   def total_distance
-    movements.inject(0) { |a, e| a + e.total_distance }
+    movements.inject(0) { |acc, elem| acc + elem.total_distance }
   end
 
   def total_distance_per_week

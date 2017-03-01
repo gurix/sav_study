@@ -4,7 +4,8 @@ AllCops:
     - config.ru
   Exclude:
     - bin/**
-    - spec/dummy/config/initializers/secret_token.rb
+    - config/**/*
+    - spec/**/*
 Documentation:
   Enabled: false
 LineLength:

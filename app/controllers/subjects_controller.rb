@@ -9,8 +9,7 @@ class SubjectsController < ApplicationController
     redirect_to [:new, @subject, :car]
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @subject.update_attributes(subject_form_params)
