@@ -54,6 +54,7 @@ class RoutesController < ApplicationController
                                   by_car_attributes: [:id, :distance, :duration, :stopp_and_go],
                                   by_foot_attributes: [:id, :distance, :duration],
                                   by_train_attributes: [:id, :distance, :duration],
-                                  by_bicycle_attributes: [:id, :distance, :duration])
+                                  by_bicycle_attributes: [:id, :distance, :duration],
+                                  by_local_line_attributes: [:id, :distance, :duration])
   end
 end

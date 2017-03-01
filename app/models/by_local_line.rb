@@ -1,0 +1,2 @@
+class ByLocalLine < Movement
+end

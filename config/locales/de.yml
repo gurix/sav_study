@@ -117,6 +117,9 @@ de:
     
     by_bicycle:  
       title: Anteil der Strecke, die ich mit dem Fahrrad zurücklege
+    
+    by_local_line:  
+      title: Anteil der Strecke, die ich mit dem Bus, Trolleybus oder Tram zurücklege
 
   mongoid:
      attributes:
@@ -156,3 +159,7 @@ de:
         by_bicycle:
           distance: Wie viele Kilometer fahren Sie mit dem Fahrrad?
           duration: Wie viele Minuten sind Sie mit dem Fahrrad unterwegs?
+
+        by_local_line:
+          distance: Wie viele Kilometer fahren Sie mit dem Bus, Trolleybus oder Tram?
+          duration: Wie viele Minuten sind Sie mit dem Bus, Trolleybus oder Tram unterwegs?

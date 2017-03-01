@@ -32,6 +32,9 @@ h1 = title(t '.title')
         br
         = f.simple_fields_for :by_bicycle do |f_by_bicycle|
           = render 'by_bicycle', f: f_by_bicycle
+        br
+        = f.simple_fields_for :by_local_line do |f_by_local_line|
+          = render 'by_local_line', f: f_by_local_line
     .row
       .col-xs-6
         = link_to t('shared.cancel'), :back, class: 'btn btn-default'
