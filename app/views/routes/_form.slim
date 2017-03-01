@@ -20,18 +20,21 @@ h1 = title(t '.title')
             = f.input :end_point
   .row
     .col-xs-12
-      = f.simple_fields_for :by_foot do |f_by_foot|
-        = render 'by_foot', f: f_by_foot
-  .row
-    .col-xs-12
-      = f.simple_fields_for :by_car do |f_by_car|
-        = render 'by_car', f: f_by_car
-  .row
-    .col-xs-12
-      = f.simple_fields_for :by_train do |f_by_train|
-        = render 'by_train', f: f_by_train
-  .row
+      .panel-group id="accordion"
+        = f.simple_fields_for :by_foot do |f_by_foot|
+          = render 'by_foot', f: f_by_foot
+        br
+        = f.simple_fields_for :by_car do |f_by_car|
+          = render 'by_car', f: f_by_car
+        br
+        = f.simple_fields_for :by_train do |f_by_train|
+          = render 'by_train', f: f_by_train
+        br
+        = f.simple_fields_for :by_bicycle do |f_by_bicycle|
+          = render 'by_bicycle', f: f_by_bicycle
+    .row
       .col-xs-6
         = link_to t('shared.cancel'), :back, class: 'btn btn-default'
       .col-xs-6
         = f.submit value: t('shared.save'), class: 'btn btn-success pull-right'
+ 
