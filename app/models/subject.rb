@@ -45,8 +45,20 @@ class Subject
     routes.sum(&:total_duration)
   end
 
+  def total_free_duration
+    total_duration - total_blocked_duration
+  end
+
   def total_distance
     routes.sum(&:total_distance)
+  end
+
+  def total_blocked_duration_per_week
+    routes.sum(&:total_blocked_duration_per_week)
+  end
+
+  def total_free_duration_per_week
+    total_duration_per_week - total_blocked_duration_per_week
   end
 
   def total_duration_per_week

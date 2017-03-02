@@ -13,6 +13,10 @@ class ByCar < Movement
     car.type_of_power
   end
 
+  def total_blocked_duration
+    duration
+  end
+
   def conventional_costs # rubocop:disable Metrics/MethodLength
     costs_per_km = case vehicle_category
                    when 'fullsize' then 1.2

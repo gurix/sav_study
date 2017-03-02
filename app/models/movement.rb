@@ -1,6 +1,4 @@
 class Movement
-  CONVENTIONAL_COSTS_PER_KM = 0.0
-
   include Mongoid::Document
   embedded_in :route, polymorphic: true
 
@@ -11,8 +9,12 @@ class Movement
     duration
   end
 
+  def total_blocked_duration
+    0.0
+  end
+
   def conventional_costs
-    total_distance * CONVENTIONAL_COSTS_PER_KM
+    0.0
   end
 
   def total_distance

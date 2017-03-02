@@ -30,12 +30,20 @@ class Route
     movements.inject(0) { |acc, elem| acc + elem.total_duration }
   end
 
+  def total_blocked_duration
+    movements.inject(0) { |acc, elem| acc + elem.total_blocked_duration }
+  end
+
   def total_conventional_costs
     movements.inject(0) { |acc, elem| acc + elem.conventional_costs }
   end
 
   def total_duration_per_week
     2 * total_duration * interval
+  end
+
+  def total_blocked_duration_per_week
+    2 * total_blocked_duration * interval
   end
 
   def total_distance
