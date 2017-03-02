@@ -138,7 +138,7 @@ de:
 
         route:
           purpose: Ich lege diese Strecke zurück ...
-          cargo: Ich befördere ein grössere Gepäckstücke, den Einkauf oder ein Haustier.
+          cargo: Ich befördere grössere Gepäckstücke, den Einkauf oder ein Haustier.
           interval: Wie­viel­mal pro Woche legen Sie diese Strecke zurück?
           start_point: Startpunkt
           end_point: Zielpunkt
