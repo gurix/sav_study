@@ -57,6 +57,10 @@ class Subject
     routes.sum(&:total_distance_per_week)
   end
 
+  def total_conventional_costs_per_week
+    routes.sum(&:total_conventional_costs_per_week)
+  end
+
   private
 
   def routes_added?

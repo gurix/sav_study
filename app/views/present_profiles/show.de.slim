@@ -1,6 +1,6 @@
 h1 = title 'Mein aktuelles Mobilitätsprofil'
-p
- b Sie sind in der in der Woche #{distance_of_time_in_words(@subject.total_duration_per_week.minutes)} unterwegs und legen dabei eine Strecke von #{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)} zurück.
+p Sie sind in der in der Woche <strong>#{distance_of_time_in_words(@subject.total_duration_per_week.minutes)}</strong> unterwegs und legen dabei eine Strecke von <strong>#{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)}</strong> zurück.
+p Die dabei enstehenden Mobilitätskosten belaufen sich auf <strong>#{t('shared.costs_in_chf', costs: @subject.total_conventional_costs_per_week)}</strong>
 - Faker::Lorem.paragraphs(8).each do | p |
       p= p
 .row

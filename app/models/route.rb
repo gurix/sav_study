@@ -30,6 +30,10 @@ class Route
     movements.inject(0) { |acc, elem| acc + elem.total_duration }
   end
 
+  def total_conventional_costs
+    movements.inject(0) { |acc, elem| acc + elem.conventional_costs }
+  end
+
   def total_duration_per_week
     2 * total_duration * interval
   end
@@ -40,6 +44,10 @@ class Route
 
   def total_distance_per_week
     2 * total_distance * interval
+  end
+
+  def total_conventional_costs_per_week
+    2 * total_conventional_costs * interval
   end
 
   def movements
