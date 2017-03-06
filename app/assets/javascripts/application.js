@@ -14,4 +14,5 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require bootstrap-slider
+//= require Chart
 //= require_tree .

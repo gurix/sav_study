@@ -14,6 +14,13 @@ de:
     total: Total
     "yes": Ja
     "no": Nein
+    movement_types:
+      by_bicycle: Fahrrad
+      by_foot: Zu Fuss
+      by_car: Auto
+      by_train: Zug
+      by_local_line: Bus, Trolleybus oder Tram
+
 
   pages:
       index:
@@ -71,6 +78,12 @@ de:
     
     update:
       thanks_for_participating: Besten Dank für Ihre Teilnahme
+  
+  present_profiles:
+    show:
+      costs: Kosten
+      durations: Reisezeiten
+
   cars:
     form:
       title: Was für ein Fahrzeug fahren Sie?

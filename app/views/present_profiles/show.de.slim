@@ -1,9 +1,133 @@
-h1 = title 'Mein aktuelles Mobilitätsprofil'
-p Sie sind in der in der Woche <strong>#{distance_of_time_in_words(@subject.total_duration_per_week.minutes)}</strong> unterwegs und legen dabei eine Strecke von <strong>#{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)}</strong> zurück.
-p Von den <strong>#{distance_of_time_in_words(@subject.total_duration_per_week.minutes)}</strong> in denen Sie unterweg sind, können sie  <strong>#{distance_of_time_in_words(@subject.total_free_duration_per_week.minutes)}</strong> nutzen für andere Tätigkeiten.
-p Die dabei enstehenden Mobilitätskosten belaufen sich auf <strong>#{t('shared.costs_in_chf', costs: @subject.total_conventional_costs_per_week)}</strong>.
-.row
-  .col-xs-6
-    = link_to t('shared.back'), :back, class: 'btn btn-default'
-  .col-xs-6
-  = link_to t('shared.next'), subject_future_profile_path(@subject), class: 'btn btn-success pull-right'
+.profile
+  h1 = title 'Mein aktuelles Mobilitätsprofil'
+  p Sie sind in der in der Woche <strong>#{distance_of_time_in_words(@subject.total_duration_per_week.minutes)}</strong> unterwegs und legen dabei eine Strecke von <strong>#{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)}</strong> zurück.
+  p Von den <strong>#{distance_of_time_in_words(@subject.total_duration_per_week.minutes)}</strong> in denen Sie unterweg sind, können sie  <strong>#{distance_of_time_in_words(@subject.total_free_duration_per_week.minutes)}</strong> nutzen für andere Tätigkeiten.
+  p Die dabei enstehenden Mobilitätskosten belaufen sich auf <strong>#{t('shared.costs_in_chf', costs: @subject.total_conventional_costs_per_week)}</strong>.
+  .row
+    .col-xs-12.col-sm-2
+      .dimension.text-center
+        = image_tag 'dimensions/costs.svg', alt: 'Kosten'
+        h2 Kosten
+    .col-xs-12.col-sm-5
+      canvas id="costChart" width="100" height="50"
+      javascript:
+       var type_colors = ["#FF6384",
+                          "#36A2EB",
+                          "#FFCE56",
+                          "#06d404",
+                          "#ff8338"]
+       var costChart = new Chart($("#costChart"),{
+            type: 'pie',
+            data: {
+              labels: #{raw @subject.conventional_costs_by_type.keys.map{ |type| t("shared.movement_types.#{type}")}},
+              datasets: [
+                {
+                  data: #{@subject.conventional_costs_by_type.values},
+                  backgroundColor: type_colors
+                }
+              ]
+            }
+        });
+    .col-xs-12.col-sm-5
+      table.table
+        tr
+          th Verkehrsmittel
+          th Kosten
+        - @subject.conventional_costs_by_type.each do |type, costs|
+          tr
+            td = t("shared.movement_types.#{type}")
+            td = t('shared.costs_in_chf', costs: costs)
+        tr
+          td
+            strong = t('shared.total')
+          td
+            strong= t('shared.costs_in_chf', costs: @subject.total_conventional_costs_per_week)
+  hr
+  .row
+    .col-xs-12.col-sm-2
+      .dimension.text-center
+        = image_tag 'dimensions/time.svg', alt: 'Reisezeiten'
+        h2 Reisezeiten
+    .col-xs-12.col-sm-5
+      canvas id="durationChart" width="100" height="50"
+      javascript:
+        var costChart = new Chart($("#durationChart"),{
+          type: 'pie',
+          data: {
+            labels: #{raw @subject.conventional_durations_by_type.keys.map{ |type| t("shared.movement_types.#{type}")}},
+            datasets: [
+              {
+                data: #{@subject.conventional_durations_by_type.values},
+                backgroundColor: type_colors
+              }
+            ]
+          }
+        });
+      br
+      .progress
+        .progress-bar.progress-bar-success style="width: #{@subject.total_free_duration_per_week / @subject.total_duration_per_week*100}%" nutzbare Zeit
+        .progress-bar.progress-bar-danger style="width: #{@subject.total_blocked_duration_per_week / @subject.total_duration_per_week*100}%" blockierte Zeit
+
+    .col-xs-12.col-sm-5
+      table.table
+        tr
+          th Verkehrsmittel
+          th Benötigte Zeit
+        - @subject.conventional_durations_by_type.each do |type, duration|
+          tr
+            td = t("shared.movement_types.#{type}")
+            td = distance_of_time_in_words(duration.minutes)
+        tr
+          td
+            strong = t('shared.total')
+          td
+            strong= distance_of_time_in_words(@subject.total_duration_per_week.minutes)
+  hr
+  .row
+    .col-xs-12.col-sm-2
+      .dimension.text-center
+        = image_tag 'dimensions/distance.svg', alt: 'Distanzen'
+        h2 Distanzen
+    .col-xs-12.col-sm-5
+      canvas id="distanceChart" width="100" height="50"
+      javascript:
+        var costChart = new Chart($("#distanceChart"),{
+          type: 'pie',
+          data: {
+            labels: #{raw @subject.conventional_distances_by_type.keys.map{ |type| t("shared.movement_types.#{type}")}},
+            datasets: [
+              {
+                data: #{@subject.conventional_distances_by_type.values},
+                backgroundColor: type_colors
+              }
+            ]
+          }
+        });
+    .col-xs-12.col-sm-5
+      table.table
+        tr
+          th Verkehrsmittel
+          th Distanz
+        - @subject.conventional_distances_by_type.each do |type, distance|
+          tr
+            td = t("shared.movement_types.#{type}")
+            td = t('shared.distance_in_kilometer', kilometers: distance)
+        tr
+          td
+            strong = t('shared.total')
+          td
+            strong= t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)
+  hr
+  .row
+    .col-xs-12.col-sm-2
+      .dimension.text-center
+        = image_tag 'dimensions/environment.svg', alt: 'Ökologie'
+        h2 Ökologie
+    .col-xs-12.col-sm-5
+      .text-center.lead Noch keine Daten vorhanden.
+  hr
+  .row
+    .col-xs-6
+      = link_to t('shared.back'), :back, class: 'btn btn-default'
+    .col-xs-6
+    = link_to t('shared.next'), subject_future_profile_path(@subject), class: 'btn btn-success pull-right'
