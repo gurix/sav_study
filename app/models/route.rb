@@ -51,15 +51,15 @@ class Route
   end
 
   def conventional_costs_by_type
-    movements.map { |m| {m.class.to_s.underscore =>  2 * interval * m.conventional_costs.round(2)}}
+    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.conventional_costs.round(2) } }
   end
 
   def conventional_durations_by_type
-    movements.map { |m| {m.class.to_s.underscore =>  2 * interval * m.duration}}
+    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.duration } }
   end
 
   def conventional_distances_by_type
-    movements.map { |m| {m.class.to_s.underscore =>  2 * interval * m.distance}}
+    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.distance } }
   end
 
   def total_distance_per_week

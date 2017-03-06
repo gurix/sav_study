@@ -74,23 +74,23 @@ class Subject
   end
 
   def conventional_costs_by_type
-    aggregate(routes.map {|r| r.conventional_costs_by_type})
+    aggregate(routes.map(&:conventional_costs_by_type))
   end
 
   def conventional_durations_by_type
-    aggregate(routes.map {|r| r.conventional_durations_by_type})
+    aggregate(routes.map(&:conventional_durations_by_type))
   end
 
   def conventional_distances_by_type
-    aggregate(routes.map {|r| r.conventional_distances_by_type})
+    aggregate(routes.map(&:conventional_distances_by_type))
   end
 
   private
 
   def aggregate(values)
-    values.flatten.inject{ |a,b| 
-      a.merge(b){|_,x,y| x + y}
-    }
+    values.flatten.inject do |a, b|
+      a.merge(b) { |_, x, y| x + y }
+    end
   end
 
   def routes_added?
