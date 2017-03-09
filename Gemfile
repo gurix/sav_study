@@ -64,7 +64,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   
   # RSpec matches for Mongoid models, including association and validation matchers
-  gem 'mongoid-rspec', github: 'mongoid-rspec/mongoid-rspec'
+  gem 'mongoid-rspec', git: 'https://github.com/mongoid-rspec/mongoid-rspec.git'
   # gem 'mongoid-rspec', '~> 3.0' # Use this when https://github.com/mongoid-rspec/mongoid-rspec/issues/169 is fixed
   
   # Acceptance test framework for web applications

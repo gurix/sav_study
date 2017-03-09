@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/mongoid-rspec/mongoid-rspec.git
+  remote: https://github.com/mongoid-rspec/mongoid-rspec.git
   revision: ed38f0b8ed4aa08edaee5c0deee6fb643fb7cd5a
   specs:
     mongoid-rspec (4.0.0.pre.alpha1)
