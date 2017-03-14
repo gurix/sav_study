@@ -1,29 +1,82 @@
-h1 = title 'Mein zukünftiges Mobilitätsprofil'
-ul#myTabs.nav.nav-tabs.nav-justified
-  li.active 
-    a href="#model" data-toggle="tab" Mobilitätsmodel
-  li
-    a href="#profile" data-toggle="tab" Profil
-.tab-content
-  #model.tab-pane.active
-    p 
-      b Sie werden 25% weniger Zeit benötigen.
-    - Faker::Lorem.paragraphs(8).each do | p |
-      p= p
-    .row
-      .col-xs-6
-        = link_to t('shared.back'), :back, class: 'btn btn-default'
-      .col-xs-6
-      = link_to t('shared.next'), 'javascript: $("#myTabs a:last").tab("show")', class: 'btn btn-success pull-right'
+.profile
+  h1 = title 'Mein zukünftiges Mobilitätsprofil'
+  - Faker::Lorem.paragraphs(16).each do | p |
+    p= p
+  hr
+  .row
+    .col-xs-12
+      h3.text-center Kosten
+  .row
+    .col-xs-12.col-sm-7
+      canvas id="costChart" width="100" height="50"
+      javascript:
 
-  #profile.tab-pane
-    p 
-      b Sie sind in der in der Woche #{distance_of_time_in_words(@subject.total_duration_per_week.minutes*0.75)} unterwegs und legen dabei eine Strecke von #{t('shared.distance_in_kilometer', kilometers: @subject.total_distance_per_week)} zurück.
-    - Faker::Lorem.paragraphs(8).each do | p |
-      p= p
-
-    .row
-      .col-xs-6
-        = link_to t('shared.back'), 'javascript: $("#myTabs a:first").tab("show")', class: 'btn btn-default'
-      .col-xs-6
+        var costChart = new Chart($("#costChart"),{
+            type: 'bar',
+            data: {
+              labels: #{raw @subject.conventional_costs_by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
+              datasets: [
+                {
+                  backgroundColor: "#000",
+                  label: 'Zukünftig',
+                  data: #{@subject.model_costs_by_type.values},
+                },
+                {
+                  backgroundColor: "#CCC",
+                  label: 'Aktuell',
+                  data: #{@subject.conventional_costs_by_type.values},
+                }
+              ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: false
+                    }],
+                    yAxes: [{
+                        stacked: false,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'CHF'
+                        }
+                    }]
+                }
+            }
+        });
+    .col-xs-12.col-sm-5
+      table.table
+        thead
+          tr
+            th Verkehrsmittel
+            th Zukünftig
+            th Aktuell
+            th 
+        tbody
+          - @subject.conventional_costs_by_type.keys.each do |type|
+            tr
+              td = t("shared.#{@subject.assigned_model}_movement_types.#{type}")
+              td = t('shared.costs_in_chf', costs: @subject.model_costs_by_type["#{type}"].round(2))
+              td = t('shared.costs_in_chf', costs: @subject.conventional_costs_by_type["#{type}"].round(2))
+              - difference = @subject.model_costs_by_type["#{type}"] - @subject.conventional_costs_by_type["#{type}"]
+              td class="#{hilight_number(difference)}"
+                = t('shared.costs_in_chf', costs: difference.round(2))
+        tfoot
+          tr
+            th= t('shared.total')
+            th= t('shared.costs_in_chf', costs: @subject.total_model_costs_per_week)
+            th= t('shared.costs_in_chf', costs: @subject.total_conventional_costs_per_week)
+            - difference = (@subject.total_model_costs_per_week - @subject.total_conventional_costs_per_week).round(2)
+            th class="#{hilight_number(difference)}"
+              = t('shared.costs_in_chf', costs: difference.round(2))
+  .row
+    .col-xs-12
+     - if @subject.assigned_model == 'pav' 
+      p Die mit * gekennzeichneten Verkehrsmittel werden durch ein private selbstfahrende Fahrzeug ersetzt. 
+     - if @subject.assigned_model == 'sav' 
+      p Die mit * gekennzeichneten Verkehrsmittel werden durch ein öffentliches selbstfahrendes Fahrzeug ersetzt. 
+  .row
+    .col-xs-6
+      = link_to t('shared.back'), subject_present_profile_path(@subject), class: 'btn btn-default'
+    .col-xs-6
       = link_to t('shared.next'), new_subject_questionary_path(@subject), class: 'btn btn-success pull-right'
+  p

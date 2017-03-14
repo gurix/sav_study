@@ -17,6 +17,10 @@ class Movement
     0.0
   end
 
+  def model_costs
+    conventional_costs
+  end
+
   def total_distance
     distance
   end

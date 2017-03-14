@@ -128,6 +128,6 @@
   hr
   .row
     .col-xs-6
-      = link_to t('shared.back'), :back, class: 'btn btn-default'
+      = link_to t('shared.back'), [@subject, :routes], class: 'btn btn-default'
     .col-xs-6
     = link_to t('shared.next'), subject_future_profile_path(@subject), class: 'btn btn-success pull-right'

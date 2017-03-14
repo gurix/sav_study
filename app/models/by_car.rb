@@ -31,4 +31,11 @@ class ByCar < Movement
     costs_per_km -= savings_by_type_of_power.percent_of(costs_per_km)
     costs_per_km * distance
   end
+
+  def model_costs
+    cost = 0.51 * distance if route.subject.assigned_model == 'pav'
+    cost = 0.3 * distance if route.subject.assigned_model == 'sav'
+    cost = 2 * cost if route.cargo
+    cost
+  end
 end

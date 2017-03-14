@@ -17,4 +17,9 @@ module ApplicationHelper
     end
     nil
   end
+
+  def hilight_number(number)
+    return 'text-success' if number < 0
+    return 'text-danger' if number > 0
+  end
 end

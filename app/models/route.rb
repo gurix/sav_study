@@ -35,7 +35,11 @@ class Route
   end
 
   def total_conventional_costs
-    movements.inject(0) { |acc, elem| acc + elem.conventional_costs.round(2) }
+    movements.inject(0) { |acc, elem| acc + elem.conventional_costs }
+  end
+
+  def total_model_costs
+    movements.inject(0) { |acc, elem| acc + elem.model_costs }
   end
 
   def total_duration_per_week
@@ -54,6 +58,10 @@ class Route
     movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.conventional_costs.round(2) } }
   end
 
+  def model_costs_by_type
+    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.model_costs.round(2) } }
+  end
+
   def conventional_durations_by_type
     movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.duration } }
   end
@@ -68,6 +76,10 @@ class Route
 
   def total_conventional_costs_per_week
     2 * total_conventional_costs * interval
+  end
+
+  def total_model_costs_per_week
+    2 * total_model_costs * interval
   end
 
   def movements

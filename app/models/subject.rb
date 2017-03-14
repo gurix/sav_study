@@ -30,6 +30,10 @@ class Subject
 
   before_create :reset_token
 
+  def assigned_model
+    'sav'
+  end
+
   def correct_age
     return unless birthyear
     this_year = DateTime.now.year
@@ -73,8 +77,16 @@ class Subject
     routes.sum(&:total_conventional_costs_per_week)
   end
 
+  def total_model_costs_per_week
+    routes.sum(&:total_model_costs_per_week)
+  end
+
   def conventional_costs_by_type
     aggregate(routes.map(&:conventional_costs_by_type))
+  end
+
+  def model_costs_by_type
+    aggregate(routes.map(&:model_costs_by_type))
   end
 
   def conventional_durations_by_type
