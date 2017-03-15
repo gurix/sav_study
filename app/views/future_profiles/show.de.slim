@@ -68,6 +68,76 @@
             - difference = (@subject.total_model_costs_per_week - @subject.total_conventional_costs_per_week).round(2)
             th class="#{hilight_number(difference)}"
               = t('shared.costs_in_chf', costs: difference.round(2))
+  hr
+  .row
+    .col-xs-12
+      h3.text-center Reiszeiten
+      .progress
+        .progress-bar.progress-bar-success style="width: #{(@subject.total_model_free_duration_per_week / @subject.total_model_duration_per_week * 100) - 10}%" nutzbare Zeit
+        .progress-bar.progress-bar-danger style="width: #{(@subject.total_model_blocked_duration_per_week / @subject.total_model_duration_per_week * 100) + 10}%" blockierte Zeit
+
+  .row
+    .col-xs-12.col-sm-7
+      canvas id="timeChart" width="100" height="50"
+      javascript:
+
+        var costChart = new Chart($("#timeChart"),{
+            type: 'bar',
+            data: {
+              labels: #{raw @subject.conventional_durations_by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
+              datasets: [
+                {
+                  backgroundColor: "#000",
+                  label: 'Zukünftig',
+                  data: #{@subject.model_durations_by_type.values},
+                },
+                {
+                  backgroundColor: "#CCC",
+                  label: 'Aktuell',
+                  data: #{@subject.conventional_durations_by_type.values},
+                }
+              ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: false
+                    }],
+                    yAxes: [{
+                        stacked: false,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Minutes'
+                        }
+                    }]
+                }
+            }
+        });
+    .col-xs-12.col-sm-5
+      table.table
+        thead
+          tr
+            th Verkehrsmittel
+            th Zukünftig
+            th Aktuell
+            th 
+        tbody
+          - @subject.conventional_durations_by_type.keys.each do |type|
+            tr
+              td = t("shared.#{@subject.assigned_model}_movement_types.#{type}")
+              td = distance_of_time_in_words(@subject.model_durations_by_type["#{type}"].minutes)
+              td = distance_of_time_in_words(@subject.conventional_durations_by_type["#{type}"].minutes)
+              - difference = @subject.model_durations_by_type["#{type}"] - @subject.conventional_durations_by_type["#{type}"]
+              td class="#{hilight_number(difference)}"
+                = distance_of_time_in_words(difference.minutes)
+        tfoot
+          tr
+            th= t('shared.total')
+            th = distance_of_time_in_words(@subject.total_model_duration_per_week.minutes)
+            th = distance_of_time_in_words(@subject.total_duration_per_week.minutes)
+            - difference = (@subject.total_model_duration_per_week - @subject.total_duration_per_week)
+            th class="#{hilight_number(difference)}"
+              = distance_of_time_in_words(difference.minutes)
   .row
     .col-xs-12
      - if @subject.assigned_model == 'pav' 

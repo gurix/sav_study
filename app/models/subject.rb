@@ -61,12 +61,24 @@ class Subject
     routes.sum(&:total_blocked_duration_per_week)
   end
 
+  def total_model_blocked_duration_per_week
+    routes.sum(&:total_model_blocked_duration_per_week)
+  end
+
   def total_free_duration_per_week
     total_duration_per_week - total_blocked_duration_per_week
   end
 
+  def total_model_free_duration_per_week
+    total_model_duration_per_week - total_model_blocked_duration_per_week
+  end
+
   def total_duration_per_week
     routes.sum(&:total_duration_per_week)
+  end
+
+  def total_model_duration_per_week
+    routes.sum(&:total_model_duration_per_week)
   end
 
   def total_distance_per_week
@@ -91,6 +103,10 @@ class Subject
 
   def conventional_durations_by_type
     aggregate(routes.map(&:conventional_durations_by_type))
+  end
+
+  def model_durations_by_type
+    aggregate(routes.map(&:model_durations_by_type))
   end
 
   def conventional_distances_by_type

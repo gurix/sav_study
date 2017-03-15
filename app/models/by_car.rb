@@ -13,8 +13,12 @@ class ByCar < Movement
     car.type_of_power
   end
 
-  def total_blocked_duration
+  def blocked_duration
     duration
+  end
+
+  def model_blocked_duration
+    route.subject.assigned_model == 'sav' ? 0 : model_duration
   end
 
   def conventional_costs # rubocop:disable Metrics/MethodLength

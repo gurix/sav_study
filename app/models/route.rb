@@ -27,11 +27,19 @@ class Route
   validates :purpose, presence: true
 
   def total_duration
-    movements.inject(0) { |acc, elem| acc + elem.total_duration }
+    movements.inject(0) { |acc, elem| acc + elem.duration }
+  end
+
+  def total_model_duration
+    movements.inject(0) { |acc, elem| acc + elem.model_duration }
   end
 
   def total_blocked_duration
-    movements.inject(0) { |acc, elem| acc + elem.total_blocked_duration }
+    movements.inject(0) { |acc, elem| acc + elem.blocked_duration }
+  end
+
+  def total_model_blocked_duration
+    movements.inject(0) { |acc, elem| acc + elem.model_blocked_duration }
   end
 
   def total_conventional_costs
@@ -46,8 +54,16 @@ class Route
     2 * total_duration * interval
   end
 
+  def total_model_duration_per_week
+    2 * total_model_duration * interval
+  end
+
   def total_blocked_duration_per_week
     2 * total_blocked_duration * interval
+  end
+
+  def total_model_blocked_duration_per_week
+    2 * total_model_blocked_duration * interval
   end
 
   def total_distance
@@ -64,6 +80,10 @@ class Route
 
   def conventional_durations_by_type
     movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.duration } }
+  end
+
+  def model_durations_by_type
+    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.model_duration } }
   end
 
   def conventional_distances_by_type
