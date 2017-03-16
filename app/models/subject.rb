@@ -6,6 +6,7 @@ class Subject
   embeds_one :car
   embeds_one :questionary
 
+  field :assigned_model, type: String
   field :gender, type: String
   field :birthyear, type: Integer
   field :education, type: Integer
@@ -29,10 +30,6 @@ class Subject
   index updated_at: 1
 
   before_create :reset_token
-
-  def assigned_model
-    'pav'
-  end
 
   def correct_age
     return unless birthyear

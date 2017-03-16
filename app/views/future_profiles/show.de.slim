@@ -1,5 +1,11 @@
 .profile
-  h1 = title 'Mein zukünftiges Mobilitätsprofil'
+  h1 = title "Mein zukünftiges Mobilitätsprofil (#{@subject.assigned_model.upcase})"
+  .pull-right
+    - if @subject.assigned_model == 'pav'
+      = link_to 'Zu SAV wechseln','?model=sav'
+    - else 
+      = link_to 'Zu PAV wechseln','?model=pav'
+
   - Faker::Lorem.paragraphs(16).each do | p |
     p= p
   hr

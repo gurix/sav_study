@@ -3,6 +3,7 @@ class SubjectsController < ApplicationController
 
   def new
     @subject = Subject.new
+    @subject.assigned_model = %w(sav pav).sample
     @subject.save
     # We store an encrypted cookie with the id to continue later
     cookies.encrypted[:subject_id] = @subject.id.to_s
