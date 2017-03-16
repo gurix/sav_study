@@ -31,7 +31,7 @@ class Subject
   before_create :reset_token
 
   def assigned_model
-    'sav'
+    'pav'
   end
 
   def correct_age

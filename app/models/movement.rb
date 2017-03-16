@@ -23,6 +23,10 @@ class Movement
     costs
   end
 
+  def first_class_model_costs
+    model_costs + (model_costs * 0.8)
+  end
+
   def model_duration
     duration
   end
