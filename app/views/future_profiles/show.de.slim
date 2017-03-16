@@ -74,7 +74,6 @@
     .col-xs-12
       h3.text-center Reiszeiten
       .progress
-        .progress
         - blocked_duration = @subject.total(:model_blocked_duration)
         - duration = @subject.total(:model_duration)
         - free_duration = duration - blocked_duration
@@ -144,6 +143,13 @@
             - difference = (@subject.total(:model_duration, per: :week) - @subject.total(:duration, per: :week))
             th class="#{hilight_number(difference)}"
               = distance_of_time_in_words_or_empty(difference.minutes)
+  hr
+  .row
+    .col-xs-12
+      .dimension.text-center
+        h3 Ökologie
+    .col-xs-12
+      .text-center.lead Noch keine Daten vorhanden.
   .row
     .col-xs-12
      - if @subject.assigned_model == 'pav' 
