@@ -91,7 +91,7 @@
               td = t("shared.#{@subject.assigned_model}_movement_types.#{type}")
               td 
                 = costs_in_chf(model_by_type["#{type}"])
-                - if @subject.assigned_model == 'sav' && model_by_type["#{type}"] != 0
+                - if @subject.assigned_model == 'sav' && model_by_type["#{type}"] != 0 && type != 'by_train'
                   br
                   = "(#{costs_in_chf(first_class_model_by_type["#{type}"])})"
                 
