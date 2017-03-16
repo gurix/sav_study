@@ -30,12 +30,12 @@ class Route
     value * interval * 2
   end
 
-  def total(trait, options)
+  def total(trait, options = {})
     value = movements.inject(0) { |acc, elem| acc + elem.send(trait) }
     options[:per] == :week ? value_per_week(value) : value
   end
 
-  def total_by_type(trait, options)
+  def total_by_type(trait, options = {})
     movements.map do |m|
       value = m.send(trait)
       value = value_per_week(value) if options[:per] == :week

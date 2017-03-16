@@ -21,8 +21,8 @@ h1 = title(t '.title')
         td 
           = route.start_point unless route.start_point.blank?
           = " - #{route.end_point}" unless route.end_point.blank?
-        td = t('shared.duration_in_minutes', minutes: route.total_duration) 
-        td = t('shared.distance_in_kilometer', kilometers: route.total_distance)
+        td = distance_of_time_in_words_or_empty(route.total(:duration).minutes)
+        td = distance_in_kilometer(route.total(:distance))
         td = route.interval
         td = t("shared.#{route.cargo ? 'yes':'no'}")  
         td
@@ -32,8 +32,8 @@ h1 = title(t '.title')
                                                                               data: {confirm: t('shared.ask_for_delete_entry')}
     tr
       th colspan='2' = t('shared.total') 
-      th = t('shared.duration_in_minutes', minutes: @subject.total_duration) 
-      th = t('shared.distance_in_kilometer', kilometers: @subject.total_distance)
+      td = distance_of_time_in_words_or_empty(@subject.total(:duration).minutes) 
+      td = distance_in_kilometer(@subject.total(:distance))
       th 
       th
       td= link_to t('.new'), new_subject_route_path(@subject), class: 'btn btn-primary pull-right'                                                                       

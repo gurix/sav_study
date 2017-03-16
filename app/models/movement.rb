@@ -26,7 +26,7 @@ class Movement
   def model_duration
     duration
   end
-  
+
   def model_distance
     distance
   end
