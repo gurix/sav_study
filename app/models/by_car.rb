@@ -13,6 +13,10 @@ class ByCar < Movement
     car.type_of_power
   end
 
+  def model_duration
+    duration - stopp_and_go
+  end
+
   def blocked_duration
     duration
   end
