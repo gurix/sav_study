@@ -21,7 +21,7 @@ class ByCar < Movement
     route.subject.assigned_model == 'sav' ? 0 : model_duration
   end
 
-  def conventional_costs # rubocop:disable Metrics/MethodLength
+  def costs # rubocop:disable Metrics/MethodLength
     costs_per_km = case vehicle_category
                    when 'fullsize' then 1.2
                    when 'compact' then 0.75

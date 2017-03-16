@@ -26,80 +26,21 @@ class Route
 
   validates :purpose, presence: true
 
-  def total_duration
-    movements.inject(0) { |acc, elem| acc + elem.duration }
+  def value_per_week(value)
+    value * interval * 2
   end
 
-  def total_model_duration
-    movements.inject(0) { |acc, elem| acc + elem.model_duration }
+  def total(trait, options)
+    value = movements.inject(0) { |acc, elem| acc + elem.send(trait) }
+    options[:per] == :week ? value_per_week(value) : value
   end
 
-  def total_blocked_duration
-    movements.inject(0) { |acc, elem| acc + elem.blocked_duration }
-  end
-
-  def total_model_blocked_duration
-    movements.inject(0) { |acc, elem| acc + elem.model_blocked_duration }
-  end
-
-  def total_conventional_costs
-    movements.inject(0) { |acc, elem| acc + elem.conventional_costs }
-  end
-
-  def total_model_costs
-    movements.inject(0) { |acc, elem| acc + elem.model_costs }
-  end
-
-  def total_duration_per_week
-    2 * total_duration * interval
-  end
-
-  def total_model_duration_per_week
-    2 * total_model_duration * interval
-  end
-
-  def total_blocked_duration_per_week
-    2 * total_blocked_duration * interval
-  end
-
-  def total_model_blocked_duration_per_week
-    2 * total_model_blocked_duration * interval
-  end
-
-  def total_distance
-    movements.inject(0) { |acc, elem| acc + elem.total_distance }
-  end
-
-  def conventional_costs_by_type
-    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.conventional_costs.round(2) } }
-  end
-
-  def model_costs_by_type
-    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.model_costs.round(2) } }
-  end
-
-  def conventional_durations_by_type
-    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.duration } }
-  end
-
-  def model_durations_by_type
-    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.model_duration } }
-  end
-
-  def conventional_distances_by_type
-    movements.map { |m| { m.class.to_s.underscore =>  2 * interval * m.distance } }
-  end
-
-  def total_distance_per_week
-    2 * total_distance * interval
-  end
-
-  def total_conventional_costs_per_week
-    2 * total_conventional_costs * interval
-  end
-
-  def total_model_costs_per_week
-    2 * total_model_costs * interval
+  def total_by_type(trait, options)
+    movements.map do |m|
+      value = m.send(trait)
+      value = value_per_week(value) if options[:per] == :week
+      { m.class.to_s.underscore => value }
+    end
   end
 
   def movements

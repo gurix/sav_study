@@ -1,7 +1,7 @@
 class ByFoot < Movement
   def blocked_duration
     duration
- end
+  end
 
   def model_blocked_duration
     route.subject.assigned_model == 'sav' ? 0 : model_duration

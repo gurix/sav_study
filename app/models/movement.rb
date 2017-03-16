@@ -15,12 +15,12 @@ class Movement
     0.0
   end
 
-  def conventional_costs
+  def costs
     0.0
   end
 
   def model_costs
-    conventional_costs
+    costs
   end
 
   def model_duration

@@ -45,72 +45,12 @@ class Subject
     self.token = generate_token(4) until unique_token?
   end
 
-  def total_duration
-    routes.sum(&:total_duration)
+  def total(trait, options = {})
+    routes.sum { |route| route.total(trait, options) }
   end
 
-  def total_free_duration
-    total_duration - total_blocked_duration
-  end
-
-  def total_distance
-    routes.sum(&:total_distance)
-  end
-
-  def total_blocked_duration_per_week
-    routes.sum(&:total_blocked_duration_per_week)
-  end
-
-  def total_model_blocked_duration_per_week
-    routes.sum(&:total_model_blocked_duration_per_week)
-  end
-
-  def total_free_duration_per_week
-    total_duration_per_week - total_blocked_duration_per_week
-  end
-
-  def total_model_free_duration_per_week
-    total_model_duration_per_week - total_model_blocked_duration_per_week
-  end
-
-  def total_duration_per_week
-    routes.sum(&:total_duration_per_week)
-  end
-
-  def total_model_duration_per_week
-    routes.sum(&:total_model_duration_per_week)
-  end
-
-  def total_distance_per_week
-    routes.sum(&:total_distance_per_week)
-  end
-
-  def total_conventional_costs_per_week
-    routes.sum(&:total_conventional_costs_per_week)
-  end
-
-  def total_model_costs_per_week
-    routes.sum(&:total_model_costs_per_week)
-  end
-
-  def conventional_costs_by_type
-    aggregate(routes.map(&:conventional_costs_by_type))
-  end
-
-  def model_costs_by_type
-    aggregate(routes.map(&:model_costs_by_type))
-  end
-
-  def conventional_durations_by_type
-    aggregate(routes.map(&:conventional_durations_by_type))
-  end
-
-  def model_durations_by_type
-    aggregate(routes.map(&:model_durations_by_type))
-  end
-
-  def conventional_distances_by_type
-    aggregate(routes.map(&:conventional_distances_by_type))
+  def total_by_type(trait, options = {})
+    aggregate(routes.map { |route| route.total_by_type(trait, options) })
   end
 
   private

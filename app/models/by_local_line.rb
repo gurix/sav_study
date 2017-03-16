@@ -1,5 +1,5 @@
 class ByLocalLine < Movement
-  def conventional_costs
+  def costs
     0.865 * distance
   end
 

@@ -9,22 +9,23 @@
   .row
     .col-xs-12.col-sm-7
       canvas id="costChart" width="100" height="50"
+      - by_type = @subject.total_by_type(:costs, per: :week)
+      - model_by_type = @subject.total_by_type(:model_costs, per: :week)
       javascript:
-
         var costChart = new Chart($("#costChart"),{
             type: 'bar',
             data: {
-              labels: #{raw @subject.conventional_costs_by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
+              labels: #{raw by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
               datasets: [
                 {
                   backgroundColor: "#000",
                   label: 'Zukünftig',
-                  data: #{@subject.model_costs_by_type.values},
+                  data: #{model_by_type.values},
                 },
                 {
                   backgroundColor: "#CCC",
                   label: 'Aktuell',
-                  data: #{@subject.conventional_costs_by_type.values},
+                  data: #{by_type.values},
                 }
               ]
             },
@@ -52,49 +53,54 @@
             th Aktuell
             th 
         tbody
-          - @subject.conventional_costs_by_type.keys.each do |type|
+          - by_type.keys.each do |type|
             tr
               td = t("shared.#{@subject.assigned_model}_movement_types.#{type}")
-              td = t('shared.costs_in_chf', costs: @subject.model_costs_by_type["#{type}"].round(2))
-              td = t('shared.costs_in_chf', costs: @subject.conventional_costs_by_type["#{type}"].round(2))
-              - difference = @subject.model_costs_by_type["#{type}"] - @subject.conventional_costs_by_type["#{type}"]
+              td = costs_in_chf(model_by_type["#{type}"])
+              td = costs_in_chf(by_type["#{type}"])
+              - difference = model_by_type["#{type}"] - by_type["#{type}"]
               td class="#{hilight_number(difference)}"
-                = t('shared.costs_in_chf', costs: difference.round(2))
+                = costs_in_chf(difference)
         tfoot
           tr
             th= t('shared.total')
-            th= t('shared.costs_in_chf', costs: @subject.total_model_costs_per_week)
-            th= t('shared.costs_in_chf', costs: @subject.total_conventional_costs_per_week)
-            - difference = (@subject.total_model_costs_per_week - @subject.total_conventional_costs_per_week).round(2)
+            th = costs_in_chf(@subject.total(:model_costs, per: :week))
+            th = costs_in_chf(@subject.total(:costs, per: :week))
+            - difference = (@subject.total(:model_costs, per: :week) - @subject.total(:costs, per: :week)).round(2)
             th class="#{hilight_number(difference)}"
-              = t('shared.costs_in_chf', costs: difference.round(2))
+              = costs_in_chf(difference)
   hr
   .row
     .col-xs-12
       h3.text-center Reiszeiten
       .progress
-        .progress-bar.progress-bar-success style="width: #{(@subject.total_model_free_duration_per_week / @subject.total_model_duration_per_week * 100) - 10}%" nutzbare Zeit
-        .progress-bar.progress-bar-danger style="width: #{(@subject.total_model_blocked_duration_per_week / @subject.total_model_duration_per_week * 100) + 10}%" blockierte Zeit
+        .progress
+        - blocked_duration = @subject.total(:model_blocked_duration)
+        - duration = @subject.total(:model_duration)
+        - free_duration = duration - blocked_duration
+        .progress-bar.progress-bar-success style="width: #{((free_duration / duration)*100) - 10}%" nutzbare Zeit
+        .progress-bar.progress-bar-danger style="width: #{((blocked_duration/duration)*100) + 10}%" blockierte Zeit
 
   .row
     .col-xs-12.col-sm-7
       canvas id="timeChart" width="100" height="50"
+      - by_type = @subject.total_by_type(:duration, per: :week)
+      - model_by_type = @subject.total_by_type(:model_duration, per: :week)
       javascript:
-
         var costChart = new Chart($("#timeChart"),{
             type: 'bar',
             data: {
-              labels: #{raw @subject.conventional_durations_by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
+              labels: #{raw by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
               datasets: [
                 {
                   backgroundColor: "#000",
                   label: 'Zukünftig',
-                  data: #{@subject.model_durations_by_type.values},
+                  data: #{model_by_type.values},
                 },
                 {
                   backgroundColor: "#CCC",
                   label: 'Aktuell',
-                  data: #{@subject.conventional_durations_by_type.values},
+                  data: #{by_type.values},
                 }
               ]
             },
@@ -122,22 +128,22 @@
             th Aktuell
             th 
         tbody
-          - @subject.conventional_durations_by_type.keys.each do |type|
+          - by_type.keys.each do |type|
             tr
               td = t("shared.#{@subject.assigned_model}_movement_types.#{type}")
-              td = distance_of_time_in_words(@subject.model_durations_by_type["#{type}"].minutes)
-              td = distance_of_time_in_words(@subject.conventional_durations_by_type["#{type}"].minutes)
-              - difference = @subject.model_durations_by_type["#{type}"] - @subject.conventional_durations_by_type["#{type}"]
+              td = distance_of_time_in_words_or_empty(model_by_type["#{type}"].minutes)
+              td = distance_of_time_in_words_or_empty(by_type["#{type}"].minutes)
+              - difference = model_by_type["#{type}"] - by_type["#{type}"]
               td class="#{hilight_number(difference)}"
-                = distance_of_time_in_words(difference.minutes)
+                = distance_of_time_in_words_or_empty(difference.minutes)
         tfoot
           tr
             th= t('shared.total')
-            th = distance_of_time_in_words(@subject.total_model_duration_per_week.minutes)
-            th = distance_of_time_in_words(@subject.total_duration_per_week.minutes)
-            - difference = (@subject.total_model_duration_per_week - @subject.total_duration_per_week)
+            th = distance_of_time_in_words_or_empty(@subject.total(:model_duration, per: :week).minutes) if @subject.total(:model_duration, per: :week).minutes
+            th = distance_of_time_in_words_or_empty(@subject.total(:duration, per: :week).minutes)
+            - difference = (@subject.total(:model_duration, per: :week) - @subject.total(:duration, per: :week))
             th class="#{hilight_number(difference)}"
-              = distance_of_time_in_words(difference.minutes)
+              = distance_of_time_in_words_or_empty(difference.minutes)
   .row
     .col-xs-12
      - if @subject.assigned_model == 'pav' 
