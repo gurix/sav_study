@@ -18,4 +18,16 @@ class ByBicycle < Movement
     duration if route.subject.assigned_model == 'pav'
     distance.to_f / RESIDENTIAL_SAV_SPEED.to_f * 60.to_f
   end
+
+  def ecological_costs
+    distance * 9.79
+  end
+
+  def model_ecological_costs
+    distance * 13.62
+  end
+
+  def first_class_model_ecological_costs
+    distance * 21.79
+  end
 end

@@ -48,4 +48,23 @@ class ByCar < Movement
     cost += (cost * 0.8) if route.cargo
     cost
   end
+
+  def ecological_costs
+    costs_per_km = case vehicle_category
+                   when 'fullsize' then 142.88
+                   when 'compact' then 179.84
+                   when 'micro' then 142.88
+                   end
+
+    costs_per_km = 50.7 if type_of_power == 'electro'
+    (costs_per_km * distance)
+  end
+
+  def model_ecological_costs
+    distance * 13.62
+  end
+
+  def first_class_model_ecological_costs
+    distance * 21.79
+  end
 end

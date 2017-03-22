@@ -6,4 +6,8 @@ class ByTrain < Movement
   def first_class_model_costs
     model_costs
   end
+
+  def ecological_costs
+    distance * 7.86
+  end
 end

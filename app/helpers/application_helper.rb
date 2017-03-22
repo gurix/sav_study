@@ -34,4 +34,8 @@ module ApplicationHelper
   def distance_in_kilometer(value)
     t('shared.distance_in_kilometer', kilometers: value.round(2)) if value != 0
   end
+
+  def emmissions_in_gramms(value)
+    t('shared.emmissions_in_gramms', kg: (value / 1000).round(2)) if value != 0
+  end
 end

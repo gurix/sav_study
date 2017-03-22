@@ -27,6 +27,18 @@ class Movement
     route.cargo ? model_costs : model_costs + (model_costs * 0.8)
   end
 
+  def ecological_costs
+    0.0
+  end
+
+  def model_ecological_costs
+    ecological_costs
+  end
+
+  def first_class_model_ecological_costs
+    model_ecological_costs
+  end
+
   def model_duration
     duration
   end
