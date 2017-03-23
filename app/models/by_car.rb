@@ -61,7 +61,8 @@ class ByCar < Movement
   end
 
   def model_ecological_costs
-    distance * 13.62
+    return distance * 13.62 if route.subject.assigned_model == 'pav'
+    return distance * 10.89 if route.subject.assigned_model == 'sav'
   end
 
   def first_class_model_ecological_costs
