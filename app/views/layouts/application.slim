@@ -1,7 +1,10 @@
 doctype html
 html
   head
-    title SAV Study - #{content_for(:title)}
+    title 
+      - flash.each do |type, message|
+        = message
+      |  SAV Study - #{content_for(:title)}
     = csrf_meta_tags
     
     = stylesheet_link_tag    'application', media: 'all'
