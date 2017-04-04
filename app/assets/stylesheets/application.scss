@@ -1,6 +1,11 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 
+$font-size-base: 16px;
+$font-size-h1: floor(($font-size-base * 1.8));
+$font-size-h2: floor(($font-size-base * 1.5));
+$font-size-h3: floor(($font-size-base * 1.2));
+
 @import "bootstrap";
 @import "bootstrap-slider/bootstrap-slider";
 @import "profile";
