@@ -1,12 +1,23 @@
-h1 = title t('.title')
-.well
-  - Faker::Lorem.paragraphs(4).each do | p |
-    p= p
-  
-  .p.text-center
-    = link_to t('.start'), new_subject_path, class: 'btn btn-lg btn-success'
+h1.sr-only = title t('.title')
+p
+  strong Liebe(r) Teilnehmer(in),
+  br
+  | danke, dass Sie an unserer Umfrage teilnehmen wollen. Wir, die Zürcher Hochschule für Angewandte Wissenschaften in der Forschungsgruppe Verkehrs-, Sicherheits- und Umweltpsychologie, erforschen wissenschaftlich das Mobilitätsverhalten der Schweizer Bevölkerung in Hinblick auf zukünftige Mobilitätsformen. Damit wollen wir herausfinden, wie umweltbewusstes Reisen und Fortbewegen in naher Zukunft aussehen und gefördert werden kann.
+
+p Mit Ihren Antworten können Sie dazu beitragen, dass das Thema „umweltfreundliche Mobilität“ in der Schweiz einen grösseren Stellenwert erhält und unsere Forschung der direkten Umsetzung in Projekte, von denen Sie wiederum letztendlich profitieren können, zu gute kommt. 
+
+p 
+  | Wir haben einige Fragen, die Sie möglichst spontan und offen beantworten. Dabei geht es um Ihre alltäglichen Wege und Strecken, die Sie privat und arbeitsbezogen zurücklegen.
+  br
+  | Das Ausfüllen der Umfrage wird maximal 15 Minuten dauern. 
+  br
+  | Die Antworten werden anonym behandelt, es können keine Rückschlüsse gezogen werden und die Daten werden ausschliesslich zu Forschungszwecken analysiert. 
+p 
+  em Danke für Ihre Unterstützung!
+
+p
+    = link_to t('.start'), new_subject_path, class: 'text-success'
+p.
+- if @subject
   p
-  - if @subject
-    p.text-center
-      = link_to t('.continue'), [:edit, @subject, :car], class: 'btn btn-lg btn-primary'
-        
+    = link_to t('.continue'), [:edit, @subject, :car]
