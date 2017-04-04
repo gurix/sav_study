@@ -15,6 +15,8 @@ de:
     total: Total
     "yes": Ja
     "no": Nein
+    required: "* bezeichnet Pflichtfelder"
+
     movement_types:
       by_bicycle: Fahrrad
       by_foot: Zu Fuss
@@ -39,8 +41,8 @@ de:
   pages:
       index:
         title: ZHAW SAV Studie
-        start: Neue Befragung beginnen
-        continue: Befragung fortführen
+        start: Eine neue Befragung starten ...
+        continue: Meine betehende Befragung fortführen ...
 
   subjects:
     errors:
@@ -101,6 +103,8 @@ de:
   cars:
     form:
       title: Was für ein Fahrzeug fahren Sie?
+      category: Was für ein Auto fahren Sie regelmässig? Bzw. wenn Sie ein Auto fahren, um welche Grösse handelt es sich dann?
+      type_of_power: Welche Antriebsart hat das Auto? Bzw. wenn Sie ein Auto fahren, welchen Verbrennungsmotor hat das Auto dann?
     
     types_of_power:
       gasoline: Konventionelles Fahrzeug betrieben mit Benzin oder Diesel
