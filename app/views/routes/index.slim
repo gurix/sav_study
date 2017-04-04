@@ -2,9 +2,8 @@ h1 = title(t '.title')
 - if @routes.blank?
   = render 'empty_routes'
 - else
-  .well
-    - Faker::Lorem.paragraphs(4).each do | p |
-      p= p
+  h2 Strecken anzeigen und weitere mit aufnehmen
+  p In dieser Ansicht, sehen Sie welche Strecken Sie <strong>wöchentlich</strong> zurücklegen. Wenn Sie eine typische Strecke hinzufügen möchten, können Sie das über den Button „zusätzliche Strecke erfassen“ tun. Wenn Sie der Meinung sind, die Auflistung entspricht Ihrem wöchentlichen Mobilitätsverhalten und den gewöhnlichen Wegen, die Sie regelmässig zurücklegen, dann wählen Sie „weiter zur Auswertung“. 
   table.table.table-collapse
     tr
       th Zweck
@@ -26,9 +25,8 @@ h1 = title(t '.title')
         td = route.interval
         td = t("shared.#{route.cargo ? 'yes':'no'}")  
         td
-          .btn-group.pull-right
-            = link_to t('shared.edit'), edit_subject_route_path(@subject, route), class: 'btn btn-default btn-primary-spacing'
-            = link_to t('shared.delete'), subject_route_path(@subject, route), class: 'btn btn-danger btn-primary-spacing', method: :delete,  
+          = link_to t('shared.edit'), edit_subject_route_path(@subject, route)
+          = link_to t('shared.delete'), subject_route_path(@subject, route), class: 'text-danger pull-right', method: :delete,  
                                                                               data: {confirm: t('shared.ask_for_delete_entry')}
     tr
       th colspan='2' = t('shared.total') 
@@ -36,10 +34,10 @@ h1 = title(t '.title')
       td = distance_in_kilometer(@subject.total(:distance))
       th 
       th
-      td= link_to t('.new'), new_subject_route_path(@subject), class: 'btn btn-primary pull-right'                                                                       
+      td= link_to t('.new'), new_subject_route_path(@subject), class: 'text-success'                                                                       
     
   .row
     .col-xs-6
-      = link_to t('shared.back'), [:edit, @subject, :car], class: 'btn btn-default'
+      = link_to t('shared.back'), [:edit, @subject, :car]
     .col-xs-6
-    = link_to t('shared.next'), subject_present_profile_path(@subject), class: 'btn btn-success pull-right'
+    = link_to t('.next'), subject_present_profile_path(@subject), class: 'pull-right'
