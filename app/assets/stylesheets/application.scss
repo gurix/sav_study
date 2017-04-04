@@ -5,6 +5,14 @@
 @import "bootstrap-slider/bootstrap-slider";
 @import "profile";
 
+.alert.danger{
+  @extend .alert-danger;
+}
+  
+.alert.notice {
+    @extend .alert-info;
+}
+
 body {
   margin-top: 12px;
 }
@@ -27,8 +35,6 @@ body {
     margin-right: 15px;
   }
 }
-
-
 
 label {
   display: block;
