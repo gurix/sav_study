@@ -23,7 +23,8 @@ class Route
   field :start_point, type: String
   field :end_point,   type: String
   field :cargo,       type: Boolean
-
+  
+  validates :cargo, presence: true
   validates :purpose, presence: true
 
   def value_per_week(value)

@@ -1,10 +1,14 @@
 h1 = title(t '.title')
+p Bitte definieren Sie als erstes den Zweck der Strecke und beziehen Sie die dafür genutzten und anzugebenden Verkehrsmittel (zu Fuss und/oder mit dem Auto und/oder mit dem Zug und/oder mit dem Fahrrad und/oder Bus/Tram) <strong>nur auf diese eine Strecke</strong>. Es kann gut möglich sein, dass Sie für eine Strecke mehrere Verkehrsmittel nutzen. Geben Sie diese bitte vollständig an. 
+p Danach können Sie weitere Strecken anlegen, z.B. für den wöchentlichen Einkauf oder das Sportevent. Damit ein möglichst umfangreiches Bild Ihres Mobilitätsverhalten ersichtlich wird, geben Sie bitte so viele Strecken wie möglich ein. Alle Angaben sollen sich <strong>nur auf den Hinweg</strong> beziehen. Der Rückweg wird danach automatisch dazugerechnet.
+
 = simple_form_for [@subject, @route] do |f|
   .row
-    .col-xs-6
+    .col-xs-12
       = f.input :purpose, as: :radio_buttons, collection: t('routes.purposes').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
-    .col-xs-6
-      = f.input :cargo, as: :boolean
+  .row
+    .col-xs-12
+      = f.input :cargo, as: :radio_buttons
   .row
     .col-xs-12
       = f.input :interval, input_html: { data: { provide: 'slider','slider-value': f.object.interval, 'slider-ticks': [1,2,3,4,5,6,7], 'slider-ticks-labels': [1,2,3,4,5,6,7] }}
@@ -20,7 +24,7 @@ h1 = title(t '.title')
             = f.input :end_point
   .row
     .col-xs-12
-      .panel-group id="accordion"
+      .panel-group
         = f.simple_fields_for :by_foot do |f_by_foot|
           = render 'by_foot', f: f_by_foot
         br
@@ -36,8 +40,11 @@ h1 = title(t '.title')
         = f.simple_fields_for :by_local_line do |f_by_local_line|
           = render 'by_local_line', f: f_by_local_line
     .row
+      .col-xs-12
+        .form-group aria-hidden="true" = t('shared.required')
+    .row
       .col-xs-6
-        = link_to t('shared.cancel'), :back, class: 'btn btn-default'
+        = link_to t('shared.cancel'), :back
       .col-xs-6
         = f.submit value: t('shared.save'), class: 'btn btn-success pull-right'
  
