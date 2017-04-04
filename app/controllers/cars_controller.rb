@@ -27,6 +27,6 @@ class CarsController < ApplicationController
   end
 
   def car_form_params
-    params.require(:car).permit(:category, :type_of_power)
+    params.require(:car).permit(:car_owner, :is_commuter, :category, :type_of_power)
   end
 end

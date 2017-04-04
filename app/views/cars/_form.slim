@@ -3,6 +3,8 @@ p Bitte beantworten Sie kurz folgende Fragen:
 = simple_form_for @car, url: subject_car_path(@subject) do |f|
   .row
     .col-xs-12
+      = f.input :car_owner, as: :radio_buttons, label: t('.car_owner')
+      = f.input :is_commuter, as: :radio_buttons, label: t('.is_commuter')
       = f.input :category, as: :radio_buttons, collection: t('cars.categories').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, class_method: :first, label: t('.category')
       = f.input :type_of_power, as: :radio_buttons, collection: t('cars.types_of_power').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, label: t('.type_of_power')
   .row

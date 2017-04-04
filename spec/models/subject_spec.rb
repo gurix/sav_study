@@ -9,4 +9,5 @@ RSpec.describe Subject do
   end
 
   it { expect(subject).to embed_many(:routes) }
+  it { expect(subject).to embed_one(:car) }
 end
