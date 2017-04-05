@@ -97,8 +97,8 @@ de:
   
   present_profiles:
     show:
-      costs: Kosten
-      durations: Reisezeiten
+      next: Weiter ...
+
 
   cars:
     form:

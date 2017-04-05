@@ -5,6 +5,9 @@ $font-size-base: 16px;
 $font-size-h1: floor(($font-size-base * 1.8));
 $font-size-h2: floor(($font-size-base * 1.5));
 $font-size-h3: floor(($font-size-base * 1.2));
+$progress-bar-success-bg: #D8E8CF;
+$progress-bar-danger-bg: #EBD7D6;
+$progress-bar-color: #000;
 
 @import "bootstrap";
 @import "bootstrap-slider/bootstrap-slider";

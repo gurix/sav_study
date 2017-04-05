@@ -1,0 +1,55 @@
+h2 Distanzen
+p Sie legen pro Woche insgesamt eine Strecke von <strong>#{distance_in_kilometer(@subject.total(:distance, per: :week))}</strong> zurück. Die Tabelle zeigt wie sich die Gesamtdistanz aus einzelnen Verkehrsmittel darauf verteilen. 
+p
+  button.btn.btn-default type="button" data-toggle="collapse" data-target="#distance_stastistcs" aria-expanded="false" aria-controls="distance_stastistcs" Tabelle zu den Distanzen anzeigen
+
+#distance_stastistcs.collapse aria-expanded="false"
+  .row
+    .col-xs-12.col-md-7
+      canvas id="distanceChart" width="100" height="50"
+      - by_type = @subject.total_by_type(:distance, per: :week)
+      javascript:
+        var costChart = new Chart($("#distanceChart"),{
+          type: 'bar',
+          data: {
+            labels: #{raw by_type.keys.map{ |type| t("shared.movement_types.#{type}")}},
+            datasets: [
+              {
+                data: #{by_type.values},
+                backgroundColor: '#CCC'
+              }
+            ]
+          },
+          options: { 
+            legend: { 
+              display: false 
+            },
+            scales: {
+              yAxes: [{
+                  stacked: false,
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Kilometer'
+                  },
+                  ticks: {
+                    beginAtZero: true
+                  }
+              }]
+            }
+          }
+        });
+    .col-xs-12.col-md-5
+      table.table
+        tr
+          th Verkehrsmittel
+          th Distanz
+        - by_type.each do |type, distance|
+          tr
+            td = t("shared.movement_types.#{type}")
+            td = distance_in_kilometer(distance)
+        tr
+          td
+            strong = t('shared.total')
+          td
+            strong= distance_in_kilometer(@subject.total(:distance, per: :week))
+hr
