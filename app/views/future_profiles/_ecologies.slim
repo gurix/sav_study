@@ -1,6 +1,10 @@
 h2 Ökologie
-p Heute belasten Sie die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt <strong>#{emmissions_in_gramms(@subject.total(:ecological_costs, per: :week))} CO2 Emissionen</strong>. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 LED Energiesparlampen diese „XX“ Stunden brennen lässt. (Emissionen sind...).
-p In Zukunft wird durch Ihre Nutzung eines autonomen Autos <strong>#{emmissions_in_gramms(@subject.total(:model_ecological_costs, per: :week))} CO2</strong> emittiert. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 LED Energiesparlampen diese „XX“ Stunden brennen lässt. 
+p Heute belasten Sie die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt <strong>#{emmissions_in_gramms(@subject.total(:ecological_costs, per: :week))} CO2</strong> Emissionen. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 LED Energiesparlampen diese „XX“ Stunden brennen lässt. (Emissionen sind...).
+p 
+  | In Zukunft wird durch Ihre Nutzung eines autonomen Autos <strong>#{emmissions_in_gramms(@subject.total(:model_ecological_costs, per: :week))} CO2</strong> emittiert. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 LED Energiesparlampen diese „XX“ Stunden brennen lässt. 
+  - if @subject.assigned_model == 'sav' 
+    |  Wenn Sie das Fahrzeug immer nur für sich alleine reservieren so, dass niemand zusätzlich zusteigen kann, belasten Sie damit die Umwelt mit <strong>#{emmissions_in_gramms(@subject.total(:first_class_model_ecological_costs, per: :week))} CO2</strong>.
+
 p
   button.btn.btn-default type="button" data-toggle="collapse" data-target="#eco_stastistcs" aria-expanded="false" aria-controls="eco_stastistcs" Tabelle zu den ökologischen Kosten anzeigen
 

@@ -1,8 +1,10 @@
 h2 Kosten
-p Die dabei entstehenden Mobilitätskosten belaufen sich auf <strong>#{costs_in_chf(@subject.total(:costs, per: :week))}</strong>.
-
 p Heute entstehen bei Ihnen durch die Nutzung der Verkehrsmittel Kosten in Höhe von <strong>#{costs_in_chf(@subject.total(:costs, per: :week))}</strong>. 
-p In Zukunft belaufen sich die Kosten für die Nutzung mit einem autonomen Auto <strong>#{costs_in_chf(@subject.total(:model_costs, per: :week))}</strong>.
+p 
+  | In Zukunft belaufen sich die Kosten für die Nutzung mit einem autonomen Auto auf <strong>#{costs_in_chf(@subject.total(:model_costs, per: :week))}</strong>.
+  - if @subject.assigned_model == 'sav' 
+    |  Wenn Sie das Fahrzeug immer nur für sich alleine reservieren so, dass niemand zusätzlich zusteigen kann, belaufen sich die Kosten für diese Einzelfahrten auf <strong>#{costs_in_chf(@subject.total(:first_class_model_costs, per: :week))}</strong>.
+
 p Die Tabelle und die Grafik zeigen den Vergleich und ggf. die Differenz in der Nutzung der beiden Mobilitätsformen bezogen auf die Kosten.
 p
   button.btn.btn-default type="button" data-toggle="collapse" data-target="#cost_stastistcs" aria-expanded="false" aria-controls="cost_stastistcs" Tabelle zu den Kosten anzeigen
