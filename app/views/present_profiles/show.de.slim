@@ -1,9 +1,6 @@
 .profile
   h1 = title 'Mein aktuelles Mobilitätsprofil'
   p Ihren Angaben zufolge haben wir eine kurze Auswertung Ihres aktuellen Mobilitätsverhaltens vorgenommen. Diese sind hochgerechnet auf eine Woche. Sie sehen sowohl die zurückgelegten Kilometer, die aufgebrachte Zeit, als auch die dabei entstehenden Kosten und Umweltauswirkungen in CO2-Emissionen angegeben. 
-  / p Sie sind in der in der Woche <strong>#{distance_of_time_in_words(@subject.total(:duration, per: :week).minutes)}</strong> unterwegs und legen dabei eine Strecke von <strong>#{t('shared.distance_in_kilometer', kilometers: @subject.total(:distance, per: :week))}</strong> zurück.
-  / p Von den <strong>#{distance_of_time_in_words(@subject.total(:duration, per: :week).minutes)}</strong> in denen Sie unterweg sind, können sie  <strong>#{distance_of_time_in_words(free_duration.minutes)}</strong> nutzen für andere Tätigkeiten.
-  / p Die dabei enstehenden Mobilitätskosten belaufen sich auf <strong>#{t('shared.costs_in_chf', costs: @subject.total(:costs, per: :week))}</strong>.
   = render 'durations'
   = render 'distances'
   = render 'costs'

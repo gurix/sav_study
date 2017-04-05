@@ -1,0 +1,115 @@
+h2 Ökologie
+p Heute belasten Sie die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt <strong>#{emmissions_in_gramms(@subject.total(:ecological_costs, per: :week))} CO2 Emissionen</strong>. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 LED Energiesparlampen diese „XX“ Stunden brennen lässt. (Emissionen sind...).
+p In Zukunft wird durch Ihre Nutzung eines autonomen Autos <strong>#{emmissions_in_gramms(@subject.total(:model_ecological_costs, per: :week))} CO2</strong> emittiert. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 LED Energiesparlampen diese „XX“ Stunden brennen lässt. 
+p
+  button.btn.btn-default type="button" data-toggle="collapse" data-target="#eco_stastistcs" aria-expanded="false" aria-controls="eco_stastistcs" Tabelle zu den ökologischen Kosten anzeigen
+
+#eco_stastistcs.collapse aria-expanded="false"
+  .row
+    .col-xs-12.col-md-7
+      canvas id="ecoChart" width="100" height="50"
+      - by_type = @subject.total_by_type(:ecological_costs, per: :week)
+      - model_by_type = @subject.total_by_type(:model_ecological_costs, per: :week)
+      - first_class_model_by_type = @subject.total_by_type(:first_class_model_ecological_costs, per: :week)
+      - if @subject.assigned_model == 'pav'
+        javascript: 
+          datasets = [
+                {
+                  backgroundColor: "#000",
+                  label: 'Zukünftig',
+                  data: #{model_by_type.values.map{|x|x/1000}},
+                },
+                {
+                  backgroundColor: "#CCC",
+                  label: 'Aktuell',
+                  data: #{by_type.values.map{|x|x/1000}},
+                }
+              ]  
+      - else
+        javascript: 
+          datasets = [
+                {
+                  backgroundColor: "#000",
+                  label: 'Zukünftig (Fahrgemeinschaft)',
+                  data: #{model_by_type.values.map{|x|x/1000}},
+                },
+                 {
+                  backgroundColor: "#999",
+                  label: 'Zukünftig (ohne Fahrgemeinschaft)',
+                  data: #{first_class_model_by_type.values.map{|x|x/1000}},
+                },
+                {
+                  backgroundColor: "#CCC",
+                  label: 'Aktuell',
+                  data: #{by_type.values.map{|x|x/1000}},
+                }
+              ]  
+
+      javascript:
+        var costChart = new Chart($("#ecoChart"),{
+            type: 'bar',
+            data: {
+              labels: #{raw by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
+              datasets: datasets
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: false
+                    }],
+                    yAxes: [{
+                        stacked: false,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Kilogramm CO2 eq.'
+                        },
+                        ticks: {
+                          beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    .col-xs-12.col-md-5
+      table.table
+        thead
+          tr
+            th Verkehrsmittel
+            th Zukünftig
+            th Aktuell
+            th 
+        tbody
+          - by_type.keys.each do |type|
+            tr
+              td = t("shared.#{@subject.assigned_model}_movement_types.#{type}")
+              td 
+                = emmissions_in_gramms(model_by_type["#{type}"])
+                - if @subject.assigned_model == 'sav' && model_by_type["#{type}"] != 0 && type != 'by_train'
+                  br
+                  = "(#{emmissions_in_gramms(first_class_model_by_type["#{type}"])})"
+                
+              td = emmissions_in_gramms(by_type["#{type}"])
+              - difference = model_by_type["#{type}"] - by_type["#{type}"]
+              td class="#{hilight_number(difference)}" 
+                = emmissions_in_gramms(difference)
+                - if @subject.assigned_model == 'sav' && difference != 0
+                  br 
+                  - first_class_difference = first_class_model_by_type["#{type}"] - by_type["#{type}"]
+                  = "(#{emmissions_in_gramms(first_class_difference)})"
+        tfoot
+          tr
+            th= t('shared.total')
+            th 
+              = emmissions_in_gramms(@subject.total(:model_ecological_costs, per: :week))
+              - if @subject.assigned_model == 'sav' && @subject.total(:model_ecological_costs, per: :week) != 0
+                br
+                = "(#{emmissions_in_gramms(@subject.total(:first_class_model_ecological_costs, per: :week))})"
+            th = emmissions_in_gramms(@subject.total(:ecological_costs, per: :week))
+            - difference = (@subject.total(:model_ecological_costs, per: :week) - @subject.total(:ecological_costs, per: :week)).round(2)
+            th class="#{hilight_number(difference)}"
+              = emmissions_in_gramms(difference)
+              - if @subject.assigned_model == 'sav' && difference != 0
+                - first_class_difference = (@subject.total(:first_class_model_ecological_costs, per: :week) - @subject.total(:ecological_costs, per: :week)).round(2)
+                br
+                = "(#{emmissions_in_gramms(first_class_difference)})"
+  = render 'replacement_hint'

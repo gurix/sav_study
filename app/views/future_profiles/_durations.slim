@@ -1,0 +1,95 @@
+- present_blocked_duration = @subject.total(:blocked_duration, per: :week)
+- present_duration = @subject.total(:duration, per: :week)
+- present_free_duration = present_duration - present_blocked_duration
+
+- future_blocked_duration = @subject.total(:model_blocked_duration, per: :week)
+- future_duration = @subject.total(:model_duration, per: :week)
+- future_free_duration = future_duration - future_blocked_duration
+
+h2 Reisezeiten
+p Heute sind Sie in der in einer Woche insgesamt <strong>#{distance_of_time_in_words(present_duration.minutes)}</strong> unterwegs.
+p In Zukunft sind Sie mit einem autonomen Auto <strong>#{distance_of_time_in_words(future_duration.minutes)}</strong> unterwegs.  
+p Die Tabelle und die Grafik zeigen den Vergleich und ggf. die Differenz in der Nutzung der beiden Mobilitätsformen bezogen auf die Zeit. 
+p Während Sie vorher <strong>#{distance_of_time_in_words(present_free_duration.minutes)}</strong> für andere Tätigkeiten nutzen konnten, bietet das autonome Auto Ihnen auf allen Strecken jetzt <strong>#{distance_of_time_in_words(future_free_duration.minutes)}</strong> für andere Tätigkeiten.
+
+p
+  button.btn.btn-default type="button" data-toggle="collapse" data-target="#duration_stastistcs" aria-expanded="false" aria-controls="duration_stastistcs" Tabelle zu den Reisezeiten anzeigen
+
+#duration_stastistcs.collapse aria-expanded="false"
+  .row
+    .col-xs-12
+      .progress
+        - blocked_duration = @subject.total(:model_blocked_duration)
+        - duration = @subject.total(:model_duration)
+        - free_duration = duration - blocked_duration
+        .progress-bar.progress-bar-success style="width: #{((free_duration / duration)*100) - 10}%" nutzbare Zeit
+        .progress-bar.progress-bar-danger style="width: #{((blocked_duration/duration)*100) + 10}%" blockierte Zeit
+
+  .row
+    .col-xs-12.col-md-7
+      canvas id="timeChart" width="100" height="50"
+      - by_type = @subject.total_by_type(:duration, per: :week)
+      - model_by_type = @subject.total_by_type(:model_duration, per: :week)
+      javascript:
+        var costChart = new Chart($("#timeChart"),{
+            type: 'bar',
+            data: {
+              labels: #{raw by_type.keys.map{ |type| t("shared.#{@subject.assigned_model}_movement_types.#{type}")}},
+              datasets: [
+                {
+                  backgroundColor: "#000",
+                  label: 'Zukünftig',
+                  data: #{model_by_type.values},
+                },
+                {
+                  backgroundColor: "#CCC",
+                  label: 'Aktuell',
+                  data: #{by_type.values},
+                }
+              ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: false
+                    }],
+                    yAxes: [{
+                        stacked: false,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Minutes'
+                        },
+                        ticks: {
+                          beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    .col-xs-12.col-md-5
+      table.table
+        thead
+          tr
+            th Verkehrsmittel
+            th Zukünftig
+            th Aktuell
+            th 
+        tbody
+          - by_type.keys.each do |type|
+            tr
+              td = t("shared.#{@subject.assigned_model}_movement_types.#{type}")
+              td = distance_of_time_in_words_or_empty(model_by_type["#{type}"].minutes)
+              td = distance_of_time_in_words_or_empty(by_type["#{type}"].minutes)
+              - difference = model_by_type["#{type}"] - by_type["#{type}"]
+              td class="#{hilight_number(difference)}"
+                = distance_of_time_in_words_or_empty(difference.minutes)
+        tfoot
+          tr
+            th= t('shared.total')
+            th = distance_of_time_in_words_or_empty(@subject.total(:model_duration, per: :week).minutes)
+            th = distance_of_time_in_words_or_empty(@subject.total(:duration, per: :week).minutes)
+            - difference = (@subject.total(:model_duration, per: :week) - @subject.total(:duration, per: :week))
+            th class="#{hilight_number(difference)}"
+              = distance_of_time_in_words_or_empty(difference.minutes)
+  = render 'replacement_hint'
+hr
