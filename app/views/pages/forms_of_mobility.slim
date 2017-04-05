@@ -1,0 +1,13 @@
+h1 = title 'Neue Mobilitätsformen'
+p Durch die technologischen Weiterentwicklungen der Automobilindustrie in den letzten Jahren zeigt sich, dass mehr und mehr elektrische betriebene Autos auf den Strassen unterwegs sind. 
+p Des Weiteren investieren sowohl Organisationen, als auch Regierungen in die Weiterentwicklung von selbstfahrenden Fahrzeugen, sogenannten autonomen Autos die zudem elektrisch betrieben sind und wenn der Strom für die Ladung aus 100% erneuerbaren Energien erzeugt wird, eine gute Umweltbilanz aufweisen können. 
+p In ihrer vollendeten Ausführung soll ein Auto dieser Art komplett ohne Fahrzeuglenker und ohne dessen aktives Ausführen von bremsen, schalten, lenken, blinken, etc. auf den Strassen unterwegs sein. 
+| PAV-CONTENT HERE
+p Die Reisezeit könnte dadurch für andere Tätigkeiten genutzt werden, da das Auto nicht mehr gelenkt werden muss.
+| SAV-CONTENT HERE
+p Die Reisezeit könnte dadurch für andere Tätigkeiten genutzt werden, das Auto könnte termingerecht an Ihren Wunschort vorfahren und Sie bräuchten keine Zeit mehr für die Parkplatzsuche. Der Besitz eines eigenen Autos könnte hinfällig werden, da es in der Zwischenzeit, während es in Nichtbenutzung ist, anderen Personen für Fahrten zur Verfügung steht.
+.row
+  .col-xs-6
+    = link_to t('shared.back'), subject_present_profile_path(@subject)
+  .col-xs-6
+  = link_to t('shared.next'), subject_future_profile_path(@subject), class: 'pull-right'

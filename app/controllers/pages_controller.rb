@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
-  def index
-    load_subject_from_previous
+  before_action :load_subject_from_previous
+
+  def show
+    render params[:id]
   end
 
   private
