@@ -53,3 +53,19 @@ label {
 .required abbr {
   border-bottom: none;
 }
+
+.routes {
+  .panel-heading {
+    h2 {
+      .col-xs-1 {
+        width: 60px;
+        padding: auto;
+        img { width: 40px; }
+      }
+      .col-xs-11 {
+        margin: 0 auto;
+      }
+    }
+  }
+
+}

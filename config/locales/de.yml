@@ -148,7 +148,7 @@ de:
       title: Anteil der Strecke, die ich mit meinem Auto zurücklege
     
     by_foot:  
-      title: Anteil der Strecke, die ich zu Fuss gehe (Beispielsweise um zur Haltestelle zu gelangen oder zum Parplatz zu gehen)
+      title: Anteil der Strecke, die ich zu Fuss gehe (Beispielsweise um zur Haltestelle zu gelangen, zum Parplatz zu gehen, den ganzen Weg zur Arbeit/zum Sport/zum Kindergarten, etc. zu Fuss laufen)
     
     by_bicycle:  
       title: Anteil der Strecke, die ich mit dem Fahrrad zurücklege
@@ -176,7 +176,7 @@ de:
           cargo: Ich befördere grössere Gepäckstücke, den Einkauf oder ein Haustier.
           interval: Wie­viel­mal pro Woche legen Sie diese Strecke zurück?
           start_point: Startpunkt
-          end_point: Zielpunkt
+          end_point: Endpunkt
 
         by_foot:
           distance: Wie viele Kilometer laufen Sie zu Fuss?
