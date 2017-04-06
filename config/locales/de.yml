@@ -4,7 +4,7 @@ de:
     cancel: Abbrechen
     edit: Bearbeiten
     delete: Löschen
-    next: Weiter ...
+    next: Weiter
     back: Zurück
     ask_for_delete_entry: Wollen Sie diesen Eintrag wirklich löschen?
     error: Die Eingabe konnte nicht gespeichert werden, überprüfen Sie bitte ihre Eingaben
@@ -41,8 +41,12 @@ de:
   pages:
       index:
         title: ZHAW SAV Studie
-        start: Eine neue Befragung starten ...
-        continue: Meine betehende Befragung fortführen ...
+        start: Eine neue Befragung starten
+        continue: Meine betehende Befragung fortführen
+      
+      forms_of_mobility:
+        back: Zurück zu meinem aktuellen Mobilitätsprofil
+        next: Weiter zu meinem zukünftigen Mobilitätsprofil
 
   subjects:
     errors:
@@ -127,7 +131,7 @@ de:
       title: Meine Strecke! 
       new: Zusätzliche Strecke erfassen
       cargo: inkl. Gepäck oder Haustiere
-      next: Weiter zur Auswertung ...
+      next: Weiter zur Auswertung
 
     form:
       title: Strecke bearbeiten
@@ -150,6 +154,16 @@ de:
     
     by_local_line:  
       title: Anteil der Strecke, die ich mit dem Bus, Trolleybus oder Tram zurücklege
+  
+  present_profiles:
+    show:
+      back: Zurück zu meinen Strecken
+      next: Weiter zu den neuen Mobilitätsformen
+  
+  future_profiles:
+    show:
+      back: Zurück zu den neuen Mobilitätsformen
+      next: Weiter zur Befragung
 
   mongoid:
      attributes:

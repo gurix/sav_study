@@ -1,5 +1,6 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
+@import "font-awesome";
 
 $font-size-base: 16px;
 $font-size-h1: floor(($font-size-base * 1.8));
@@ -71,4 +72,12 @@ label {
     }
   }
 
+}
+
+.nav-link {
+  font-weight: bold;
+  
+  i.fa {
+    margin: 0 10px;
+  }
 }

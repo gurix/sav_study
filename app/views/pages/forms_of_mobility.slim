@@ -8,6 +8,10 @@ p Die Reisezeit könnte dadurch für andere Tätigkeiten genutzt werden, da das 
 p Die Reisezeit könnte dadurch für andere Tätigkeiten genutzt werden, das Auto könnte termingerecht an Ihren Wunschort vorfahren und Sie bräuchten keine Zeit mehr für die Parkplatzsuche. Der Besitz eines eigenen Autos könnte hinfällig werden, da es in der Zwischenzeit, während es in Nichtbenutzung ist, anderen Personen für Fahrten zur Verfügung steht.
 .row
   .col-xs-6
-    = link_to t('shared.back'), subject_present_profile_path(@subject)
+    = link_to subject_present_profile_path(@subject), class: 'nav-link'
+      i.fa.fa-arrow-left aria-hidden="true"
+      = t('.back')
   .col-xs-6
-  = link_to t('shared.next'), subject_future_profile_path(@subject), class: 'pull-right'
+  = link_to subject_future_profile_path(@subject), class: 'pull-right nav-link'
+    = t('.next')
+    i.fa.fa-arrow-right aria-hidden="true"

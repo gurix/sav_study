@@ -22,8 +22,10 @@ p
         - blocked_duration = @subject.total(:model_blocked_duration)
         - duration = @subject.total(:model_duration)
         - free_duration = duration - blocked_duration
-        .progress-bar.progress-bar-success style="width: #{((free_duration / duration)*100) - 10}%" nutzbare Zeit
-        .progress-bar.progress-bar-danger style="width: #{((blocked_duration/duration)*100) + 10}%" blockierte Zeit
+        - free_duration_percentage = ((free_duration / duration)*100).round(2) - 10
+        - blocked_duration_percentage = ((blocked_duration/duration)*100).round(2) + 10
+        .progress-bar.progress-bar-success style="width: #{free_duration_percentage}%" #{free_duration_percentage}% nutzbare Zeit
+        .progress-bar.progress-bar-danger style="width: #{blocked_duration_percentage}%" #{blocked_duration_percentage}% blockierte Zeit
 
   .row
     .col-xs-12.col-md-7
@@ -68,6 +70,7 @@ p
         });
     .col-xs-12.col-md-5
       table.table
+        caption Reisezeiten nach Verkehrsmittel
         thead
           tr
             th Verkehrsmittel
@@ -91,5 +94,6 @@ p
             - difference = (@subject.total(:model_duration, per: :week) - @subject.total(:duration, per: :week))
             th class="#{hilight_number(difference)}"
               = distance_of_time_in_words_or_empty(difference.minutes)
+        
   = render 'replacement_hint'
 hr

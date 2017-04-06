@@ -15,7 +15,11 @@
 
   .row
     .col-xs-6
-      = link_to t('shared.back'), subject_present_profile_path(@subject)
+      = link_to '/pages/forms_of_mobility', class: 'nav-link'
+        i.fa.fa-arrow-left aria-hidden="true"
+        = t('.back')
     .col-xs-6
-      = link_to t('shared.next'), new_subject_questionary_path(@subject), class: 'pull-right'
+      = link_to new_subject_questionary_path(@subject), class: 'pull-right nav-link'
+        = t('.next')
+        i.fa.fa-arrow-right aria-hidden="true"
   p

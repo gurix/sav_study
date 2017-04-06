@@ -38,6 +38,10 @@ h1 = title(t '.title')
     
   .row
     .col-xs-6
-      = link_to t('shared.back'), [:edit, @subject, :car]
+      = link_to [:edit, @subject, :car], class: 'nav-link'
+        i.fa.fa-arrow-left aria-hidden="true"
+        = t('shared.back')
     .col-xs-6
-    = link_to t('.next'), subject_present_profile_path(@subject), class: 'pull-right'
+    = link_to subject_present_profile_path(@subject), class: 'pull-right  nav-link'
+      = t('.next')
+      i.fa.fa-arrow-right aria-hidden="true"

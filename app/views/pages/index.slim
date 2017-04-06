@@ -16,8 +16,12 @@ p
   em Danke für Ihre Unterstützung!
 
 p
-    = link_to t('.start'), new_subject_path, class: 'text-success'
+    = link_to  new_subject_path, class: 'text-success nav-link'
+      = t('.start')
+      i.fa.fa-arrow-right aria-hidden="true"
 p.
 - if @subject
   p
-    = link_to t('.continue'), [:edit, @subject, :car]
+    = link_to [:edit, @subject, :car], class: 'nav-link'
+      = t('.continue')
+      i.fa.fa-arrow-right aria-hidden="true"
