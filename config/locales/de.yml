@@ -39,14 +39,14 @@ de:
       by_local_line: Bus oder Tram*
 
   pages:
-      index:
-        title: ZHAW SAV Studie
-        start: Eine neue Befragung starten
-        continue: Meine betehende Befragung fortführen
-      
-      forms_of_mobility:
-        back: Zurück zu meinem aktuellen Mobilitätsprofil
-        next: Weiter zu meinem zukünftigen Mobilitätsprofil
+    index:
+      title: ZHAW SAV Studie
+      start: Eine neue Befragung starten
+      continue: Meine betehende Befragung fortführen
+    
+    forms_of_mobility:
+      back: Zurück zu meinem aktuellen Mobilitätsprofil
+      next: Weiter zu meinem zukünftigen Mobilitätsprofil
 
   subjects:
     errors:
@@ -87,7 +87,7 @@ de:
       3: 3 - 4 mal am Tag
       4: einmal am Tag
       5: weniger als einmal pro Tag
-
+    
     form:
       duration_hint: Falls sie keinen direkten ÖV-Anschluss haben, geben Sie 60 Minuten an.
       interval_hint: Falls sie keinen direkten ÖV-Anschluss haben, geben Sie weniger als einmal pro Tag an.
@@ -165,6 +165,24 @@ de:
       back: Zurück zu den neuen Mobilitätsformen
       next: Weiter zur Befragung
 
+  types_of_adoptions:
+    pav:
+      innovators: Ich bin eine Person, die neuen Technologien und Entwicklungen dicht folgt. Ich wage es, die Risiken, die mit dem Kauf eines ersten autonomen Fahrzeugs einhergehen, zu tragen.
+      early_adopters: Ich bin eine Person, die sich der Vorteile autonomer Fahrzeuge vergegenwärtigt und bin einer der ersten, die von diesen Vorteilen Gebrauch macht und ein autonomes Fahrzeug kauft.
+      early_majority: Ich bin eine Person, die an autonomen Fahrzeugen interessiert ist, aber deren Vorteile kritisch betrachtet. Bevor ich ein autonomes Fahrzeug kaufe, will ich mir die Zeit nehmen, und von den Vorteilen überzeugt sein. Meine Entscheidung hängt grösstenteils von den Empfehlungen andere Nutzer ab.
+      late_majority: Ich bin eine Person, die von autonomen Fahrzeugen nicht begeistert ist und Gewissheit braucht. Ich kaufe autonome Fahrzeuge, wenn diese einige Zeit auf dem Markt sind und deren Vorteile sich offensichtlich bestätigen.
+      traditionalist: Ich bin eine traditionelle Person und habe wenig Interesse an autonomen Fahrzeugen. Ich mag keine Veränderungen in meinem Leben und kaufe ein autonomes Fahrzeug nur wenn die existierenden Modelle nicht mehr gekauft werden können.
+    
+    sav:
+      innovators: Ich bin eine Person, die neuen Technologien und Entwicklungen dicht folgt. Ich wage es, die Risiken zu tragen, die mit der Nutzung eines ersten autonomen Taxis einhergehen.
+      early_adopters: Ich bin eine Person, die sich der Vorteile eines autonomen Taxis vergegenwärtigt und bin einer der ersten, die von diesen Vorteilen Gebrauch macht und ein autonomes Taxi nutzt.
+      early_majority: Ich bin eine Person, die an autonomen Taxis interessiert ist, aber deren Vorteile kritisch betrachtet. Bevor ich ein autonomes Taxi nutze, will ich mir die Zeit nehmen, und von den Vorteilen überzeugt sein. Meine Entscheidung hängt grösstenteils von den Empfehlungen andere Nutzer ab.
+      late_majority: Ich bin eine Person, die von autonomen Taxis nicht begeistert ist und Gewissheit braucht. Ich nutze autonome Taxis, wenn diese einige Zeit auf dem Markt sind und deren Vorteile sich offensichtlich bestätigen.
+      traditionalist: Ich bin eine traditionelle Person und habe wenig Interesse an autonomen Taxis. Ich mag keine Veränderungen in meinem Leben und nutze autonomes Taxis nur wenn die existierenden Mobilitätsmodelle nicht mehr genutzt werden können. 
+  
+  questionaries:
+    form:
+      types_of_adoption: Bitte wählen Sie eine Aussage aus, die auf Sie am ehesten zutrifft.
   mongoid:
      attributes:
         subject:

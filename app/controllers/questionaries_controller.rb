@@ -15,7 +15,7 @@ class QuestionariesController < ApplicationController
   def update_questionary
     if @questionary.update_attributes(questionary_params)
       @questionary.page = @questionary.page.to_i + 1
-      if @questionary.page == 3
+      if @questionary.page == 4
         redirect_to edit_subject_path(@subject)
         return
       end
@@ -30,7 +30,7 @@ class QuestionariesController < ApplicationController
   end
 
   def assign_page
-    @questionary.page = params[:page] || 1
+    @questionary.page = questionary_params[:page].to_i || 1
   end
 
   def questionary_params

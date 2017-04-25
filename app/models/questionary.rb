@@ -11,11 +11,14 @@ class Questionary
   validates :version, presence: true
 
   field :answer_1, type: Integer, default: 0
-  validates :answer_1, presence: true, if: proc { |questionary| questionary.page == 1 }
+  validates :answer_1, presence: true, if: proc { |questionary| questionary.page.to_i == 1 }
 
   field :answer_2, type: Integer, default: 0
-  validates :answer_2, presence: true, if: proc { |questionary| questionary.page == 1 }
+  validates :answer_2, presence: true, if: proc { |questionary| questionary.page.to_i == 1 }
 
   field :answer_3, type: Integer, default: 0
-  validates :answer_3, presence: true, if: proc { |questionary| questionary.page == 2 }
+  validates :answer_3, presence: true, if: proc { |questionary| questionary.page.to_i == 2 }
+
+  field :adoption, type: String
+  validates :adoption, presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 3 }
 end
