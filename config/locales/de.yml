@@ -123,6 +123,8 @@ de:
       shopping: ... um für meinen täglichen Bedarf einzukaufen.
       errands: ... um Erledigungen oder Besorgungen zu machen. (Behördengänge, Friseur, Arzt, Post, etc.)
       recreational: ... in meiner Freizeit. (Beispielsweise um Freunde zu besuchen oder um ins Vereinslokal zu gelangen.)
+      catch_up: ... um Jemanden abzuholen oder wegzubringen.
+
     short_purposes:
       work: Arbeit
       shopping: Einkauf
