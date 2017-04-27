@@ -1,6 +1,6 @@
 class QuestionariesController < ApplicationController
   before_action :load_subject
-  before_action :assign_page
+  before_action :assign_page, only: [:update, :create]
 
   def create
     update_questionary
@@ -34,6 +34,6 @@ class QuestionariesController < ApplicationController
   end
 
   def questionary_params
-    params.require(:questionary).permit! # We don't care about security here as long as it just affects questionary data
+    params.require(:questionary).permit! if params['questionary'] # We don't care about security here as long as it just affects questionary data
   end
 end

@@ -29,7 +29,10 @@ ruby:
         = f.input :adoption, as: :radio_buttons, collection: t("types_of_adoptions.#{@subject.assigned_model}").map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, label: t('.types_of_adoption')
   .row
       .col-xs-6
-        = link_to t('shared.cancel'), :back, class: 'btn btn-default'
+        - back_path = @questionary.page == 1 ? subject_future_profile_path(@subject) : edit_subject_questionary_path(@subject, questionary: { page: (@questionary.page.to_i - 1) } )
+        = link_to back_path, class: 'nav-link' do
+          i.fa.fa-arrow-left aria-hidden="true"
+          = t('.back')
       .col-xs-6
         = f.submit value: t('shared.next'), class: 'btn btn-success pull-right'
 

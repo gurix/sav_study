@@ -21,4 +21,9 @@ class Questionary
 
   field :adoption, type: String
   validates :adoption, presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 3 }
+
+  # Set default value for page
+  def page
+    @page || 1
+  end
 end
