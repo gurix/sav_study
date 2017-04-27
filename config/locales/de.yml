@@ -119,8 +119,9 @@ de:
 
   routes:
     purposes:
-      work: ... um zur Arbeit zu gehen.
-      shopping: ... um einzukaufen.
+      work: ... um zu meinem Arbeitplatz oder meiner Ausbildungsstädte zu kommen.
+      shopping: ... um für meinen täglichen Bedarf einzukaufen.
+      errands: ... um Erledigungen oder Besorgungen zu machen. (Behördengänge, Friseur, Arzt, Post, etc.)
       recreational: ... in meiner Freizeit. (Beispielsweise um Freunde zu besuchen oder um ins Vereinslokal zu gelangen.)
     short_purposes:
       work: Arbeit
@@ -183,6 +184,8 @@ de:
   questionaries:
     form:
       types_of_adoption: Bitte wählen Sie eine Aussage aus, die auf Sie am ehesten zutrifft.
+      back: Zurück
+      
   mongoid:
      attributes:
         subject:
