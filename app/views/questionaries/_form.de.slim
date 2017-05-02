@@ -26,7 +26,7 @@ ruby:
   - if f.object.page.to_i == 3
     .row
       .col-xs-12
-        = f.input :adoption, as: :radio_buttons, collection: t("types_of_adoptions.#{@subject.assigned_model}").map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, label: t('.types_of_adoption')
+        = f.input :adoption, as: :radio_buttons, collection: t('.types_of_adoptions').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, label: t('.types_of_adoption')
   .row
       .col-xs-6
         - back_path = @questionary.page == 1 ? subject_future_profile_path(@subject) : edit_subject_questionary_path(@subject, questionary: { page: (@questionary.page.to_i - 1) } )
