@@ -50,6 +50,10 @@ class Subject
     aggregate(routes.map { |route| route.total_by_type(trait, options) })
   end
 
+  def dfference_by(trait, another_trait, options = {})
+    total(trait, options) - total(another_trait, options)
+  end
+
   private
 
   def aggregate(values)

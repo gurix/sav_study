@@ -1,9 +1,21 @@
-h1 = title('Ein paar indiskrete Fragen')
+h1 = title('Fragebogen')
 ruby:
   @default_slider = {
-    ticks: [1,2,3,4],
-    labels: ['Trifft gar<br>nicht zu', 'Trifft<br>nicht zu', 'Trifft zu', 'Trifft<br>völlig zu'],
-    ticks_position: [0, 33, 66, 100]
+    ticks: [1,2,3,4,5],
+    labels: ['Trifft gar<br>nicht zu', 'Trifft<br>nicht zu', 'Neutral', 'Trifft zu', 'Trifft<br>völlig zu'],
+    ticks_position: [0, 25, 50, 75, 100]
+  }
+
+  @amount_slider = {
+    ticks: [1,2,3,4,5],
+    labels: ['Sehr wenig', 'Wenig', 'Weder viel,<br>noch wenig', 'Viel', 'Sehr viel'],
+    ticks_position: [0, 25, 50, 75, 100]
+  }
+
+  @justification_slider = {
+    ticks: [1,2,3,4,5],
+    labels: ['überhapt nicht wert', 'wenig wert', 'Weder viel,<br>noch wenig wert', 'viel wert', 'sehr viel wert'],
+    ticks_position: [0, 25, 50, 75, 100]
   }
 
 = simple_form_for @questionary, url: subject_questionary_path(@subject) do |f|
@@ -11,19 +23,47 @@ ruby:
   = f.input :page, as: :hidden
   
   - if f.object.page.to_i == 1
-    .row
-      .col-xs-12
-        = f.input :answer_1, label: 'Im Auto brülle ich oft den Vordermann an.', input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_1, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
-    .row
-      .col-xs-12
-        = f.input :answer_2,label: 'Im Zug stelle ich die Tasche extra auf den Nebensitz, damit niemand sich zumir setzen kann.', input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_2, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
- 
+    - if @subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week) > 0
+      hr
+      .row
+        .col-xs-12
+          = f.input :apf_quantity_ecology, label: "Die wöchentlichen Einsparungen an #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2, die ich durch die Nutzung eines autonomen Fahrzeugs erreichen kann sind...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_ecology, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
+      .row
+        .col-xs-12
+          = f.input :apf_feelings_ecology, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Fahrzeugs #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2 pro Woche einsparen könnte.", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_ecology, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+      .row
+        .col-xs-12
+          = f.input :apf_justification_ecology, label: "Wöchentliche Einsparungen von #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2  sind die Änderungen meiner Verhaltensweisen bzw. die damit verbundenen Anstrengungen ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_justification_ecology, 'slider-ticks': @justification_slider[:ticks], 'slider-ticks-labels': @justification_slider[:labels], 'slider-ticks-positions': @justification_slider[:ticks_position]}}
   - if f.object.page.to_i == 2
+    - if @subject.dfference_by(:duration,:model_duration, per: :week) > 0
+      hr
+      .row
+        .col-xs-12
+          = f.input :apf_quantity_duration, label: "Die wöchentlichen Einsparungen von #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)}, die ich durch die Nutzung eines autonomen Fahrzeugs erreichen kann sind...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_duration, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
+      .row
+        .col-xs-12
+          = f.input :apf_feelings_duration, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Fahrzeugs #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)} pro Woche einsparen könnte.", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_duration, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+      .row
+        .col-xs-12
+          = f.input :apf_justification_duration, label: "Wöchentliche Einsparungen von #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)}  sind die Änderungen meiner Verhaltensweisen bzw. die damit verbundenen Anstrengungen ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_justification_duration, 'slider-ticks': @justification_slider[:ticks], 'slider-ticks-labels': @justification_slider[:labels], 'slider-ticks-positions': @justification_slider[:ticks_position]}}
+  - if f.object.page.to_i == 3
+    - if @subject.dfference_by(:costs,:model_costs, per: :week) > 0
+      hr
+      .row
+        .col-xs-12
+          = f.input :apf_quantity_costs, label: "Die wöchentlichen Einsparungen von #{costs_in_chf(@subject.dfference_by(:costs,:model_costs, per: :week))}, die ich durch die Nutzung eines autonomen Fahrzeugs erreichen kann sind...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_costs, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
+      .row
+        .col-xs-12
+          = f.input :apf_feelings_costs, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Fahrzeugs #{costs_in_chf(@subject.dfference_by(:costs,:model_costs, per: :week))} pro Woche einsparen könnte.", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_costs, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+      .row
+        .col-xs-12
+          = f.input :apf_justification_costs, label: "Wöchentliche Einsparungen von #{costs_in_chf(@subject.dfference_by(:costs,:model_costs, per: :week))}  sind die Änderungen meiner Verhaltensweisen bzw. die damit verbundenen Anstrengungen ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_justification_costs, 'slider-ticks': @justification_slider[:ticks], 'slider-ticks-labels': @justification_slider[:labels], 'slider-ticks-positions': @justification_slider[:ticks_position]}}
+  - if f.object.page.to_i == 4
     .row
       .col-xs-12
         = f.input :answer_3, label:'Ich finde alle Leute doof', input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_3, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
   
-  - if f.object.page.to_i == 3
+  - if f.object.page.to_i == 5
     .row
       .col-xs-12
         = f.input :adoption, as: :radio_buttons, collection: t('.types_of_adoptions').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, label: t('.types_of_adoption')

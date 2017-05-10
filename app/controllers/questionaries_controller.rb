@@ -1,6 +1,6 @@
 class QuestionariesController < ApplicationController
   before_action :load_subject
-  before_action :assign_page, only: [:update, :create]
+  before_action :assign_page, only: [:update, :create, :edit]
 
   def create
     update_questionary
@@ -15,7 +15,7 @@ class QuestionariesController < ApplicationController
   def update_questionary
     if @questionary.update_attributes(questionary_params)
       @questionary.page = @questionary.page.to_i + 1
-      if @questionary.page == 4
+      if @questionary.page == 6
         redirect_to edit_subject_path(@subject)
         return
       end
