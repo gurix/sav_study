@@ -24,7 +24,6 @@ ruby:
   
   - if f.object.page.to_i == 1
     - if @subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week) > 0
-      hr
       .row
         .col-xs-12
           = f.input :apf_quantity_ecology, label: "Die wöchentlichen Einsparungen an #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2, die ich durch die Nutzung eines autonomen Fahrzeugs erreichen kann sind...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_ecology, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
@@ -34,9 +33,10 @@ ruby:
       .row
         .col-xs-12
           = f.input :apf_justification_ecology, label: "Wöchentliche Einsparungen von #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2  sind die Änderungen meiner Verhaltensweisen bzw. die damit verbundenen Anstrengungen ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_justification_ecology, 'slider-ticks': @justification_slider[:ticks], 'slider-ticks-labels': @justification_slider[:labels], 'slider-ticks-positions': @justification_slider[:ticks_position]}}
+    - else
+      p Bitte fahren Sie fort.
   - if f.object.page.to_i == 2
     - if @subject.dfference_by(:duration,:model_duration, per: :week) > 0
-      hr
       .row
         .col-xs-12
           = f.input :apf_quantity_duration, label: "Die wöchentlichen Einsparungen von #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)}, die ich durch die Nutzung eines autonomen Fahrzeugs erreichen kann sind...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_duration, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
@@ -46,9 +46,10 @@ ruby:
       .row
         .col-xs-12
           = f.input :apf_justification_duration, label: "Wöchentliche Einsparungen von #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)}  sind die Änderungen meiner Verhaltensweisen bzw. die damit verbundenen Anstrengungen ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_justification_duration, 'slider-ticks': @justification_slider[:ticks], 'slider-ticks-labels': @justification_slider[:labels], 'slider-ticks-positions': @justification_slider[:ticks_position]}}
+    - else
+      p Bitte fahren Sie fort.
   - if f.object.page.to_i == 3
     - if @subject.dfference_by(:costs,:model_costs, per: :week) > 0
-      hr
       .row
         .col-xs-12
           = f.input :apf_quantity_costs, label: "Die wöchentlichen Einsparungen von #{costs_in_chf(@subject.dfference_by(:costs,:model_costs, per: :week))}, die ich durch die Nutzung eines autonomen Fahrzeugs erreichen kann sind...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_costs, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
@@ -58,6 +59,8 @@ ruby:
       .row
         .col-xs-12
           = f.input :apf_justification_costs, label: "Wöchentliche Einsparungen von #{costs_in_chf(@subject.dfference_by(:costs,:model_costs, per: :week))}  sind die Änderungen meiner Verhaltensweisen bzw. die damit verbundenen Anstrengungen ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_justification_costs, 'slider-ticks': @justification_slider[:ticks], 'slider-ticks-labels': @justification_slider[:labels], 'slider-ticks-positions': @justification_slider[:ticks_position]}}
+    - else
+      p Bitte fahren Sie fort.
   - if f.object.page.to_i == 4
     .row
       .col-xs-12
