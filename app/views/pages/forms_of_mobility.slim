@@ -71,16 +71,16 @@ hr
   ul.quiz
     li <input type="checkbox" name="answer1"/> Autonome Fahrzeuge haben ein höheres Unfallrisiko.
     li <input type="checkbox" name="answer2"/> Autonome Fahrzeuge haben dieselbe Reichweite wie konventionelle Fahrzeuge.
-    li <input type="checkbox" name="answer3"/> Es wird davon ausgegangen, dass im Jahr 2030 die Mehrheit der Fahrzeuge autonom fahren wird.
+    li <input type="checkbox" name="answer3"/> Es wird davon ausgegangen, dass im Jahr 2030 die Mehrheit der Fahrzeuge autonom fahren.
     li <input type="checkbox" name="answer4"/> Als Insasse müssen Sie jederzeit in das Geschehen eingreifen können und die Steuerung des Fahrzeugs übernehmen können.
     li <input type="checkbox" name="answer5"/> Die Ökobilanz autonomer Fahrzeuge ist besser als die konventioneller Fahrzeuge.
     li <input type="checkbox" name="answer6"/> Ein konventionelles Fahrzeug hat höhere Betriebskosten als ein autonomes Fahrzeug.
   
-  button.check.btn.btn-primary Antworten Überprüfen
+  button.check.btn.btn-primary Antworten überprüfen
   
   .false_answer.hidden
     .text-danger
-      strong Ihre Antwort ist nicht korrekt, bitte Überprüfen Sie ihre Antworten.
+      strong Ihre Antwort ist nicht korrekt, bitte überprüfen Sie ihre Antworten.
 
   .continue.hidden
     .text-success
@@ -101,7 +101,6 @@ coffee:
       console.log(correct_answered)
       if correct_answered then $('.continue').removeClass('hidden') else $('.continue').addClass('hidden')
       if correct_answered then $('.false_answer').addClass('hidden') else $('.false_answer').removeClass('hidden')
-
 
 .row
   .col-xs-6
