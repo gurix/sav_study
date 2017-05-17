@@ -1,17 +1,110 @@
-h1 = title 'Neue Mobilitätsformen'
-p Durch die technologischen Weiterentwicklungen der Automobilindustrie in den letzten Jahren zeigt sich, dass mehr und mehr elektrische betriebene Autos auf den Strassen unterwegs sind. 
-p Des Weiteren investieren sowohl Organisationen, als auch Regierungen in die Weiterentwicklung von selbstfahrenden Fahrzeugen, sogenannten autonomen Autos die zudem elektrisch betrieben sind und wenn der Strom für die Ladung aus 100% erneuerbaren Energien erzeugt wird, eine gute Umweltbilanz aufweisen können. 
-p In ihrer vollendeten Ausführung soll ein Auto dieser Art komplett ohne Fahrzeuglenker und ohne dessen aktives Ausführen von bremsen, schalten, lenken, blinken, etc. auf den Strassen unterwegs sein. 
-| PAV-CONTENT HERE
-p Die Reisezeit könnte dadurch für andere Tätigkeiten genutzt werden, da das Auto nicht mehr gelenkt werden muss.
-| SAV-CONTENT HERE
-p Die Reisezeit könnte dadurch für andere Tätigkeiten genutzt werden, das Auto könnte termingerecht an Ihren Wunschort vorfahren und Sie bräuchten keine Zeit mehr für die Parkplatzsuche. Der Besitz eines eigenen Autos könnte hinfällig werden, da es in der Zwischenzeit, während es in Nichtbenutzung ist, anderen Personen für Fahrten zur Verfügung steht.
+- @subject.assigned_model = 'pav'
+h1= title @subject.assigned_model == 'pav' ? 'Das private autonome Fahrzeug' : 'Carsharing autonomer Fahrzeuge'
+.row
+  .col-xs-12.col-md-6.col-lg-5
+    p Durch die technologischen Weiterentwicklungen der Automobilindustrie in den letzten Jahren zeigt sich, dass mehr und mehr elektrische betriebene Autos auf den Strassen unterwegs sind.
+    p Des Weiteren investieren sowohl Organisationen, als auch Regierungen in die Weiterentwicklung von selbstfahrenden Fahrzeugen, sogenannten autonomen Autos die zudem elektrisch betrieben sind und wenn der Strom für die Ladung aus 100% erneuerbaren Energien erzeugt wird, eine gute Umweltbilanz aufweisen können.
+    p In ihrer vollendeten Ausführung soll ein Fahrzeug dieser Art komplett ohne Fahrzeuglenker und ohne dessen aktives Ausführen von bremsen, schalten, lenken, blinken, etc. auf den Strassen unterwegs sein.
+  .col-xs-12.col-md-6.col-log-7
+    = image_tag "#{@subject.assigned_model}.jpg", alt: 'Konzeptstudie © Rinspeed', class: 'img-responsive'
+    .pull-right.copyright aria-hidden="true" © Rinspeed
+hr
+- if @subject.assigned_model == 'pav'
+  p Stellen Sie sich vor, Sie befinden sich im Jahr 2030 und überlegen sich ein neues Fahrzeug anzuschaffen. Dabei haben Sie die Möglichkeit ein privates autonomes Fahrzeug zu erwerben.
+  
+  p 
+    | Sie können davon ausgehen, dass sich bereits die Hälfte der Fahrzeuge vollständig autonom fortbewegen und kein Lenkrad mehr besitzen. 
+    strong Die Zahl der Unfälle ist dabei drastisch   gesunken – es hat sich gezeigt, dass ein Unfall mit einem autonomen Fahrzeug, einem Sechser im Lotto gleichkommt.
+  
+  p Autonome Fahrzeuge bieten in erster Linie den Vorteil, dass sie per se <strong>ökonomisch fahren</strong>. Dadurch wird die Energie optimal genutzt und <strong>die Shadstoffemission minimiert</strong>. 
+  
+  p <strong>Der Verkehr wird flüssiger</strong> und beruhigt sich bei höherem Anteil an autonomen Fahrzeugen. <strong>Es so wird Stopp-and-Go-Verkehr vermindert</strong>.
+  
+  p Durch einen ökonomischen Fahrstil wird der <strong>Energiebedarf und Verschleiss geringer</strong>, entsprechend <strong>senken sich die Fahrtkosten.</strong>
+  
+  p Der Fahrer muss sich nicht mehr um das Lenken des Fahrzeugs kümmern, es ist, als ob man einen Chauffeur hätte. <strong>Die Fahrzeit kann damit individuell genutzt werden</strong>, beispielsweise um zu arbeiten, ein Buch zu lesen oder mit Freunden zu schreiben. Die Fahrtzeit kann somit für das Pflegen von sozialen Kontakte genutzt werden.
+  
+  p Während man sich wie bisher voll und ganz auf das Fahrgeschehen konzentrieren musste, kann man nun die Fahrezeit nutzen um beispielsweise seinen Urlaub zu planen, der Tochter die Haare zu kämmen, die Präsentation für das gleich stattfindenen Meeting vorbereiten und vieles mehr. 
+
+  p
+    | Folgende Merkmale können sie als gegeben betrachten:
+    ul
+      li Das private autonome Fahrzeug wird elektrisch betrieben und hat dieselbe Reichweite wie ein konventionelles Fahrzeug.
+      li Es existiert ein gut ausgebautes Netz an Ladestationen. Eine volle Ladung benötigt nur ein paar Minuten.
+      li Diese Generation von autonomen Fahrzeugen funktionieren auch bei extremen Wetterereignissen gleich gut, wie konventionelle Fahrzeug.
+      li Die Anschaffungskosten sind gleich hoch, wie bei konventionellen Fahrzeugen.
+      li Das private autonome Fahrzeug kann gleichviele Passagiere und Gepäckstücke transportieren, wie ein konventionelles Fahrzeug.
+
+- if @subject.assigned_model == 'sav'
+  p Stellen Sie sich vor, Sie befinden sich im Jahr 2030. In Ihrer Umgebung gibt es eine ausreichend grosse Flotte von autonomen Autos, die grundsätzlich allen zur Verfügung stehen. Sie haben die Möglichkeit ein autonomes Fahrzeug bei Bedarf zu reservieren und auch mitzufahren.
+  
+  p Entgegen dem konventionellen Individualverkehr ist das Fahrzeug nicht mehr in ihrem Privatbesitz. Es wird ein Fahrzeug aus einer öffentlichen Flotte für eine gewisse Strecke reserviert. Die Reservierung erfolgt über Smartphone oder Computer. Egal wo sie sich gerade befinden, ein Fahrzeug wird spätestens in 10 Minuten bei ihnen eintreffen und sie an ihr gewünschtes Ziel chauffieren.
+  
+  p 
+   | Sie können davon ausgehen, dass sich bereits die Hälfte der Bevölkerung dies Fahrzeuge nutzen. Diese sind vollständig autonom und besitzen kein Lenkrad mehr. 
+   strong Die Zahl der Unfälle ist dabei drastisch gesunken – es hat sich gezeigt, dass ein Unfall mit einem autonomen Fahrzeug, einem Sechser im Lotto gleichkommt.
+  
+  p Autonome Fahrzeuge bieten in erster Linie den Vorteil, dass sie per se <strong>ökonomisch fahren</strong>. Dadurch wird die Energie optimal genutzt und <strong>die Shadstoffemission minimiert</strong>. 
+ 
+  p <strong>Der Verkehr wird flüssiger</strong> und beruhigt sich bei höherem Anteil an autonomen Fahrzeugen. <strong>Es so wird Stopp-and-Go-Verkehr vermindert</strong>.
+
+  p Durch einen ökonomischen Fahrstil wird der <strong>Energiebedarf und Verschleiss geringer</strong>, entsprechend <strong>senken sich die Fahrtkosten.</strong>
+
+  p Das Fahrzeug kann während der Fahrt zusätzliche Passagiere aufnehmen. Es können bis zu vier Personen zusteigen. <strong>Dadurch werden die Kosten geteilt und es werden weniger Fahrzeuge auf der Strasse sein.</strong> Gegen einen Aufpreis können sie das Fahrzeug für sich alleine buchen. Beispielsweise wenn sie Transporte zu erledigen haben oder ihre Ruhe haben möchten.
+
+  p Der Fahrer muss sich nicht mehr um das Lenken des Fahrzeugs kümmern, es ist, als ob man einen Chauffeur hätte. <strong>Die Fahrzeit kann damit individuell genutzt werden</strong>, beispielsweise um zu arbeiten, ein Buch zu lesen oder mit Freunden zu schreiben. Die Fahrtzeit kann somit für das Pflegen von sozialen Kontakte genutzt werden.
+  
+  p Während man sich wie bisher voll und ganz auf das Fahrgeschehen konzentrieren musste, kann man nun die Fahrezeit nutzen um beispielsweise seinen Urlaub zu planen, der Tochter die Haare zu kämmen, die Präsentation für das gleich stattfindenen Meeting vorbereiten und vieles mehr.
+
+  p <strong>Die Fahrzeuge werden regelmässig gereinigt und werden zentral überwacht.</strong> Bei Problemen kann ein Servicetechniker die Steuerung des Fahrzeugs übernehmen. Es besteht ein Rundum Service für das funktionierende autonome Fahrzeug.
+
+  p
+    | Folgende Merkmale können sie als gegeben betrachten:
+    ul
+      li Das geteilte autonome Fahrzeug wird elektrisch betrieben und hat dieselbe Reichweite wie ein konventionelles Fahrzeug.
+      li Es existiert eine gut ausgebaute Flotte von Fahrzeugen. Sie werden innerhalb von 10 Minuten bedient.
+      li Diese Generation von autonomen Fahrzeugen funktionieren auch bei extremen Wetterereignissen gleich gut, wie konventionelle Fahrzeug.
+      li Das autonome Fahrzeug kann gleichviele Passagiere und Gepäckstücke transportieren, wie ein konventionelles Fahrzeug. 
+hr
+.well
+  p Bitte markieren sie im Folgenden alle <strong>falschen</strong> Aussagen um fortzufahren.
+  ul.quiz
+    li <input type="checkbox" name="answer1"/> Autonome Fahrzeuge haben ein höheres Unfallrisiko.
+    li <input type="checkbox" name="answer2"/> Autonome Fahrzeuge haben dieselbe Reichweite wie konventionelle Fahrzeuge.
+    li <input type="checkbox" name="answer3"/> Es wird davon ausgegangen, dass im Jahr 2030 die Mehrheit der Fahrzeuge autonom fahren wird.
+    li <input type="checkbox" name="answer4"/> Als Insasse müssen Sie jederzeit in das Geschehen eingreifen können und die Steuerung des Fahrzeugs übernehmen können.
+    li <input type="checkbox" name="answer5"/> Die Ökobilanz autonomer Fahrzeuge ist besser als die konventioneller Fahrzeuge.
+    li <input type="checkbox" name="answer6"/> Ein konventionelles Fahrzeug hat höhere Betriebskosten als ein autonomes Fahrzeug.
+  
+  button.check.btn.btn-primary Antworten Überprüfen
+  
+  .false_answer.hidden
+    .text-danger
+      strong Ihre Antwort ist nicht korrekt, bitte Überprüfen Sie ihre Antworten.
+
+  .continue.hidden
+    .text-success
+      strong Sie haben alle Fragen korrekt beantwortet.
+    = link_to subject_future_profile_path(@subject), class: 'nav-link'
+      = t('.next')
+      i.fa.fa-arrow-right aria-hidden="true"
+
+coffee:
+  $ ->
+    $('.check').click ->
+      correct_answered = $(".quiz input[name='answer1']").is(':checked') && 
+      !$(".quiz input[name='answer2']").is(':checked') &&
+      !$(".quiz input[name='answer3']").is(':checked') &&
+      $(".quiz input[name='answer4']").is(':checked') &&
+      !$(".quiz input[name='answer5']").is(':checked') &&
+      !$(".quiz input[name='answer6']").is(':checked')
+      console.log(correct_answered)
+      if correct_answered then $('.continue').removeClass('hidden') else $('.continue').addClass('hidden')
+      if correct_answered then $('.false_answer').addClass('hidden') else $('.false_answer').removeClass('hidden')
+
+
 .row
   .col-xs-6
     = link_to subject_present_profile_path(@subject), class: 'nav-link'
       i.fa.fa-arrow-left aria-hidden="true"
       = t('.back')
-  .col-xs-6
-  = link_to subject_future_profile_path(@subject), class: 'pull-right nav-link'
-    = t('.next')
-    i.fa.fa-arrow-right aria-hidden="true"

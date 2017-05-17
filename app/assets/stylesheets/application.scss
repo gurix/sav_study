@@ -81,3 +81,17 @@ label {
     margin: 0 10px;
   }
 }
+
+ul.quiz {
+  list-style: none;
+  padding: 0px;
+  
+  li {
+    padding: 5px 0px;
+
+    input {
+      margin-right: 5px;
+    }
+  }
+}
+  
