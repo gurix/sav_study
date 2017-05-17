@@ -128,7 +128,9 @@ de:
     short_purposes:
       work: Arbeit
       shopping: Einkauf
+      errands: Erledigungen
       recreational: Freizeit
+      catch_up: Jemanden fahren
   
     index:
       title: Meine Strecke! 
