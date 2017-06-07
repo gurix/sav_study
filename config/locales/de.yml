@@ -102,19 +102,19 @@ de:
   cars:
     form:
       title: Was für ein Fahrzeug fahren Sie?
-      category: Was für ein Auto fahren Sie regelmässig? Bzw. wenn Sie ein Auto fahren würden, um welche Grösse handelt es sich dann?
-      type_of_power: Welche Antriebsart hat das Auto? Bzw. wenn Sie ein Auto fahren würden, welchen Verbrennungsmotor hat das Auto dann?
+      category: Was für ein Auto fahren Sie regelmässig? Bzw. wenn Sie ein Auto fahren würden, um welche Grösse handelt es sich dann? 
+      type_of_power: Welche Antriebsart hat das Auto?
       car_owner: Besitzen Sie ein Auto? 
-      is_commuter: Sind Sie regelmässig (mindestens 2x pro Woche) mit dem Zug und/ oder dem Auto unterwegs? 
+      is_commuter: Sind Sie regelmässig (mindestens 2x pro Woche) mit dem Zug und/oder mit dem Auto unterwegs?
     
     types_of_power:
       gasoline: Konventionelles Fahrzeug betrieben mit Benzin oder Diesel
-      hybrid: Hybridelektrokraftfahrzeug mit Benzin oder Diesel
+      hybrid: Hybridelektrofahrzeug mit Benzin oder Diesel
       electro: Batteriebetriebenes Elektrofahrzeug
 
     categories: 
       fullsize: SUV, Oberklasse, Offroader, Transporter (10 Liter / 100 Kilometer oder mehr)
-      compact: Mittel- und Kompaktklasse (6 - 10 Liter / 100 Kilometer oder mehr)
+      compact: Kompaktklasse (6 - 10 Liter / 100 Kilometer)
       micro: Kleinklasse und Minis (6 Liter / 100 Kilometer oder weniger)
 
   routes:
