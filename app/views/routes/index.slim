@@ -2,6 +2,11 @@ h1 = title(t '.title')
 - if @routes.blank?
   = render 'empty_routes'
 - else
+  - if @routes.size == 1
+  .well
+    p Sie haben nun Ihre erste Strecke definiert. Welche Strecken legen Sie während der Woche oder am Wochenende sonst noch zurück? Beispielsweise bezüglich Freizeit, täglichem Bedarf, etc? Damit ein möglichst umfangreiches Bild Ihres Mobilitätsverhalten ersichtlich wird, geben Sie bitte verschiedene Strecken, bzw. so viele Strecken wie möglich an.  
+    = link_to 'Möchte Sie noch eine Strecke für Freizeitaktivitäten/Erledigungen-Behördengänge/etc. eingeben? ', new_subject_route_path(@subject), class: 'text-success'
+
   h2 Strecken anzeigen und weitere mit aufnehmen
   p In dieser Ansicht, sehen Sie welche Strecken Sie <strong>wöchentlich</strong> zurücklegen. Wenn Sie eine typische Strecke hinzufügen möchten, können Sie das über den Button „zusätzliche Strecke erfassen“ tun. Wenn Sie der Meinung sind, die Auflistung entspricht Ihrem wöchentlichen Mobilitätsverhalten und den gewöhnlichen Wegen, die Sie regelmässig zurücklegen, dann wählen Sie „weiter zur Auswertung“. 
   table.table.table-collapse

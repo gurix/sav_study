@@ -120,8 +120,8 @@ de:
   routes:
     purposes:
       work: ... um zu meinem Arbeitplatz oder meiner Ausbildungsstädte zu kommen.
-      shopping: ... um für meinen täglichen Bedarf einzukaufen.
-      errands: ... um Erledigungen oder Besorgungen zu machen. (Behördengänge, Friseur, Arzt, Post, etc.)
+      shopping: ... um für meinen täglichen Bedarf einzukaufen (kleine Einkäufe).
+      errands: ... um Erledigungen oder Besorgungen zu machen. (Grosseinkauf, Behördengänge, Friseur, Arzt, Post, etc.)
       recreational: ... in meiner Freizeit. (Beispielsweise um Freunde zu besuchen oder um ins Vereinslokal zu gelangen.)
       catch_up: ... um Jemanden abzuholen oder wegzubringen.
 
@@ -133,7 +133,7 @@ de:
       catch_up: Jemanden fahren
   
     index:
-      title: Meine Strecke! 
+      title: Meine Strecken
       new: Zusätzliche Strecke erfassen
       cargo: inkl. Gepäck oder Haustiere
       next: Weiter zur Auswertung
@@ -152,7 +152,7 @@ de:
       title: Anteil der Strecke, die ich mit meinem Auto zurücklege
     
     by_foot:  
-      title: Anteil der Strecke, die ich zu Fuss gehe (Beispielsweise um zur Haltestelle zu gelangen, zum Parplatz zu gehen, den ganzen Weg zur Arbeit/zum Sport/zum Kindergarten, etc. zu Fuss laufen)
+      title: Anteil der Strecke, die ich zu Fuss gehe (Beispielsweise um zur Haltestelle zu gelangen, zum Parkplatz zu gehen, den ganzen Weg zur Arbeit/zum Sport/zum Kindergarten, etc. zu Fuss laufen)
     
     by_bicycle:  
       title: Anteil der Strecke, die ich mit dem Fahrrad zurücklege
@@ -214,7 +214,7 @@ de:
         
         by_car:
           distance: Wie viele Kilometer fahren Sie mit dem Auto?
-          duration: Wie viele Minuten sind Sie mit den Auto unterwegs? (inklusive stockendem Verkehr)
+          duration: Wie viele Minuten sind Sie mit dem Auto unterwegs? (inklusive stockendem Verkehr)
           stopp_and_go: Wie viele Minuten stehen Sie dabei in stockendem Verkehr?
         
         by_bicycle:
