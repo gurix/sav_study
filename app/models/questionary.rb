@@ -40,21 +40,6 @@ class Questionary
     questionary.page.to_i == 3 && questionary.subject.dfference_by(:costs, :model_costs, per: :week) > 0
   }
 
-  field :apf_justification_ecology, type: Integer, default: 0
-  validates :apf_justification_ecology, presence: true, if: proc { |questionary|
-    questionary.page.to_i == 1 && questionary.subject.dfference_by(:ecological_costs, :model_ecological_costs, per: :week) > 0
-  }
-
-  field :apf_justification_duration, type: Integer, default: 0
-  validates :apf_justification_duration, presence: true, if: proc { |questionary|
-    questionary.page.to_i == 2 && questionary.subject.dfference_by(:duration, :model_duration, per: :week) > 0
-  }
-
-  field :apf_justification_costs, type: Integer, default: 0
-  validates :apf_justification_costs, presence: true, if: proc { |questionary|
-    questionary.page.to_i == 3 && questionary.subject.dfference_by(:costs, :model_costs, per: :week) > 0
-  }
-
   field :answer_3, type: Integer, default: 0
   validates :answer_3, presence: true, if: proc { |questionary| questionary.page.to_i == 4 }
 
