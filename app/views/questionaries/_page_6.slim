@@ -1,0 +1,67 @@
+sass:
+  #ranking_sorter 
+    list-style-position: inside
+    padding: 0px
+
+    li
+      margin: 5px
+      padding: 5px
+      border: 1px solid black
+      cursor: move
+      background-color: #FFF
+
+    input
+      display: inline
+      width: 50px
+    .form-group
+      display: inline
+      margin-left: 1em
+
+.row
+  .col-xs-12
+    p Sortieren Sie was Ihnen am vorgestellten Mobilitätsmodell/an dem Ihnen präsentierten autonomen Auto am wichtigsten erscheint? 1 = sehr wichtig bis 4 = unwichtig
+    ol#ranking_sorter
+      
+      li
+        | Umwelt = eine umweltfreundliche Fortbewegung 
+        = f.input :dimension_ranking_environment, as: :string, readonly: false, label: false
+
+      li
+        | Kosten = die enstehenden Mobilitätskosten 
+        = f.input :dimension_ranking_costs, as: :string, readonly: false, label: false
+
+      li
+        | Soziales = das Miteinander mit anderen Personen bei der Fortbewegung
+        = f.input :dimension_ranking_social, as: :string, readonly: false, label: false
+      
+      li
+        | Zeit = die Dauer der Reise
+        = f.input :dimension_ranking_time, as: :string, readonly: false, label: false 
+
+javascript:
+  $(document).ready(function() {
+    // Updates the hidden inputs by looping through all child elements
+    var updateValues = function() {
+      $('#ranking_sorter li').each(function(index, element, _array) {
+        $(element).find('input').val(index);
+      });
+    }
+
+    // Enable 
+    var el = document.getElementById('ranking_sorter');
+    var sortable = Sortable.create(el, {
+      onEnd: function (/**Event*/evt) {
+        updateValues();
+      }
+    });
+    
+    // Arrange the inputs according its values
+    var initializeSorting = function() {
+      var wrapper = $('#ranking_sorter');
+
+      wrapper.find('li').sort(function(a, b) {
+          return +$(a).find('input').val() - +$(b).find('input').val();
+      }).appendTo(wrapper);
+    }
+    initializeSorting();
+  });

@@ -12,62 +12,17 @@ ruby:
     ticks_position: [0, 25, 50, 75, 100]
   }
 
-  @justification_slider = {
-    ticks: [1,2,3,4,5],
-    labels: ['überhapt nicht wert', 'wenig wert', 'Weder viel,<br>noch wenig wert', 'viel wert', 'sehr viel wert'],
-    ticks_position: [0, 25, 50, 75, 100]
-  }
-
 = simple_form_for @questionary, url: subject_questionary_path(@subject) do |f|
   = f.input :version, as: :hidden, value: 1
   = f.input :page, as: :hidden
   
-  - if f.object.page.to_i == 1
-    - if @subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week) > 0
-      .row
-        .col-xs-12
-          = f.input :apf_quantity_ecology, label: "Die wöchentlichen Einsparungen an #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2, die ich durch die Nutzung eines autonomen Autos erreichen kann, sind für mich ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_ecology, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
-      .row
-        .col-xs-12
-          = f.input :apf_feelings_ecology, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Autos #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2 pro Woche einsparen könnte.", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_ecology, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
-    - else
-      p Bitte fahren Sie fort.
-  - if f.object.page.to_i == 2
-    - if @subject.dfference_by(:duration,:model_duration, per: :week) > 0
-      .row
-        .col-xs-12
-          = f.input :apf_quantity_duration, label: "Die wöchentlichen Einsparungen an #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)} Zeit, die ich durch die Nutzung eines autonomen Autos erreichen kann, sind für mich ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_duration, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
-      .row
-        .col-xs-12
-          = f.input :apf_feelings_duration, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Autos #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)} Zeit pro Woche einsparen könnte.", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_duration, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
-    - else
-      p Bitte fahren Sie fort.
-  - if f.object.page.to_i == 3
-    - if @subject.dfference_by(:costs,:model_costs, per: :week) > 0
-      .row
-        .col-xs-12
-          = f.input :apf_quantity_costs, label: "Die wöchentlichen Einsparungen an #{costs_in_chf(@subject.dfference_by(:costs,:model_costs, per: :week))} (Geld), die ich durch die Nutzung eines autonomen Autos erreichen kann, sind ... ", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_costs, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
-      .row
-        .col-xs-12
-          = f.input :apf_feelings_costs, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Autos #{costs_in_chf(@subject.dfference_by(:costs,:model_costs, per: :week))} (Geld) pro Woche einsparen könnte. ", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_costs, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
-    - else
-      p Bitte fahren Sie fort.
-  - if f.object.page.to_i == 4
-    .row
-      .col-xs-12
-        = f.input :answer_3, label:'Ich finde alle Leute doof', input_html: { data: { provide: 'slider', 'slider-value': f.object.answer_3, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+  = render "page_#{f.object.page.to_i}", f: f
   
-  - if f.object.page.to_i == 5
-    .row
-      .col-xs-12
-        = f.input :adoption, as: :radio_buttons, collection: t('.types_of_adoptions').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, label: t('.types_of_adoption')
   .row
-      .col-xs-6
-        - back_path = @questionary.page == 1 ? subject_future_profile_path(@subject) : edit_subject_questionary_path(@subject, questionary: { page: (@questionary.page.to_i - 1) } )
-        = link_to back_path, class: 'nav-link' do
-          i.fa.fa-arrow-left aria-hidden="true"
-          = t('.back')
-      .col-xs-6
-        = f.submit value: t('shared.next'), class: 'btn btn-success pull-right'
-
-  
+    .col-xs-6
+      - back_path = @questionary.page == 1 ? subject_future_profile_path(@subject) : edit_subject_questionary_path(@subject, questionary: { page: (@questionary.page.to_i - 1) } )
+      = link_to back_path, class: 'nav-link' do
+        i.fa.fa-arrow-left aria-hidden="true"
+        = t('.back')
+    .col-xs-6
+      = f.submit value: t('shared.next'), class: 'btn btn-success pull-right'

@@ -1,0 +1,46 @@
+ruby:
+  labels = ['stimme überhaupt nicht zu ','','','','stimme voll und ganz zu']
+  sub_questions = [
+    {
+      code: 'norm_consequences_1',
+      text: 'Durch den Verkehr verursachter Lärm und Luftverschmutzung senken die Lebensqualität in meinem Wohnort.'
+    },
+    {
+      code: 'norm_consequences_2',
+      text: 'Ich bin mir bewusst, dass meine Mobilitätsgewohnheiten den Klimawandel beeinflussen.'
+    },
+    {
+      code: 'norm_responsibility_1',
+      text: 'Durch meine individuelle Verkehrsmittelwahl für die alltäglichen Wegetappen bin auch ich verantwortlich für das Ausmass der Umweltprobleme und Umweltverschmutzung.'
+    },
+    {
+      code: 'norm_responsibility_2',
+      text: 'Ich fühle mich mitverantwortlich für den Abbau und Verbrauch von natürlichen Rohstoffen durch die Autonutzung.'
+    },
+    {
+      code: 'norm_personality_1',
+      text: 'Ich fühle mich moralisch verpflichtet, die Umwelt zu schützen. '
+    },
+    {
+      code: 'norm_personality_2',
+      text: 'Ich fühle mich der Umwelt gegenüber verpflichtet in meinem Alltag das Auto so selten wie möglich zu nutzen.'
+    },
+  ]
+
+p Bitte beurteilen sie die folgenden Aussagen:
+table.table.radio_button_matrix
+  thead
+    tr
+      th
+      - labels.each do | label |
+        th.text-center width="#{70/labels.size}%" = label
+  tbody
+  - sub_questions.each do |sub_question|
+    tr
+      td.text
+        = sub_question[:text]
+        - if @questionary.errors[sub_question[:code]]
+          .help-block.text-danger= @questionary.errors[sub_question[:code]].first
+
+      - (1..labels.size).each do |value|
+        td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value

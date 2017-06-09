@@ -192,6 +192,7 @@ de:
           income: Einkommen
           pt_connection_duration: Wieviele Minuten benötigen sie zu Fuss zur nächsten öffentliche Haltestelle (Bus, Zug, Tram, etc.)
           pt_connection_interval: In welchem durchschnittlichen Abstand haben Sie dort eine Verbindung? 
+          plz: Postleitzahl Ihrer Wohngemeinde
 
         car:
           category: Fahrzeugkategorie

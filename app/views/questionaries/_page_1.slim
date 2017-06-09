@@ -1,0 +1,10 @@
+- if @subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week) > 0
+  p Bitte beurteilen sie die folgenden Aussagen:
+  .row
+    .col-xs-12
+      = f.input :apf_quantity_ecology, label: "Die wöchentlichen Einsparungen an #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2, die ich durch die Nutzung eines autonomen Autos erreichen kann, sind für mich ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_ecology, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
+  .row
+    .col-xs-12
+      = f.input :apf_feelings_ecology, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Autos #{emmissions_in_gramms(@subject.dfference_by(:ecological_costs,:model_ecological_costs, per: :week))} CO2 pro Woche einsparen könnte.", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_ecology, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+- else
+  p Bitte fahren Sie fort.

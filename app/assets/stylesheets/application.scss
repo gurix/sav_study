@@ -13,6 +13,7 @@ $progress-bar-color: #000;
 @import "bootstrap";
 @import "bootstrap-slider/bootstrap-slider";
 @import "profile";
+@import "questionary";
 
 .alert.danger{
   @extend .alert-danger;

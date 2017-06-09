@@ -12,7 +12,6 @@ class Subject
   field :education, type: Integer
   field :income, type: Integer
   field :plz, type: Integer
-  field :city, type: String
   field :email, type: String
   field :token, type: String
 
@@ -21,8 +20,7 @@ class Subject
   validates :birthyear, presence: true, if: :routes_added?
   validates :education, presence: true, if: :routes_added?
   validates :income, presence: true, if: :routes_added?
-  # validates :plz, presence: true, if: :routes_added?
-  # validates :city, presence: true, if: :routes_added?
+  validates :plz, presence: true, if: :routes_added?
 
   validate :correct_age, if: :routes_added?
 

@@ -1,0 +1,10 @@
+- if @subject.dfference_by(:duration,:model_duration, per: :week) > 0
+  p Bitte beurteilen sie die folgenden Aussagen:
+  .row
+    .col-xs-12
+      = f.input :apf_quantity_duration, label: "Die wöchentlichen Einsparungen an #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)} Zeit, die ich durch die Nutzung eines autonomen Autos erreichen kann, sind für mich ...", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_quantity_duration, 'slider-ticks': @amount_slider[:ticks], 'slider-ticks-labels': @amount_slider[:labels], 'slider-ticks-positions': @amount_slider[:ticks_position]}}
+  .row
+    .col-xs-12
+      = f.input :apf_feelings_duration, label: "Ich würde mich gut fühlen, wenn ich durch die Nutzung eines autonomen Autos #{distance_of_time_in_words_or_empty(@subject.dfference_by(:duration,:model_duration, per: :week).minutes)} Zeit pro Woche einsparen könnte.", input_html: { data: { provide: 'slider', 'slider-value': f.object.apf_feelings_duration, 'slider-ticks': @default_slider[:ticks], 'slider-ticks-labels': @default_slider[:labels], 'slider-ticks-positions': @default_slider[:ticks_position]}}
+- else
+  p Bitte fahren Sie fort.

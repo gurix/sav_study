@@ -1,0 +1,4 @@
+
+.row
+  .col-xs-12
+    = f.input :adoption, as: :radio_buttons, collection: t('questionaries.form.types_of_adoptions').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first, label: t('questionaries.form.types_of_adoption')
