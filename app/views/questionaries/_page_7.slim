@@ -1,0 +1,135 @@
+
+ruby:
+  labels = ['stimme überhaupt nicht zu ','','','','stimme voll und ganz zu']
+  sub_questions = [
+    {
+      code: 'context_needs_1',
+      text: 'Ich wohne so dicht an den jeweiligen „point of interests“ (Arbeit, Einkaufen, Freizeit und Sport), ich brauche dafür sowieso kein Auto bzw. muss dafür nicht extra ein autonomes Auto nutzen.'
+    },
+    {
+      code: 'context_needs_2',
+      text: 'Ich benötige für meine berufliche Tätigkeit ein eigenes Fahrzeug, (z.B. weil es an den Arbeitsorten keine passende ÖV Anbindung gibt, z.B. weil ich grösseres Montagematerial transportieren muss, etc.).'
+    }
+  ]
+  if @questionary.subject.assigned_model == 'sav'
+    sub_questions += [
+      {
+        code: 'context_needs_3',
+        text: 'Ich denke es gibt kein autonomes Fahrzeug, dass mich wegen des Geländes wo ich wohne und/oder der (instabilen) Wetterlage dort vor Ort, chauffieren kann.'
+      },
+      {
+        code: 'context_needs_4',
+        text: 'Ich möchte, dass das autonome Auto für meine Bedürnisse speziell ausgelegt ist, bspw. Zugänglichkeit für Rollstuhlfahrer, spezielle Dachträger für den Transport von Fahrrädern, Platz für den Kinderwagen, etc.'
+      }
+    ]
+  end 
+  sub_questions += [
+    {
+      code: 'context_needs_5',
+      text: 'Ich möchte meine persönlichen Gegenstände im autonomen Auto immer griffbereit haben und auch liegenlassen können, d.h. nicht immer wieder alles mitnehmen müssen. '
+    },
+    {
+      code: 'context_needs_6',
+      text: 'Ich möchte ggf. meinen Hund mitnehmen können.'
+    },
+    {
+      code: 'context_needs_7',
+      text: 'Ich möchte in einem autonomen Auto volle Flexibilität haben und halten/stoppen können wo und wann ich will.'
+    }
+  ]
+
+  if @questionary.subject.assigned_model == 'sav'
+    sub_questions += [
+      {
+        code: 'context_needs_8',
+        text: 'Ich möchte nicht mit anderen Personen ein Fahrzeug teilen.'
+      },
+      {
+        code: 'context_needs_9',
+        text: 'Ich fühle mich nicht sicher mit fremden Personen in einem Auto zu sitzen.'
+      },
+      {
+        code: 'context_needs_10',
+        text: 'Ich möchte mein autonomes Auto selber gestalten, es ist ein Teil meiner Identität.'
+      },
+      {
+        code: 'context_needs_11',
+        text: 'Während der Fahrt im autonomen Auto möchte ich laut Musik hören oder telefonieren können.'
+      }
+    ]
+  end
+  sub_questions += [
+    {
+      code: 'context_needs_12',
+      text: 'Mir ist der eigene Fahrspass wichtig.'
+    },
+    {
+      code: 'context_needs_13',
+      text: 'Mir ist das selber lenken und das kontrollieren des Autos wichtig. '
+    },
+    {
+      code: 'context_concerns_1',
+      text: 'Mit anderen Personen in dem autonomen Auto fühle ich mich bedrängt eine Konversation führen zu müssen.'
+    }
+  ]
+  if @questionary.subject.assigned_model == 'sav'
+    sub_questions += [
+      {
+        code: 'context_concerns_2',
+        text: 'Die autonomen Autos sind eventuell nicht so sauber, wie ich es gerne hätte.'
+      },
+      {
+        code: 'context_concerns_3',
+        text: 'Das autonome Auto könnte in einem Notfall nicht vorhanden sein, bzw. generell dann wenn ich es wirklich dringend brauche.'
+      },
+      {
+        code: 'context_concerns_4',
+        text: 'Das autonome Auto steht mir nicht persönlich zur Verfügung, bzw. muss ich zu lange darauf warten, bis es kommt.'
+      },
+    ]
+  end
+  sub_questions += [
+    {
+      code: 'context_concerns_5',
+      text: 'Ich traue grundsätzlich dem Fahrstil des autonomen Autos nicht.'
+    },
+    {
+      code: 'context_concerns_6',
+      text: 'Ich glaube nicht an die Um- und Durchsetzung des Konzepts "autonomes Auto" als Mobilitätslösung für die Zukunft.'
+    },
+    {
+      code: 'context_anticipation_1',
+      text: 'Autonome Autos könnten eine Alternative zum ÖV für mich werden.'
+    },
+    {
+      code: 'context_anticipation_2',
+      text: 'Ich will mit meinen Freunden ein autonomes Auto teilen.'
+    },
+    {
+      code: 'context_anticipation_3',
+      text: 'Autonome Autos könnten eine Ergänzung zum ÖV (für die erste/letzte Meile) für mich werden.'
+    }
+  ]
+
+p Bitte beurteilen sie die folgenden Aussagen:
+table.table.radio_button_matrix
+  thead
+    tr
+      th
+      - labels.each do | label |
+        th.text-center width="#{70/labels.size}%" = label
+  tbody
+  - sub_questions.each_with_index do |sub_question, index|
+    - if index.modulo(5) == 0 && index != 0
+      tr
+        th
+        - labels.each do | label |
+          th.text-center width="#{70/labels.size}%" = label
+    tr
+      td.text
+        = sub_question[:text]
+        - if @questionary.errors[sub_question[:code]]
+          .text-danger=@questionary.errors[sub_question[:code]].first
+
+      - (1..labels.size).each do |value|
+        td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value

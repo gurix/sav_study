@@ -48,7 +48,7 @@ class Questionary
 
   field :acceptance_costs, type: Integer
   validates :acceptance_costs, presence: true, if: proc { |questionary| questionary.page.to_i == 4 }
-  
+
   field :acceptance_time, type: Integer
   validates :acceptance_time, presence: true, if: proc { |questionary| questionary.page.to_i == 4 }
 
@@ -76,7 +76,7 @@ class Questionary
   end
 
   field :dimension_ranking_time, type: Integer, default: 0
-  validates :dimension_ranking_time, presence: true, if: proc { |questionary| questionary.page.to_i == 6 } 
+  validates :dimension_ranking_time, presence: true, if: proc { |questionary| questionary.page.to_i == 6 }
 
   field :dimension_ranking_environment, type: Integer, default: 1
   validates :dimension_ranking_environment, presence: true, if: proc { |questionary| questionary.page.to_i == 6 }
@@ -87,8 +87,88 @@ class Questionary
   field :dimension_ranking_social, type: Integer, default: 3
   validates :dimension_ranking_social, presence: true, if: proc { |questionary| questionary.page.to_i == 6 }
 
+  (1..3).each do |i|
+    field "impicit_time_#{i}", type: Integer
+    validates "impicit_time_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 6 }
+  end
+
+  field :impicit_environment_1, type: Integer
+  validates :impicit_environment_1, presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 6 }
+
+  field :impicit_environment_2, type: Integer
+  validates :impicit_environment_2, presence: true, allow_blank: false, if: proc { |questionary|
+    questionary.page.to_i == 6 && questionary.subject.assigned_model == 'sav'
+  }
+
+  field :impicit_environment_3, type: Integer
+  validates :impicit_environment_3, presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 6 }
+
+  (1..3).each do |i|
+    field "impicit_costs_#{i}", type: Integer
+    validates "impicit_costs_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 6 }
+  end
+
+  field :impicit_social_1, type: Integer
+  validates :impicit_social_1, presence: true, allow_blank: false, if: proc { |questionary|
+    questionary.page.to_i == 6 && questionary.subject.assigned_model == 'sav'
+  }
+
+  (2..3).each do |i|
+    field "impicit_social_#{i}", type: Integer
+    validates "impicit_social_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 6 }
+  end
+
   field :adoption, type: String
   validates :adoption, presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 6 }
+
+  (1..2).each do |i|
+    field "context_needs_#{i}", type: Integer
+    validates "context_needs_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 7 }
+  end
+
+  (3..4).each do |i|
+    field "context_needs_#{i}", type: Integer
+    validates "context_needs_#{i}", presence: true, allow_blank: false, if: proc { |questionary|
+      questionary.page.to_i == 7 && questionary.subject.assigned_model == 'sav'
+    }
+  end
+
+  (5..7).each do |i|
+    field "context_needs_#{i}", type: Integer
+    validates "context_needs_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 7 }
+  end
+
+  (8..11).each do |i|
+    field "context_needs_#{i}", type: Integer
+    validates "context_needs_#{i}", presence: true, allow_blank: false, if: proc { |questionary|
+      questionary.page.to_i == 7 && questionary.subject.assigned_model == 'sav'
+    }
+  end
+
+  (12..13).each do |i|
+    field "context_needs_#{i}", type: Integer
+    validates "context_needs_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 7 }
+  end
+
+  field :context_concerns_1, type: Integer
+  validates :context_concerns_1, presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 7 }
+
+  (2..4).each do |i|
+    field "context_concerns_#{i}", type: Integer
+    validates "context_concerns_#{i}", presence: true, allow_blank: false, if: proc { |questionary|
+      questionary.page.to_i == 7 && questionary.subject.assigned_model == 'sav'
+    }
+  end
+
+  (5..6).each do |i|
+    field "context_concerns_#{i}", type: Integer
+    validates "context_concerns_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 7 }
+  end
+
+  (1..3).each do |i|
+    field "context_anticipation_#{i}", type: Integer
+    validates "context_anticipation_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 7 }
+  end
 
   # Set default value for page
   def page

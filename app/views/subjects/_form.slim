@@ -5,7 +5,9 @@
       = f.input :birthyear, as: :integer, required: true, placeholder: t('subjects.placeholders.birthyear')   
   = f.input :income, as: :radio_buttons, required: true, collection: t('subjects.income').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
   = f.input :education, as: :radio_buttons, required: true, collection: t('subjects.education').map{ |x| [x.first, raw(x.last)]}, label_method: :last, value_method: :first
-  = f.input :plz, as: :numeric, required: true
+  .row
+    .col-xs-12.col-sm-2
+      = f.input :plz, as: :numeric, required: true
   p Wenn Sie von uns in 18 Monaten eine Zusammenfassung der Ergebnisse wünschen, können Sie Ihre E-Mail-Adresse in das folgende Feld eintragen. Es handelt sich um eine anonyme Studie und wir werden Ihre E-Mail-Adresse nach dem Senden der Zusammenfassung wieder löschen.
   .row
     .col-xs-12.col-sm-4

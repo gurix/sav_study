@@ -20,7 +20,7 @@ table.table.radio_button_matrix
       td.text
         = sub_question[:text]
         - if @questionary.errors[sub_question[:code]]
-          .help-block.text-danger= @questionary.errors[sub_question[:code]].first
+          .text-danger= @questionary.errors[sub_question[:code]].first
 
       - (1..labels.size).each do |value|
         td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value
@@ -58,7 +58,7 @@ table.table.radio_button_matrix
       td.text
         == sub_question[:text]
         - if @questionary.errors[sub_question[:code]]
-          .help-block.text-danger= @questionary.errors[sub_question[:code]].first
+          .text-danger= @questionary.errors[sub_question[:code]].first
 
       - (1..labels.size).each do |value|
         td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value
@@ -99,7 +99,7 @@ table.table.radio_button_matrix
       td.text
         == sub_question[:text]
         - if @questionary.errors[sub_question[:code]]
-          .help-block.text-danger= @questionary.errors[sub_question[:code]].first
+          .text-danger= @questionary.errors[sub_question[:code]].first
 
       - (1..labels.size).each do |value|
         td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value

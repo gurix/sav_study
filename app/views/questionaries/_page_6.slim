@@ -45,7 +45,7 @@ sass:
         | Zeit = die Dauer der Reise
         = f.input :dimension_ranking_time, as: :hidden, readonly: false, label: false 
         = image_tag 'sort_handle.svg', alt:'', class: 'pull-right'
-        
+
 javascript:
   $(document).ready(function() {
     // Updates the hidden inputs by looping through all child elements
@@ -73,3 +73,91 @@ javascript:
     }
     initializeSorting();
   });
+
+ruby:
+  labels = ['stimme überhaupt nicht zu ','','','','stimme voll und ganz zu']
+  sub_questions = [
+    {
+      code: 'impicit_time_1',
+      text: 'Die Reisezeit im autonomen Auto kann ich sinnvoll nutzen.'
+    },
+    {
+      code: 'impicit_time_2',
+      text: 'Ich geniesse es einfach mal nichts Anderes zu machen, ausser mich im autonomen Auto zur Arbeit fahren zu lassen.'
+    },
+    {
+      code: 'impicit_time_3',
+      text: 'Für mich ist die Zeit besonders wertvoll, die ich gewinne, wenn ich nicht im Stau stehe.'
+    },
+    {
+      code: 'impicit_environment_1',
+      text: 'Um die Umwelt zu schonen, würde ich ein Fahrzeug mit geringerem Energieverbrauch begrüssen.'
+    }
+  ]
+  if @questionary.subject.assigned_model == 'sav'
+    sub_questions += [
+      {
+        code: 'impicit_environment_2',
+        text: 'Durch eine optimale (Sitzplatz)-Auslastung von autonomen Autos und dem dadurch resultirenden geringeren Verkehrsaufkommen, erhöht sich die Lebensqualität.'
+      },
+    ]
+  end
+  sub_questions += [
+    {
+      code: 'impicit_environment_3',
+      text: 'Dadurch das autonome Autos weniger Lärm und Abgase produzieren, wird sich mein Wohlbefinden erhöhen.'
+    },
+    {
+      code: 'impicit_costs_1',
+      text: 'Ich werde weniger Kosten für den Parkplatz bei der Nutzung von autonomen Autos aufwenden müssen.'
+    },
+    {
+      code: 'impicit_costs_2',
+      text: 'Um meine kilometerbezogenen Kosten (im autonomen Auto: Strom, im herkömmlichen Auto: Benzin) zu senken, würde ich ein autonomes Fahrzeug begrüssen.'
+    },
+    {
+      code: 'impicit_costs_3',
+      text: 'Mit einem autonomen Auto hätte ich weniger Wartungskosten.'
+    }
+  ]
+  if @questionary.subject.assigned_model == 'sav'
+  sub_questions += [
+    {
+      code: 'impicit_social_1',
+      text: 'Ich lerne gerne neue Menschen unterwegs kennen.'
+    },
+  ]
+  end
+  sub_questions += [
+    {
+      code: 'impicit_social_2',
+      text: 'In einem autonomen Auto kann ich mich voll und ganz auf mein Gegenüber konzentrieren.'
+    },
+    {
+      code: 'impicit_social_3',
+      text: 'Mit einem autonomen Auto habe ich mehr Zeit meine sonstigen sozialen Kontakte zu pflegen.'
+    }
+  ]
+
+p Bitte beurteilen sie die folgenden Aussagen:
+table.table.radio_button_matrix
+  thead
+    tr
+      th
+      - labels.each do | label |
+        th.text-center width="#{70/labels.size}%" = label
+  tbody
+  - sub_questions.each_with_index do |sub_question, index|
+    - if index.modulo(5) == 0 && index != 0
+      tr
+        th
+        - labels.each do | label |
+          th.text-center width="#{70/labels.size}%" = label
+    tr
+      td.text
+        = sub_question[:text]
+        - if @questionary.errors[sub_question[:code]]
+          .text-danger=@questionary.errors[sub_question[:code]].first
+
+      - (1..labels.size).each do |value|
+        td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value
