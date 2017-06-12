@@ -9,6 +9,10 @@ sass:
       border: 1px solid black
       cursor: move
       background-color: #FFF
+      
+      img
+        width: 20px
+        margin-right: 1em
 
     input
       display: inline
@@ -24,20 +28,24 @@ sass:
       
       li
         | Umwelt = eine umweltfreundliche Fortbewegung 
-        = f.input :dimension_ranking_environment, as: :string, readonly: false, label: false
+        = f.input :dimension_ranking_environment, as: :hidden, readonly: false, label: false
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right'
 
       li
         | Kosten = die enstehenden Mobilitätskosten 
-        = f.input :dimension_ranking_costs, as: :string, readonly: false, label: false
+        = f.input :dimension_ranking_costs, as: :hidden, readonly: false, label: false
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right'
 
       li
         | Soziales = das Miteinander mit anderen Personen bei der Fortbewegung
-        = f.input :dimension_ranking_social, as: :string, readonly: false, label: false
+        = f.input :dimension_ranking_social, as: :hidden, readonly: false, label: false
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right'
       
       li
         | Zeit = die Dauer der Reise
-        = f.input :dimension_ranking_time, as: :string, readonly: false, label: false 
-
+        = f.input :dimension_ranking_time, as: :hidden, readonly: false, label: false 
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right'
+        
 javascript:
   $(document).ready(function() {
     // Updates the hidden inputs by looping through all child elements
