@@ -1,30 +1,147 @@
+sass:
+  #ranking_sorter 
+    list-style-position: inside
+    padding: 0px
+
+    li
+      margin: 5px
+      padding: 5px
+      border: 1px solid black
+      cursor: move
+      background-color: #FFF
+      
+      img
+        width: 20px
+        margin-right: 1em
+
+    input
+      display: inline
+      width: 50px
+    .form-group
+      display: inline
+      margin-left: 1em
+
+.row
+  .col-xs-12
+    p 
+      | Sortieren Sie was Ihnen am vorgestellten Mobilitätsmodell/an dem Ihnen präsentierten autonomen Auto am wichtigsten erscheint? 1 = sehr wichtig bis 4 = unwichtig.
+      |  Sie können die Begriffe sortieren, in dem Sie diese nach oben oder unten schieben.
+    ol#ranking_sorter
+      
+      li
+        span aria-hidden="true" 
+          | Umwelt = eine umweltfreundliche Fortbewegung 
+        .sr-only= f.input :dimension_ranking_environment, as: :numeric, label: 'Umwelt = eine umweltfreundliche Fortbewegung'
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right', 'aria-hidden' => true
+      li
+        span aria-hidden="true" 
+          | Kosten = die enstehenden Mobilitätskosten 
+        .sr-only= f.input :dimension_ranking_costs, as: :numeric, label: 'Kosten = die enstehenden Mobilitätskosten'
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right', 'aria-hidden' => true
+
+      li
+        span aria-hidden="true" 
+          | Soziales = das Miteinander mit anderen Personen bei der Fortbewegung
+        .sr-only= f.input :dimension_ranking_social, as: :numeric, label: 'Soziales = das Miteinander mit anderen Personen bei der Fortbewegung'
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right', 'aria-hidden' => true
+      
+      li
+        span aria-hidden="true"
+          | Zeit = die Dauer der Reise
+        .sr-only= f.input :dimension_ranking_time, as: :numeric, label: 'Zeit = die Dauer der Reise' 
+        = image_tag 'sort_handle.svg', alt:'', class: 'pull-right', 'aria-hidden' => true
+
+javascript:
+  $(document).ready(function() {
+    // Updates the hidden inputs by looping through all child elements
+    var updateValues = function() {
+      $('#ranking_sorter li').each(function(index, element, _array) {
+        $(element).find('input').val(index);
+      });
+    }
+
+    // Enable 
+    var el = document.getElementById('ranking_sorter');
+    var sortable = Sortable.create(el, {
+      onEnd: function (/**Event*/evt) {
+        updateValues();
+      }
+    });
+    
+    // Arrange the inputs according its values
+    var initializeSorting = function() {
+      var wrapper = $('#ranking_sorter');
+
+      wrapper.find('li').sort(function(a, b) {
+          return +$(a).find('input').val() - +$(b).find('input').val();
+      }).appendTo(wrapper);
+    }
+    initializeSorting();
+  });
+
 ruby:
   labels = ['stimme überhaupt nicht zu ','','','','stimme voll und ganz zu']
   sub_questions = [
     {
-      code: 'norm_consequences_1',
-      text: 'Durch den Verkehr verursachter Lärm und Luftverschmutzung senken die Lebensqualität in meinem Wohnort.'
+      code: 'impicit_time_1',
+      text: 'Die Reisezeit im autonomen Auto kann ich sinnvoll nutzen.'
     },
     {
-      code: 'norm_consequences_2',
-      text: 'Ich bin mir bewusst, dass meine Mobilitätsgewohnheiten den Klimawandel beeinflussen.'
+      code: 'impicit_time_2',
+      text: 'Ich geniesse es einfach mal nichts Anderes zu machen, ausser mich im autonomen Auto zur Arbeit fahren zu lassen.'
     },
     {
-      code: 'norm_responsibility_1',
-      text: 'Durch meine individuelle Verkehrsmittelwahl für die alltäglichen Wegetappen bin auch ich verantwortlich für das Ausmass der Umweltprobleme und Umweltverschmutzung.'
+      code: 'impicit_time_3',
+      text: 'Für mich ist die Zeit besonders wertvoll, die ich gewinne, wenn ich nicht im Stau stehe.'
     },
     {
-      code: 'norm_responsibility_2',
-      text: 'Ich fühle mich mitverantwortlich für den Abbau und Verbrauch von natürlichen Rohstoffen durch die Autonutzung.'
+      code: 'impicit_environment_1',
+      text: 'Um die Umwelt zu schonen, würde ich ein Fahrzeug mit geringerem Energieverbrauch begrüssen.'
+    }
+  ]
+  if @questionary.subject.assigned_model == 'sav'
+    sub_questions += [
+      {
+        code: 'impicit_environment_2',
+        text: 'Durch eine optimale (Sitzplatz)-Auslastung von autonomen Autos und dem dadurch resultirenden geringeren Verkehrsaufkommen, erhöht sich die Lebensqualität.'
+      },
+    ]
+  end
+  sub_questions += [
+    {
+      code: 'impicit_environment_3',
+      text: 'Dadurch das autonome Autos weniger Lärm und Abgase produzieren, wird sich mein Wohlbefinden erhöhen.'
     },
     {
-      code: 'norm_personality_1',
-      text: 'Ich fühle mich moralisch verpflichtet, die Umwelt zu schützen. '
+      code: 'impicit_costs_1',
+      text: 'Ich werde weniger Kosten für den Parkplatz bei der Nutzung von autonomen Autos aufwenden müssen.'
     },
     {
-      code: 'norm_personality_2',
-      text: 'Ich fühle mich der Umwelt gegenüber verpflichtet in meinem Alltag das Auto so selten wie möglich zu nutzen.'
+      code: 'impicit_costs_2',
+      text: 'Um meine kilometerbezogenen Kosten (im autonomen Auto: Strom, im herkömmlichen Auto: Benzin) zu senken, würde ich ein autonomes Fahrzeug begrüssen.'
     },
+    {
+      code: 'impicit_costs_3',
+      text: 'Mit einem autonomen Auto hätte ich weniger Wartungskosten.'
+    }
+  ]
+  if @questionary.subject.assigned_model == 'sav'
+  sub_questions += [
+    {
+      code: 'impicit_social_1',
+      text: 'Ich lerne gerne neue Menschen unterwegs kennen.'
+    },
+  ]
+  end
+  sub_questions += [
+    {
+      code: 'impicit_social_2',
+      text: 'In einem autonomen Auto kann ich mich voll und ganz auf mein Gegenüber konzentrieren.'
+    },
+    {
+      code: 'impicit_social_3',
+      text: 'Mit einem autonomen Auto habe ich mehr Zeit meine sonstigen sozialen Kontakte zu pflegen.'
+    }
   ]
 
 p Bitte beurteilen sie die folgenden Aussagen:
@@ -35,12 +152,17 @@ table.table.radio_button_matrix
       - labels.each do | label |
         th.text-center width="#{70/labels.size}%" = label
   tbody
-  - sub_questions.each do |sub_question|
+  - sub_questions.each_with_index do |sub_question, index|
+    - if index.modulo(5) == 0 && index != 0
+      tr
+        th
+        - labels.each do | label |
+          th.text-center width="#{70/labels.size}%" = label
     tr
       td.text
         = sub_question[:text]
         - if @questionary.errors[sub_question[:code]]
-          .text-danger= @questionary.errors[sub_question[:code]].first
+          .text-danger=@questionary.errors[sub_question[:code]].first
 
       - (1..labels.size).each do |value|
         td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value

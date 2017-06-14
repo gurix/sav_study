@@ -35,15 +35,16 @@ ruby:
     {
       code: 'context_needs_7',
       text: 'Ich möchte in einem autonomen Auto volle Flexibilität haben und halten/stoppen können wo und wann ich will.'
+    },
+    {
+        code: 'context_needs_8',
+        text: 'Ich möchte nicht mit anderen Personen ein Fahrzeug teilen.'
     }
   ]
 
   if @questionary.subject.assigned_model == 'sav'
     sub_questions += [
-      {
-        code: 'context_needs_8',
-        text: 'Ich möchte nicht mit anderen Personen ein Fahrzeug teilen.'
-      },
+      
       {
         code: 'context_needs_9',
         text: 'Ich fühle mich nicht sicher mit fremden Personen in einem Auto zu sitzen.'
@@ -51,14 +52,14 @@ ruby:
       {
         code: 'context_needs_10',
         text: 'Ich möchte mein autonomes Auto selber gestalten, es ist ein Teil meiner Identität.'
-      },
-      {
-        code: 'context_needs_11',
-        text: 'Während der Fahrt im autonomen Auto möchte ich laut Musik hören oder telefonieren können.'
-      }
+      } 
     ]
   end
   sub_questions += [
+    {
+      code: 'context_needs_11',
+      text: 'Während der Fahrt im autonomen Auto möchte ich laut Musik hören oder telefonieren können.'
+    },
     {
       code: 'context_needs_12',
       text: 'Mir ist der eigene Fahrspass wichtig.'

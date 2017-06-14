@@ -2,91 +2,27 @@ ruby:
   labels = ['stimme überhaupt nicht zu ','','','','stimme voll und ganz zu']
   sub_questions = [
     {
-      code: 'acceptance_generally',
-      text: 'Ich würde das autonome Auto allgemein nützen.'
-    }
-  ]
-
-p Bitte beurteilen sie die folgenden Aussagen:
-table.table.radio_button_matrix
-  thead
-    tr
-      th
-      - labels.each do | label |
-        th.text-center width="#{70/labels.size}%" = label
-  tbody
-  - sub_questions.each do |sub_question|
-    tr
-      td.text
-        = sub_question[:text]
-        - if @questionary.errors[sub_question[:code]]
-          .text-danger= @questionary.errors[sub_question[:code]].first
-
-      - (1..labels.size).each do |value|
-        td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value
-
-ruby:
-  sub_questions= [
-    {
-      code: 'acceptance_environmental',
-      text: '...ich damit einen Beitrag zur Umwelt leisten will. (Umwelt)'
-    },
-    {
-      code: 'acceptance_costs',
-      text: '...ich damit meine Mobilitätskosten senken kann. (Kosten)'
-    },
-    {
-      code: 'acceptance_time',
-      text: '...ich damit mehr Zeit habe für anderes. (Zeit)'
-    },
-    {
-      code: 'acceptance_social',
-      text: '...ich so meine sozialen Kontakte besser pflegen oder ausbauen kann. (Sozial)'
-    }
-  ]
-
-strong Ich würde das autonome Auto nützen, weil...
-table.table.radio_button_matrix
-  thead
-    tr
-      th
-      - labels.each do | label |
-        th.text-center width="#{70/labels.size}%" = label
-  tbody
-  - sub_questions.each do |sub_question|
-    tr
-      td.text
-        == sub_question[:text]
-        - if @questionary.errors[sub_question[:code]]
-          .text-danger= @questionary.errors[sub_question[:code]].first
-
-      - (1..labels.size).each do |value|
-        td.radio_button.text-center = f.radio_button sub_question[:code], value, checked: @questionary[sub_question[:code]] == value
-
-ruby:
-  sub_questions = [
-    {
-      code: 'general_acceptance_1',
+      code: 'implicite_general_acceptance_1',
       text: 'Autonome Autos sind ein wichtiges Transportmittel der Zukunft.'
     },
     {
-      code: 'general_acceptance_2',
+      code: 'implicite_general_acceptance_2',
       text: 'Ich bin von den neuen autonomen Autos überzeugt. '
     },
     {
-      code: 'general_acceptance_3',
+      code: 'implicite_general_acceptance_3',
       text: 'Autonome Autos sollten eine wichtige Rolle in unserem Mobilitätssystem spielen.'
     },
     {
-      code: 'general_acceptance_4',
+      code: 'implicite_general_acceptance_4',
       text: 'Autonome Autos sind ungeeignet für den Gebrauch in der Freizeit.'
     },
     {
-      code: 'general_acceptance_5',
+      code: 'implicite_general_acceptance_5',
       text: 'Autonome Autos sind ungeeignet für den Gebrauch im Beruf.'
     }
   ]
-  
+p Bitte beurteilen sie die folgenden Aussagen:
 table.table.radio_button_matrix
   thead
     tr
