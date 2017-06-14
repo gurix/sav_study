@@ -6,7 +6,7 @@ p
     |  Wenn Sie das Fahrzeug immer nur für sich alleine reservieren so, dass niemand zusätzlich zusteigen kann, belasten Sie damit die Umwelt mit <strong>#{emmissions_in_gramms(@subject.total(:first_class_model_ecological_costs, per: :week))} CO2</strong>.
 
 p
-  button.btn.btn-default type="button" data-toggle="collapse" data-target="#eco_stastistcs" aria-expanded="false" aria-controls="eco_stastistcs" Tabelle zu den ökologischen Kosten anzeigen
+  button.btn.btn-primary type="button" data-toggle="collapse" data-target="#eco_stastistcs" aria-expanded="false" aria-controls="eco_stastistcs" Tabelle zu den ökologischen Kosten anzeigen
 
 #eco_stastistcs.collapse aria-expanded="false"
   .row
