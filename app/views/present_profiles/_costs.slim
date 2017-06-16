@@ -1,5 +1,12 @@
-h2 Kosten
-p Die dabei entstehenden Mobilitätskosten belaufen sich auf <strong>#{costs_in_chf(@subject.total(:costs, per: :week))}</strong>.
+h2 
+  | Kosten  
+  a data-toggle="popover" role="button" data-content="Mobilitätskosten (Kilometerkosten bzw. Betriebskosten) für ÖV und Auto berechnen sich individuell für jedes Mobilitätsprofil aufgrundlage aktueller Informationen aus bestehenden Datenbanken verschiedener Mobiltätsanbieter, beispielsweise Mobitool und TCS-Ratgeber. Bei den ÖV-Kosten handelt es sich dabei um effektive Kosten, d.h. Preise, die keine Reduktion durch Abonnemente vorsehen und ohne sonstige Subventionierungen entstehen. Die Autokosten schliessen sämtliche variable und fixe Kosten mit ein und gelten je nachdem für Autos mit Verbrennungsmotoren, für Hybridelektrofahrzeuge oder batteriebetriebene Elektrofahrzeuge. "
+    i.fa.fa-info-circle
+    .sr-only Mehr Informationen
+p 
+  | Die dabei entstehenden Mobilitätskosten belaufen sich auf <strong>#{costs_in_chf(@subject.total(:costs, per: :week))}</strong>.  
+  
+  
 p
   button.btn.btn-primary type="button" data-toggle="collapse" data-target="#cost_stastistcs" aria-expanded="false" aria-controls="cost_stastistcs" Tabelle zu den Kosten anzeigen
 

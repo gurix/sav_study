@@ -12,8 +12,14 @@
 //
 //= require jquery
 //= require bootstrap-sprockets
+//= require bootstrap/tooltip
+//= require bootstrap/popover
 //= require jquery_ujs
 //= require bootstrap-slider
 //= require Chart
 //= require Sortable.min
 //= require_tree .
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})

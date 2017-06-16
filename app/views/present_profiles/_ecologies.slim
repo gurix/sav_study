@@ -1,4 +1,9 @@
-h2 Ökologie
+h2 
+  | Ökologie  
+  a data-toggle="popover" role="button" data-content="Die umweltbezogenen CO2 Daten für ÖV, Auto und Velo berechnen sich individuell für jedes Mobilitätsprofil aufgrundlage aktueller Daten aus der Umweltdatenbank Mobitool. bzw. der zugrundeliegenden mobitool-Faktorenliste. Diese Umwelt- und Emissionswerte sind für insgesamt 150 Verkehrsmittel aufbereit und gelten in der Schweiz als Standard für die Ökobilanz-Umweltbewertung der Mobilität."
+    i.fa.fa-info-circle
+    .sr-only Mehr Informationen
+
 p Sie belasten die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt <strong>#{emmissions_in_gramms(@subject.total(:ecological_costs, per: :week))} CO2</strong> Emissionen. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 Energiesparlampen diese XX Stunden brennen lässt.
 p
   button.btn.btn-primary type="button" data-toggle="collapse" data-target="#eco_stastistcs" aria-expanded="false" aria-controls="eco_stastistcs" Tabelle zu den ökologischen Kosten anzeigen
