@@ -4,7 +4,7 @@ h2
     i.fa.fa-info-circle
     .sr-only Mehr Informationen
 p 
-  | Die dabei entstehenden Mobilitätskosten belaufen sich auf <strong>#{costs_in_chf(@subject.total(:costs, per: :week))}</strong>.  
+  | Die dabei entstehenden Mobilitätskosten belaufen sich auf <strong>#{costs_in_chf(@subject.total(:costs, per: :week)) || "0 CHF"}</strong>.  
   
   
 p
