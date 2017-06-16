@@ -116,7 +116,7 @@ class Questionary
 
   # Page 7
 
-    (1..2).each do |i|
+  (1..2).each do |i|
     field "context_needs_#{i}", type: Integer
     validates "context_needs_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 7 }
   end
@@ -186,8 +186,6 @@ class Questionary
     field "norm_personality_#{i}", type: Integer
     validates "norm_personality_#{i}", presence: true, allow_blank: false, if: proc { |questionary| questionary.page.to_i == 9 }
   end
-
- 
 
   # Set default value for page
   def page

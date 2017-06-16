@@ -12,7 +12,6 @@ class Subject
   field :education, type: Integer
   field :income, type: Integer
   field :plz, type: Integer
-  field :email, type: String
   field :token, type: String
 
   validates :token, uniqueness: true

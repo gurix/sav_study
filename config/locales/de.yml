@@ -53,7 +53,6 @@ de:
       to_young: Der angegebene Jahrgang ist zu jung
       to_old: Der angegebene Jahrgang ist zu alt
     placeholders:
-      email: hans@muster.ch
       birthyear: "1982"
 
     new:
@@ -96,9 +95,6 @@ de:
     edit:
       title: Angaben zu ihrer Person
     
-    update:
-      thanks_for_participating: Besten Dank für Ihre Teilnahme
-
   cars:
     form:
       title: Was für ein Fahrzeug fahren Sie?
@@ -181,13 +177,24 @@ de:
         traditionalist: Ich bin eine traditionelle Person und habe wenig Interesse an autonomen Fahrzeugen. Ich mag keine Veränderungen in meinem Leben und nutze ein autonomes Fahrzeug nur, wenn die existierenden Modelle nicht mehr genutzt werden können.
 
       back: Zurück
-      
+  
+  newsletters:  
+    placeholders:
+      email: hans@muster.ch  
+    
+    new:
+      title: Newsletter
+      subscribe: Eintragen
+      back_to_root_path: oder zurück zur Startseite
+    
+    create:
+      success: Besten Dank. Ihre E-Mail-Addresse wurde eingetragen.
+
   mongoid:
      attributes:
         subject:
           gender: Geschlecht
           birthyear: Geburtsjahr
-          email: E-Mail-Adresse
           education: Höchster Bildungsabschuss
           income: Einkommen
           pt_connection_duration: Wieviele Minuten benötigen sie zu Fuss zur nächsten öffentliche Haltestelle (Bus, Zug, Tram, etc.)
@@ -225,3 +232,6 @@ de:
         by_local_line:
           distance: Wie viele Kilometer fahren Sie mit dem Bus, Trolleybus oder Tram?
           duration: Wie viele Minuten sind Sie mit dem Bus, Trolleybus oder Tram unterwegs?
+        
+        newsletter:
+          email: E-Mail-Adresse

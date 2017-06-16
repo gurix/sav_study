@@ -14,9 +14,8 @@ class SubjectsController < ApplicationController
 
   def update
     if @subject.update_attributes(subject_form_params)
-      flash[:success] = t '.thanks_for_participating'
       cookies.delete :subject_id # Delte cookie so that the questionary is no longer availabel to continue
-      redirect_to '/'
+      redirect_to new_newsletter_path
     else
       flash[:error] = t 'shared.error'
       render :edit
