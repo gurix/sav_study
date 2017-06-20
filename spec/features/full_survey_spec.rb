@@ -47,7 +47,7 @@ feature 'Survey' do
     expect(page).to have_content 'Von der Zeit, in der Sie unterwegs sind, können Sie etwa eine Stunde für andere Tätigkeiten nutzen'
     expect(page).to have_content 'Sie legen pro Woche insgesamt eine Strecke von 216.0 Kilometer zurück.'
     expect(page).to have_content 'Die dabei entstehenden Mobilitätskosten belaufen sich auf 154.38 CHF.'
-    expect(page).to have_content 'Sie belasten die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt 32.82 Kg CO2 Emissionen.'    
+    expect(page).to have_content 'Sie belasten die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt 36.86 Kg CO2 Emissionen.'    
 
     click_link 'Weiter zu den neuen Mobilitätsformen'
 
@@ -63,12 +63,12 @@ feature 'Survey' do
     expect(page).to have_content 'In Zukunft sind Sie mit einem autonomen Auto etwa 3 Stunden unterwegs.'
     expect(page).to have_content 'Sie das Fahrzeug immer nur für sich alleine reservieren so, dass niemand zusätzlich zusteigen kann, belaufen sich die Kosten für diese Einzelfahrten auf 119.16 CHF.'
     expect(page).to have_content 'In Zukunft belaufen sich die Kosten für die Nutzung mit einem autonomen Auto auf 70.2 CHF.'
-    expect(page).to have_content 'In Zukunft wird durch Ihre Nutzung eines autonomen Autos 2.3 Kg CO2 emittiert.'
-    expect(page).to have_content 'Wenn Sie das Fahrzeug immer nur für sich alleine reservieren so, dass niemand zusätzlich zusteigen kann, belasten Sie damit die Umwelt mit 4.41 Kg CO2.'
+    expect(page).to have_content 'In Zukunft wird durch Ihre Nutzung eines autonomen Autos 4.55 Kg CO2 emittiert.'
+    expect(page).to have_content 'Wenn Sie das Fahrzeug immer nur für sich alleine reservieren so, dass niemand zusätzlich zusteigen kann, belasten Sie damit die Umwelt mit 9.01 Kg CO2.'
 
     click_link 'Weiter zur Befragung'
 
-    expect(page).to have_content 'Die wöchentlichen Einsparungen an 30.52 Kg CO2'
+    expect(page).to have_content 'Die wöchentlichen Einsparungen an 32.31 Kg CO2'
 
     click_button 'Weiter'
 
