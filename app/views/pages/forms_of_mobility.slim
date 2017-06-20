@@ -1,8 +1,8 @@
-.pull-right
-    - if @subject.assigned_model == 'pav'
-      = link_to 'Zu SAV wechseln','?model=sav'
-    - else 
-      = link_to 'Zu PAV wechseln','?model=pav'
+/.pull-right
+  - if @subject.assigned_model == 'pav'
+    = link_to 'Zu SAV wechseln','?model=sav'
+  - else 
+    = link_to 'Zu PAV wechseln','?model=pav'
 h1= title @subject.assigned_model == 'pav' ? 'Das private autonome Fahrzeug' : 'Carsharing autonomer Fahrzeuge'
 .row
   .col-xs-12.col-md-6.col-lg-5

@@ -4,22 +4,29 @@ p
   br
   | danke, dass Sie an unserer Umfrage teilnehmen. Wir, die Forschungsgruppe Verkehrs-, Sicherheits- und Umweltpsychologie der Zürcher Hochschule für Angewandte Wissenschaften, erforschen das Mobilitätsverhalten der Schweizer Bevölkerung in Hinblick auf zukünftige Mobilitätsformen. Damit wollen wir herausfinden, wie umweltbewusstes Reisen und Mobilitätsverhalten in naher Zukunft aussehen und gefördert werden kann.
 
-p Mit Ihren Antworten tragen Sie dazu bei, dass das Thema «umweltfreundliche Mobilität» in der Schweiz einen grösseren Stellenwert erhält. Unsere Forschungsergebnisse werden direkt in Projekten umgesetzt und haben somit auch einen Einfluss auf Ihre zukünftige Mobilität.
 
-p 
-  | Bitte beantworten Sie die gestellten Fragen spontan und wahrheitsgemäss. Dabei geht es um Ihre alltäglichen Strecken, die Sie privat und arbeitsbezogen zurücklegen.
-p
-  | Das Ausfüllen der Umfrage wird maximal 15 Minuten dauern. Die Antworten werden anonym behandelt, es können keine Rückschlüsse gezogen werden und die Daten werden ausschliesslich zu Forschungszwecken analysiert. 
-p 
-  em Danke für Ihre Unterstützung!
 
-p
-    = link_to  new_subject_path, class: 'text-success nav-link'
-      = t('.start')
-      i.fa.fa-arrow-right aria-hidden="true"
-p.
-- if @subject
-  p
-    = link_to [:edit, @subject, :car], class: 'nav-link'
-      = t('.continue')
-      i.fa.fa-arrow-right aria-hidden="true"
+.row
+  .col-xs-12.col-sm-6
+    p Mit Ihren Antworten tragen Sie dazu bei, dass das Thema «umweltfreundliche Mobilität» in der Schweiz einen grösseren Stellenwert erhält. Unsere Forschungsergebnisse werden direkt in Projekten umgesetzt und haben somit auch einen Einfluss auf Ihre zukünftige Mobilität.
+    p 
+      | Bitte beantworten Sie die gestellten Fragen spontan und wahrheitsgemäss. Dabei geht es um Ihre alltäglichen Strecken, die Sie privat und arbeitsbezogen zurücklegen.
+    p
+      | Das Ausfüllen der Umfrage wird maximal 15 Minuten dauern. Die Antworten werden anonym behandelt, es können keine Rückschlüsse gezogen werden und die Daten werden ausschliesslich zu Forschungszwecken analysiert. 
+    p 
+      em Danke für Ihre Unterstützung!
+
+    p
+        = link_to  new_subject_path, class: 'text-success nav-link'
+          = t('.start')
+          i.fa.fa-arrow-right aria-hidden="true"
+    
+    - if @subject
+      p
+        = link_to [:edit, @subject, :car], class: 'nav-link'
+          = t('.continue')
+          i.fa.fa-arrow-right aria-hidden="true"
+  .col-xs-12.col-sm-6
+    = image_tag 'sav_study.jpg', alt: "Autonomes Fahren", class: 'img-responsive'
+    | © James Vaughan
+    /https://www.flickr.com/photos/x-ray_delta_one/4280149848

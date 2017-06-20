@@ -9,7 +9,22 @@ html
     
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+
+    meta name="description" content="Wir erforschen das Mobilitätsverhalten der Schweizer Bevölkerung in Hinblick auf zukünftige Mobilitätsformen."
+
+    meta name="twitter:card" value="Wir erforschen das Mobilitätsverhalten der Schweizer Bevölkerung in Hinblick auf zukünftige Mobilitätsformen."
+
+    
+    meta property="og:title" content="Studie über zukünftige Mobilitätsformen."
+    meta property="og:type" content="article"
+    meta property="og:url" content="#{root_url}"
+    meta property="og:image" content="#{image_url('logo_AP_rgb.jpg')}"
+    meta property="og:description" content="Wir erforschen das Mobilitätsverhalten der Schweizer Bevölkerung in Hinblick auf zukünftige Mobilitätsformen."
+
   body class="#{controller_name}"
     .container
+      head
+        = image_tag 'logo_AP_rgb.jpg', width: 200, class: 'pull-right'
+      .clearfix
       = flash_messages
       = yield

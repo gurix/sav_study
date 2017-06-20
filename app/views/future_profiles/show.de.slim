@@ -1,6 +1,6 @@
 .profile
   h1 = title "Mein zukünftiges Mobilitätsprofil (#{@subject.assigned_model.upcase})"
-  .pull-right
+  /.pull-right
     - if @subject.assigned_model == 'pav'
       = link_to 'Zu SAV wechseln','?model=sav'
     - else 
