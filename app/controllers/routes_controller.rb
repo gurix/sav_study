@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
   before_action :load_subject
+  before_action :test_criteria
   before_action :load_route, only: [:edit, :update, :destroy]
 
   def index
@@ -56,5 +57,11 @@ class RoutesController < ApplicationController
                                   by_train_attributes: [:id, :distance, :duration],
                                   by_bicycle_attributes: [:id, :distance, :duration],
                                   by_local_line_attributes: [:id, :distance, :duration])
+  end
+
+  def test_criteria
+    return true if @subject.car.is_commuter
+    flash[:danger] = t('.does_not_meet_criteria')
+    redirect_to root_path
   end
 end

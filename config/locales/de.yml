@@ -129,6 +129,7 @@ de:
       catch_up: Jemanden fahren
   
     index:
+      does_not_meet_criteria: Leider erfüllen Sie die Kritien für eine Teilnahme nicht.
       title: Meine Strecken
       new: Zusätzliche Strecke erfassen
       cargo: inkl. Gepäck oder Haustiere

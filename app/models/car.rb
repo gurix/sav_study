@@ -11,6 +11,6 @@ class Car
 
   validates :car_owner,     presence: true
   validates :is_commuter,   presence: true
-  validates :category,      presence: true
-  validates :type_of_power, presence: true
+  validates :category,      presence: true, if: proc { |car| car.car_owner == true }
+  validates :type_of_power, presence: true, if: proc { |car| car.car_owner == true }
 end

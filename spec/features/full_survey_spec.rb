@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 feature 'Survey' do
+  scenario 'A user fills in the whole survey but do not meet the criterias', js: true do
+    visit root_path
+
+     click_link 'Eine neue Befragung starten'
+
+    choose 'car_car_owner_false'
+    choose 'car_is_commuter_false'
+
+    click_button 'Weiter'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Leider erfüllen Sie die Kritien für eine Teilnahme nicht.'
+  end
+
   scenario 'A user fills in the whole survey', js: true do
     allow_any_instance_of(Subject).to receive(:assigned_model).and_return("sav")
     
