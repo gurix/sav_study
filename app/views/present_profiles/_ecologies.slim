@@ -4,7 +4,7 @@ h2
     i.fa.fa-info-circle
     .sr-only Mehr Informationen
 
-p Sie belasten die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt <strong>#{emmissions_in_gramms(@subject.total(:ecological_costs, per: :week))} CO2</strong> Emissionen. Das entspricht ungefähr den CO2 Emissionen, die entstehen, wenn man in einem Raum mit 10 Energiesparlampen diese XX Stunden brennen lässt.
+p Sie belasten die Umwelt durch Ihre zurückgelegte Strecke mit insgesamt <strong>#{emmissions_in_gramms(@subject.total(:ecological_costs, per: :week))} CO2</strong> Emissionen.
 p
   button.btn.btn-primary type="button" data-toggle="collapse" data-target="#eco_stastistcs" aria-expanded="false" aria-controls="eco_stastistcs" Tabelle zu den ökologischen Kosten anzeigen
 
