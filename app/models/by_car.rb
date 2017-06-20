@@ -51,21 +51,22 @@ class ByCar < Movement
 
   def ecological_costs
     costs_per_km = case vehicle_category
-                   when 'fullsize' then 142.88
-                   when 'compact' then 179.84
-                   when 'micro' then 142.88
+                   when 'fullsize' then 242.1
+                   when 'compact' then 202.4
+                   when 'micro' then 162.7
                    end
 
-    costs_per_km = 50.7 if type_of_power == 'electro'
+    costs_per_km = 81.6 if type_of_power == 'electro'
+    costs_per_km = 158 if type_of_power == 'hybrid'
     (costs_per_km * distance)
   end
 
   def model_ecological_costs
-    return distance * 13.62 if route.subject.assigned_model == 'pav'
-    return distance * 10.89 if route.subject.assigned_model == 'sav'
+    return distance * 27.32 if route.subject.assigned_model == 'pav'
+    return distance * 21.86 if route.subject.assigned_model == 'sav'
   end
 
   def first_class_model_ecological_costs
-    distance * 21.79
+    distance * 43.72
   end
 end

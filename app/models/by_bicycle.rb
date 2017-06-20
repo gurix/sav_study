@@ -20,14 +20,14 @@ class ByBicycle < Movement
   end
 
   def ecological_costs
-    distance * 9.79
+    distance * 7.64
   end
 
   def model_ecological_costs
-    distance * 13.62
+    distance * 21.86
   end
 
   def first_class_model_ecological_costs
-    distance * 21.79
+    distance * 43.72
   end
 end

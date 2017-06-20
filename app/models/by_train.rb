@@ -8,6 +8,6 @@ class ByTrain < Movement
   end
 
   def ecological_costs
-    distance * 7.86
+    distance * 7.32
   end
 end
