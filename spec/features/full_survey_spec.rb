@@ -12,7 +12,7 @@ feature 'Survey' do
     click_button 'Weiter'
 
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Leider erfüllen Sie die Kritien für eine Teilnahme nicht.'
+    expect(page).to have_content 'Leider erfüllen Sie die Bedingungen für die Teilnahme an der Studie nicht.'
   end
 
   scenario 'A user fills in the whole survey', js: true do

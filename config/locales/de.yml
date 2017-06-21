@@ -129,7 +129,7 @@ de:
       catch_up: Jemanden fahren
   
     index:
-      does_not_meet_criteria: Leider erfüllen Sie die Kritien für eine Teilnahme nicht.
+      does_not_meet_criteria: Leider erfüllen Sie die Bedingungen für die Teilnahme an der Studie nicht. Der Fragebogen wird deshalb an dieser Stelle abgebrochen und Sie können das Browserfenster schliessen. Herzlichen Dank für Ihr Interesse!
       title: Meine Strecken
       new: Zusätzliche Strecke erfassen
       cargo: inkl. Gepäck oder Haustiere
