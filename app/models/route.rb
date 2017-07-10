@@ -32,7 +32,7 @@ class Route
   end
 
   def total(trait, options = {})
-    value = movements.inject(0) { |acc, elem| acc + elem.send(trait) }
+    value = movements.inject(0) { |acc, elem| acc + (elem.send(trait) || 0) }
     options[:per] == :week ? value_per_week(value) : value
   end
 

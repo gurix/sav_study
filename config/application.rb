@@ -32,5 +32,7 @@ module SavStudy
     config.i18n.default_locale = :de
 
     config.i18n.fallbacks = { 'de' => 'en' }
+
+    config.autoload_paths << "#{Rails.root}/lib"
   end
 end

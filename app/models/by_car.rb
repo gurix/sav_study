@@ -43,8 +43,8 @@ class ByCar < Movement
   end
 
   def model_costs
-    cost = 0.51 * distance if route.subject.assigned_model == 'pav'
-    cost = 0.3 * distance if route.subject.assigned_model == 'sav'
+    return 0.51 * distance if route.subject.assigned_model == 'pav'
+    cost = 0.3 * distance
     cost += (cost * 0.8) if route.cargo
     cost
   end
