@@ -1,3 +1,4 @@
+require 'csv_export'
 class SubjectsController < ApplicationController
   # include ActionController::Live
   before_action :load_subject, only: [:edit, :update]
