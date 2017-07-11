@@ -11,6 +11,7 @@ class SubjectsController < ApplicationController
   def new
     @subject = Subject.new
     @subject.assigned_model = %w(sav pav).sample
+    @subject.panel_id = cookies.encrypted[:panel_id] # Store the panel id to determine wether the subject is from a panel
     @subject.save
     # We store an encrypted cookie with the id to continue later
     cookies.encrypted[:subject_id] = @subject.id.to_s
@@ -22,7 +23,9 @@ class SubjectsController < ApplicationController
   def update
     if @subject.update_attributes(subject_form_params)
       cookies.delete :subject_id # Delte cookie so that the questionary is no longer availabel to continue
-      redirect_to new_newsletter_path
+      cookies.delete :panel_id
+      
+      redirect_to(@subject.panel_id.present? ? "http://somepanelprovider.de/?id=#{@subject.panel_id}" : new_newsletter_path)
     else
       flash[:error] = t 'shared.error'
       render :edit

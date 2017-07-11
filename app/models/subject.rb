@@ -7,12 +7,13 @@ class Subject
   embeds_one :questionary
 
   field :assigned_model, type: String
-  field :gender, type: String
-  field :birthyear, type: Integer
-  field :education, type: Integer
-  field :income, type: Integer
-  field :plz, type: Integer
-  field :token, type: String
+  field :gender,         type: String
+  field :birthyear,      type: Integer
+  field :education,      type: Integer
+  field :income,         type: Integer
+  field :plz,            type: Integer
+  field :token,          type: String
+  field :panel_id,       type: String
 
   validates :token, uniqueness: true
   validates :gender, presence: true, if: :routes_added?
