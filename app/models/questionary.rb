@@ -1,4 +1,4 @@
-class Questionary
+class Questionary # rubocop:disable Metrics/ClassLength
   include Mongoid::Document
   include Mongoid::Timestamps
 

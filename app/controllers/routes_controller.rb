@@ -62,6 +62,6 @@ class RoutesController < ApplicationController
   def test_criteria
     return true if @subject.car.is_commuter
     flash[:danger] = t('.does_not_meet_criteria')
-    redirect_to root_path
+    redirect_to(@subject.panel_id.present? ? 'https://s.cint.com/Survey/EarlyScreenOut?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce' : root_path)
   end
 end

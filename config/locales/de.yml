@@ -25,11 +25,11 @@ de:
       by_local_line: Bus oder Tram
 
     pav_movement_types:
-      by_bicycle: Fahrrad
+      by_bicycle: Fahrrad*
       by_foot: Zu Fuss
       by_car: Auto*
       by_train: Zug
-      by_local_line: Bus oder Tram
+      by_local_line: Bus oder Tram*
   
     sav_movement_types:
       by_bicycle: Fahrrad*

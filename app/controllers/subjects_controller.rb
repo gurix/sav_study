@@ -24,8 +24,8 @@ class SubjectsController < ApplicationController
     if @subject.update_attributes(subject_form_params)
       cookies.delete :subject_id # Delte cookie so that the questionary is no longer availabel to continue
       cookies.delete :panel_id
-      
-      redirect_to(@subject.panel_id.present? ? "http://somepanelprovider.de/?id=#{@subject.panel_id}" : new_newsletter_path)
+
+      redirect_to(@subject.panel_id.present? ? 'https://s.cint.com/Survey/Complete?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce' : new_newsletter_path)
     else
       flash[:error] = t 'shared.error'
       render :edit

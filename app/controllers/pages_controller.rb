@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_action :load_subject_from_previous
 
   def show
-    # @subject.assigned_model = params[:model] if @subject && params[:model]
+    @subject.assigned_model = params[:model] if @subject && params[:model]
     render params[:page]
   end
 

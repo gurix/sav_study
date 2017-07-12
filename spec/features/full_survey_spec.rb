@@ -15,6 +15,19 @@ feature 'Survey' do
     expect(page).to have_content 'Leider erfüllen Sie die Bedingungen für die Teilnahme an der Studie nicht.'
   end
 
+  scenario 'A panel user fills in the whole survey but do not meet the criterias', js: true do
+    visit root_path(id: 'ABC')
+
+     click_link 'Eine neue Befragung starten'
+
+    choose 'car_car_owner_false'
+    choose 'car_is_commuter_false'
+
+    click_button 'Weiter'
+
+    expect(current_url).to eq 'https://s.cint.com/Survey/EarlyScreenOut?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce'
+  end
+
   scenario 'A user fills in the whole survey', js: true do
     allow_any_instance_of(Subject).to receive(:assigned_model).and_return("sav")
     
@@ -65,8 +78,10 @@ feature 'Survey' do
 
     click_link 'Weiter zu den neuen Mobilitätsformen'
 
-    check 'Autonome Fahrzeuge haben ein höheres Unfallrisiko'
-    check 'Als Insasse müssen Sie jederzeit in das Geschehen eingreifen können und die Steuerung des Fahrzeugs übernehmen können.'
+    check 'Autonome Fahrzeuge haben dieselbe Reichweite wie konventionelle Fahrzeuge.'
+    check 'Es wird davon ausgegangen, dass im Jahr 2030 mindestens die Hälfte der Fahrzeuge autonom fahren.'
+    check 'Die Ökobilanz autonomer Fahrzeuge ist besser als die von konventionellen Fahrzeugen.'
+    check 'Ein konventionelles Fahrzeug hat höhere Betriebskosten als ein autonomes Fahrzeug.'
 
     click_button 'Antworten überprüfen'
 
@@ -233,8 +248,10 @@ feature 'Survey' do
 
     click_link 'Weiter zu den neuen Mobilitätsformen'
 
-    check 'Autonome Fahrzeuge haben ein höheres Unfallrisiko'
-    check 'Als Insasse müssen Sie jederzeit in das Geschehen eingreifen können und die Steuerung des Fahrzeugs übernehmen können.'
+    check 'Autonome Fahrzeuge haben dieselbe Reichweite wie konventionelle Fahrzeuge.'
+    check 'Es wird davon ausgegangen, dass im Jahr 2030 mindestens die Hälfte der Fahrzeuge autonom fahren.'
+    check 'Die Ökobilanz autonomer Fahrzeuge ist besser als die von konventionellen Fahrzeugen.'
+    check 'Ein konventionelles Fahrzeug hat höhere Betriebskosten als ein autonomes Fahrzeug.'
 
     click_button 'Antworten überprüfen'
 
@@ -337,6 +354,7 @@ feature 'Survey' do
 
     click_button 'Befragung abschliessen'
 
-    expect(page.driver.network_traffic.last.response_parts.first.url).to eq'http://somepanelprovider.de/?id=ABC'
+    #expect(page.driver.network_traffic.last.response_parts.first.url).to eq 'https://s.cint.com/Survey/Complete?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce'
+    expect(current_url).to eq 'https://s.cint.com/Survey/Complete?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce'
   end
 end
