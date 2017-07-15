@@ -32,6 +32,7 @@ class ByCar < Movement
                    when 'fullsize' then 1.2
                    when 'compact' then 0.75
                    when 'micro' then 0.5
+                   else 0
                    end
     savings_by_type_of_power = case type_of_power
                                when 'hybrid' then 0.1
@@ -54,6 +55,7 @@ class ByCar < Movement
                    when 'fullsize' then 242.1
                    when 'compact' then 202.4
                    when 'micro' then 162.7
+                   else 0
                    end
 
     costs_per_km = 81.6 if type_of_power == 'electro'
