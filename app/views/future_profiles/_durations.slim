@@ -7,7 +7,7 @@
 - future_free_duration = future_duration - future_blocked_duration
 
 h2 Reisezeiten
-p Heute sind Sie in der in einer Woche insgesamt <strong>#{distance_of_time_in_words(present_duration.minutes)}</strong> unterwegs.
+p Heute sind Sie in einer Woche insgesamt <strong>#{distance_of_time_in_words(present_duration.minutes)}</strong> unterwegs.
 p In Zukunft sind Sie mit einem autonomen Auto <strong>#{distance_of_time_in_words(future_duration.minutes)}</strong> unterwegs.  
 p Die Tabelle und die Grafik zeigen den Vergleich und ggf. die Differenz in der Nutzung der beiden Mobilitätsformen bezogen auf die Zeit. 
 p Während Sie vorher <strong>#{distance_of_time_in_words(present_free_duration.minutes)}</strong> für andere Tätigkeiten nutzen konnten, bietet das autonome Auto Ihnen auf allen Strecken jetzt <strong>#{distance_of_time_in_words(future_free_duration.minutes)}</strong> für andere Tätigkeiten.

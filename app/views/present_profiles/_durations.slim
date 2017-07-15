@@ -4,7 +4,7 @@
 - free_duration_percentage = ((free_duration / duration)*100).round(2) - 10
 - blocked_duration_percentage = ((blocked_duration/duration)*100).round(2) + 10
 h2 Reisezeiten
-p Sie sind in der in einer Woche insgesamt <strong>#{distance_of_time_in_words(duration.minutes)}</strong> unterwegs.
+p Sie sind in einer Woche insgesamt <strong>#{distance_of_time_in_words(duration.minutes)}</strong> unterwegs.
 p Die Tabelle zeigt wie sich die Gesamtzeit aus den Zeiten der einzelnen Verkehrsmittel zusammensetzt.   
 p Von der Zeit, in der Sie unterwegs sind, können Sie <strong>#{distance_of_time_in_words(free_duration.minutes)}</strong> für andere Tätigkeiten nutzen, da Sie sich in einem Verkehrsmittel aufhalten, welches nicht Ihre volle Konzentration erfordert. 
 
