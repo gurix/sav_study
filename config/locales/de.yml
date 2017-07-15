@@ -101,7 +101,7 @@ de:
       category: Was für ein Auto fahren Sie regelmässig? Bzw. wenn Sie ein Auto fahren würden, um welche Grösse handelt es sich dann? 
       type_of_power: Welche Antriebsart hat das Auto?
       car_owner: Besitzen Sie ein Auto? 
-      is_commuter: Sind Sie regelmässig (mindestens 2x pro Woche) mit dem Zug und/oder mit dem Auto unterwegs?
+      is_commuter: Sind Sie regelmässig (mindestens 2x pro Woche) mit dem öffentlichen Verkehr und/oder mit dem Auto unterwegs?
     
     types_of_power:
       gasoline: Konventionelles Fahrzeug betrieben mit Benzin oder Diesel
