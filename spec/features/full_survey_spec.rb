@@ -70,7 +70,7 @@ feature 'Survey' do
 
     click_link 'Weiter zur Auswertung'
 
-    expect(page).to have_content 'Sie sind in der in einer Woche insgesamt etwa 5 Stunden unterwegs.'
+    expect(page).to have_content 'Sie sind in einer Woche insgesamt etwa 5 Stunden unterwegs.'
     expect(page).to have_content 'Von der Zeit, in der Sie unterwegs sind, können Sie etwa eine Stunde für andere Tätigkeiten nutzen'
     expect(page).to have_content 'Sie legen pro Woche insgesamt eine Strecke von 216.0 Kilometer zurück.'
     expect(page).to have_content 'Die dabei entstehenden Mobilitätskosten belaufen sich auf 154.38 CHF.'
@@ -240,7 +240,7 @@ feature 'Survey' do
 
     click_link 'Weiter zur Auswertung'
 
-    expect(page).to have_content 'Sie sind in der in einer Woche insgesamt etwa 5 Stunden unterwegs.'
+    expect(page).to have_content 'Sie sind in einer Woche insgesamt etwa 5 Stunden unterwegs.'
     expect(page).to have_content 'Von der Zeit, in der Sie unterwegs sind, können Sie etwa eine Stunde für andere Tätigkeiten nutzen'
     expect(page).to have_content 'Sie legen pro Woche insgesamt eine Strecke von 216.0 Kilometer zurück.'
     expect(page).to have_content 'Die dabei entstehenden Mobilitätskosten belaufen sich auf 154.38 CHF.'

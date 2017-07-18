@@ -56,14 +56,13 @@ class SubjectsController < ApplicationController
   end
 
   def render_json
-    csv_export = CSVExport.new
     response.headers['Content-Disposition'] = "attachment; filename=sav_study_#{DateTime.now.strftime('%Y%m%d')}.json"
     # response.headers['Content-Disposition'] = "inline; filename=sav_study_#{DateTime.now.strftime("%Y%m%d")}.csv"
     response.headers['Content-Type'] = 'text/json'
     response.stream.write '['
     # ... and generate a line for each session.
     Subject.each_with_index do |subject, index|
-      response.stream.write JSON.pretty_generate(JSON.parse subject.to_json)
+      response.stream.write JSON.pretty_generate(JSON.parse(subject.to_json))
       # response.stream.write subject.as_json
       response.stream.write ',' if index < Subject.count - 1
     end
