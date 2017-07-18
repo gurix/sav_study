@@ -1,11 +1,15 @@
 require 'csv_export'
+require 'json'
 class SubjectsController < ApplicationController
   # include ActionController::Live
   before_action :load_subject, only: [:edit, :update]
   before_action :ask_for_password, only: :index, if: -> { Rails.env.production? }
 
   def index
-    render_csv
+    respond_to do |format|
+      format.csv { render_csv }
+      format.json { render_json }
+    end
   end
 
   def new
@@ -48,6 +52,23 @@ class SubjectsController < ApplicationController
       response.stream.write csv_export.for_subject(subject)
     end
   ensure
+    response.stream.close
+  end
+
+  def render_json
+    csv_export = CSVExport.new
+    response.headers['Content-Disposition'] = "attachment; filename=sav_study_#{DateTime.now.strftime('%Y%m%d')}.json"
+    # response.headers['Content-Disposition'] = "inline; filename=sav_study_#{DateTime.now.strftime("%Y%m%d")}.csv"
+    response.headers['Content-Type'] = 'text/json'
+    response.stream.write '['
+    # ... and generate a line for each session.
+    Subject.each_with_index do |subject, index|
+      response.stream.write JSON.pretty_generate(JSON.parse subject.to_json)
+      # response.stream.write subject.as_json
+      response.stream.write ',' if index < Subject.count - 1
+    end
+  ensure
+    response.stream.write ']'
     response.stream.close
   end
 
