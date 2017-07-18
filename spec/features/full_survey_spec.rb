@@ -25,7 +25,7 @@ feature 'Survey' do
 
     click_button 'Weiter'
 
-    expect(current_url).to eq 'https://s.cint.com/Survey/EarlyScreenOut?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce'
+    expect(current_url).to eq 'https://s.cint.com/Survey/EarlyScreenOut?ProjectToken=d5ca5586-67d9-47a3-a2c2-e4a07f20db0d'
   end
 
   scenario 'A user fills in the whole survey', js: true do
@@ -354,7 +354,6 @@ feature 'Survey' do
 
     click_button 'Befragung abschliessen'
 
-    #expect(page.driver.network_traffic.last.response_parts.first.url).to eq 'https://s.cint.com/Survey/Complete?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce'
-    expect(current_url).to eq 'https://s.cint.com/Survey/Complete?ProjectToken=d73a8323-6030-4348-9879-8c37abf55bce'
+    expect(current_url).to eq 'https://s.cint.com/Survey/Complete?ProjectToken=d5ca5586-67d9-47a3-a2c2-e4a07f20db0d'
   end
 end
