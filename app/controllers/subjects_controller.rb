@@ -26,10 +26,9 @@ class SubjectsController < ApplicationController
 
   def update
     if @subject.update_attributes(subject_form_params)
-      cookies.delete :subject_id # Delte cookie so that the questionary is no longer availabel to continue
-      cookies.delete :panel_id
+      cookies.delete(:subject_id) && cookies.delete(:panel_id) # Delte cookie so that the questionary is no longer availabel to continue
 
-      redirect_to(@subject.panel_id.present? ? 'https://s.cint.com/Survey/Complete?ProjectToken=d5ca5586-67d9-47a3-a2c2-e4a07f20db0d' : new_newsletter_path)
+      redirect_to(redirect_path)
     else
       flash[:error] = t 'shared.error'
       render :edit
@@ -37,6 +36,16 @@ class SubjectsController < ApplicationController
   end
 
   private
+
+  def redirect_path
+    tmp = new_newsletter_path
+    if @subject.panel_id.present?
+      project_token = 'd5ca5586-67d9-47a3-a2c2-e4a07f20db0d'
+      # A valid session has to last at least 5 minutes
+      tmp = "https://s.cint.com/Survey/#{((@subject.updated_at - @subject.created_at).to_i < 5 * 60 ? 'Finished' : 'Complete')}?ProjectToken=#{project_token}"
+    end
+    tmp
+  end
 
   def render_csv
     csv_export = CSVExport.new
