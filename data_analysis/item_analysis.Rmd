@@ -1,0 +1,194 @@
+---
+title: "SAV Study Item Analysis"
+output:
+  html_document: default
+  html_notebook: default
+---
+# Load data
+```{r}
+source('prepare_data.R')
+```
+# Test data quality
+We expect no difference between gender. Participants have to be distributed equally over both conditions sav and pav by gender.
+```{r}
+table(valid_sessions$gender)
+crosstab_gender_assigned_model <- xtabs(~gender+assigned_model, data=valid_sessions); crosstab_gender_assigned_model
+chisq.test(crosstab_gender_assigned_model)
+```
+
+# Item analysis
+```{r}
+library(psych)
+citation("psych")
+```
+## Acceptance
+### Acceptance of AVs via general attitude
+```{r}
+items <- c('questionnaire_implicite_general_acceptance_1', 'questionnaire_implicite_general_acceptance_2', 'questionnaire_implicite_general_acceptance_3', 'questionnaire_implicite_general_acceptance_4', 'questionnaire_implicite_general_acceptance_5')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+### Acceptance of AVs via explicit rating over all diemensions
+```{r}
+items <- c('questionnaire_acceptance_generally', 'questionnaire_acceptance_environmental', 'questionnaire_acceptance_time', 'questionnaire_acceptance_costs', 'questionnaire_acceptance_social')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+## Anticipated Feelings
+### Perceptible quantity of potential savings over all dimensions
+```{r}
+items <- c('questionnaire_apf_quantity_ecology', 'questionnaire_apf_quantity_duration', 'questionnaire_apf_quantity_costs')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+### Anticipated Feelings
+```{r}
+items <- c('questionnaire_apf_feelings_ecology', 'questionnaire_apf_feelings_duration', 'questionnaire_apf_feelings_costs')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+## Norm and Moral
+### Awareness of Consequences
+```{r}
+items <- c('questionnaire_norm_consequences_1', 'questionnaire_norm_consequences_2')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+### Responsibility
+```{r}
+items <- c('questionnaire_norm_responsibility_1', 'questionnaire_norm_responsibility_2')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+### Personal Norm
+```{r}
+items <- c('questionnaire_norm_personality_1', 'questionnaire_norm_personality_2')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+## Implicit assessment
+### Ranking
+```{r}
+valid_sessions_with_sorted_ranking <- subset(valid_sessions, ranking_sorted == TRUE)
+nrow(valid_sessions_with_sorted_ranking)
+
+table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_time)
+barplot(table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_time), main='Ranking Time')
+
+table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_environment)
+barplot(table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_environment), main='Ranking Environment')
+
+table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_costs)
+barplot(table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_costs), main='Ranking Costs')
+
+table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_social)
+barplot(table(valid_sessions_with_sorted_ranking$questionnaire_dimension_ranking_social), main='Ranking Sozial')
+```
+
+### Time
+```{r}
+items <- c('questionnaire_impicit_time_1', 'questionnaire_impicit_time_2', 'questionnaire_impicit_time_3')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+### Environment
+```{r}
+items <- c('questionnaire_impicit_environment_1', 'questionnaire_impicit_environment_2', 'questionnaire_impicit_environment_3')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+### Costs
+```{r}
+items <- c('questionnaire_impicit_costs_1', 'questionnaire_impicit_costs_2', 'questionnaire_impicit_costs_3')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+### Social
+```{r}
+items <- c('questionnaire_impicit_social_1', 'questionnaire_impicit_social_2', 'questionnaire_impicit_social_3')
+alpha(valid_sessions[,items], check.keys=TRUE)
+describe(rowMeans(valid_sessions[,items], na.rm = T))
+hist(rowMeans(valid_sessions[,items], na.rm = T), main='')
+```
+
+## Factor Analysis Contextual Factors
+### PAV
+```{r}
+items <- names(valid_sessions)[grepl( "questionnaire_context_" , names(valid_sessions))]
+items <- items[items != 'questionnaire_context_needs_3']
+items <- items[items != 'questionnaire_context_needs_4']
+items <- items[items != 'questionnaire_context_needs_9']
+items <- items[items != 'questionnaire_context_needs_10']
+items <- items[items != 'questionnaire_context_concerns_2']
+items <- items[items != 'questionnaire_context_concerns_3']
+items <- items[items != 'questionnaire_context_concerns_4']
+
+# Determine Number of Factors to Extract
+mydata <- valid_sessions.pav[,items]
+ev <- eigen(cor(mydata))
+ap <- parallel(subject=nrow(mydata),var=ncol(mydata),rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS)
+
+res1b <- factanal(mydata, factors=4, rotation="varimax")
+print( res1b$loadings, cutoff=0.3 )
+```
+### SAV
+```{r}
+items <- names(valid_sessions)[grepl( "questionnaire_context_" , names(valid_sessions))]
+# Determine Number of Factors to Extract
+mydata <- valid_sessions.sav[,items]
+ev <- eigen(cor(mydata))
+ap <- parallel(subject=nrow(mydata),var=ncol(mydata),rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS)
+
+res1b <- factanal(mydata, factors=7, rotation="varimax")
+print( res1b$loadings, cutoff=0.3 )
+```
+### SAV + PAV 
+```{r}
+items <- names(valid_sessions)[grepl( "questionnaire_context_" , names(valid_sessions))]
+items <- items[items != 'questionnaire_context_needs_3']
+items <- items[items != 'questionnaire_context_needs_4']
+items <- items[items != 'questionnaire_context_needs_9']
+items <- items[items != 'questionnaire_context_needs_10']
+items <- items[items != 'questionnaire_context_concerns_2']
+items <- items[items != 'questionnaire_context_concerns_3']
+items <- items[items != 'questionnaire_context_concerns_4']
+# Determine Number of Factors to Extract
+mydata <- valid_sessions[,items]
+ev <- eigen(cor(mydata))
+ap <- parallel(subject=nrow(mydata),var=ncol(mydata),rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS)
+
+res1b <- factanal(mydata, factors=4, rotation="varimax")
+print( res1b$loadings, cutoff=0.3 )
+```
+## Innovation
+```{r}
+tmp <- table(valid_sessions$questionnaire_adoption);tmp[c('innovators','early_adopters','early_majority','late_majority','traditionalist')]
+barplot(tmp[c('innovators','early_adopters','early_majority','late_majority','traditionalist')], main='')
+```
+

@@ -19,3 +19,9 @@ spec/examples.txt
 
 # Ignore ruby version
 .ruby-version
+.Rproj.user
+data_analysis/code_snippets/CrystalBallPavDiy_files
+CrystalBall*.html
+sav_*.csv
+item_analysis*.html
+data_analysis/exports

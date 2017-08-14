@@ -1,0 +1,100 @@
+---
+title: "Stepwise Variable Selection PAV"
+author: "Markus Graf"
+date: "10 8 2017"
+output: html_document
+---
+```{r}
+library('corrplot')
+library('corrgram')
+library('lm.beta')
+library('MASS')
+source('prepare_data.R')
+```
+## Definition of available variables
+```{r}
+catecorial_vars <- c('car_category',
+                     'gender',
+                     'car_car_owner',
+                     'innovation')
+
+ordinal_vars <- c('urban_vs_rural_areas_2000',
+                  'community_size_class',
+                  'education',
+                  'income')
+
+interval_vars <- c(
+  'implicit_time',
+  'implicit_costs',
+  'implicit_social',
+  'implicit_environment',
+  'apf_feelings',
+  'apf_quantity',
+  'norm_consequences',
+  'norm_responsibility',
+  'norm_personality',
+  'age',
+  'context_positive_antizipation',
+  'context_autonomy',
+  'context_aversion',
+  'context_driving_enjoyment')
+```
+
+## Testing for collinearity
+### Intercorrelation
+```{r}
+Hmisc::rcorr(as.matrix(valid_sessions.pav[,c(interval_vars, ordinal_vars, 'explicit_acceptance')]))
+corrplot(Hmisc::rcorr(as.matrix(valid_sessions.pav[,c(interval_vars, ordinal_vars, 'explicit_acceptance')]))$r)
+```
+
+apf_quantity and apf_feelings is correlating to high so we have to exclude the one that's correlate less with the independend variable.
+
+```{r}
+Hmisc::rcorr(as.matrix(valid_sessions.pav[,c('apf_quantity', 'apf_feelings', 'explicit_acceptance')]))
+```
+
+So we exclude apf_quantity.
+
+```{r}
+interval_vars <- interval_vars[!interval_vars %in% c('apf_quantity')]
+```
+
+```{r}
+corrgram(valid_sessions.pav[,c(interval_vars, ordinal_vars, 'explicit_acceptance')],order=TRUE, lower.panel=panel.ellipse, upper.panel=panel.pts, text.panel=panel.txt, diag.panel=panel.minmax,cor.method = 'spearman')
+```
+
+### Variance inflation factor
+```{r}
+vif <- bestglm::vifx(valid_sessions.pav[,c(interval_vars)]); vif
+```
+
+VIF should be less then 10. So we have to exclude route_duration
+
+```{r}
+1/vif
+```
+
+Tolerance is greater then 0.2
+
+## Searching for the best general linear model
+```{r}
+# prepare the dataset and generate the formula
+dataset = na.omit(valid_sessions.pav[,c(interval_vars, ordinal_vars, catecorial_vars,'explicit_acceptance')])
+left.hand.side  <- 'explicit_acceptance'
+predictors <- c(interval_vars, ordinal_vars, catecorial_vars)
+right.hand.side <- apply(X = combn(predictors, length(predictors)), MARGIN = 2, paste, collapse = " + ")
+model <- paste(left.hand.side, right.hand.side, sep = "  ~  ")
+print(model)
+# Fit model with all variables included
+fit <- glm(as.formula(model),data=dataset)
+
+# Calculate the best model using BIC as creteria
+step.bic <- stepAIC(fit, k=log(nrow(dataset)), trace=F, steps = 500000)
+summary.lm(step.bic)
+
+# Print Betas
+lm.beta(step.bic)
+
+# Inspect the model properties
+plot(step.bic)
+```

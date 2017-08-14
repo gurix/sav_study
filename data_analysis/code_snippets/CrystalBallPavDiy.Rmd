@@ -1,0 +1,115 @@
+---
+title: "Variable selection"
+author: "Markus Graf"
+date: "10 8 2017"
+output: html_document
+---
+```{r}
+library('parallel')
+library('corrplot')
+library('lm.beta')
+source('prepare_data.R')
+```
+## Definition of available variables
+```{r}
+catecorial_vars <- c('car_category',
+                     'gender',
+                     'car_car_owner',
+                     'innovation')
+
+ordinal_vars <- c('urban_vs_rural_areas_2000',
+                  'community_size_class',
+                  'education',
+                  'income')
+
+interval_vars <- c('implicite_general_acceptance',
+                   'impicit_time',
+                   'impicit_costs',
+                   'impicit_environment',
+                   'impicit_social',
+                   'apf_feelings',
+                   'apf_quantity',
+                   'norm_consequences',
+                   'norm_responsibility',
+                   'norm_personality',
+                   'age',
+                   'context_positive_antizipation',
+                   'context_autonomy',
+                   'context_aversion',
+                   'driving_enjoyment')
+```
+
+## Testing for collinearity
+### Intercorrelation
+```{r}
+Hmisc::rcorr(as.matrix(valid_sessions.pav[,c(interval_vars, ordinal_vars)]))
+corrplot(Hmisc::rcorr(as.matrix(valid_sessions.pav[,c(interval_vars, ordinal_vars)]))$r)
+```
+
+apf_quantity and apf_feelings is correlating to high so we have to exclude the one that's correlate less with the independend variable.
+
+```{r}
+Hmisc::rcorr(as.matrix(valid_sessions[,c('apf_quantity', 'apf_feelings', 'explicit_acceptance')]))
+```
+
+So we exclude apf_quantity.
+
+```{r}
+interval_vars <- interval_vars[!interval_vars %in% c('apf_quantity')]
+```
+
+
+### Variance inflation factor
+```{r}
+vif.pav <- bestglm::vifx(valid_sessions.pav[,c(interval_vars)]); vif.pav
+```
+
+VIF should be less then 10. 
+
+```{r}
+1/vif.pav
+```
+
+Tolerance is greater then 0.2
+
+## Searching for the best general linear model
+```{r}
+predictors = c(interval_vars, ordinal_vars, catecorial_vars)
+outcome = c('explicit_acceptance')
+dataset <- valid_sessions.pav
+
+## Create list of models
+list.of.models <- mclapply(seq_along((predictors)), function(n) {
+  
+  left.hand.side  <- outcome
+  right.hand.side <- apply(X = combn(predictors, n), MARGIN = 2, paste, collapse = " + ")
+  
+  paste(left.hand.side, right.hand.side, sep = "  ~  ")
+}, mc.cores=(parallel::detectCores() -1), mc.allow.recursive=T)
+
+## Convert to a vector
+vector.of.models <- unlist(list.of.models)
+start.time <- Sys.time()
+
+## Fit glm to all models
+list.of.fits <- mclapply(vector.of.models, function(x) {
+  formula    <- as.formula(x)
+  fit        <- glm(formula, data = dataset)
+  result.BIC <- extractAIC(fit, k = log(nrow(dataset)))
+  
+  data.frame(num.predictors = result.BIC[1],
+             BIC            = result.BIC[2],
+             model          = x)
+}, mc.cores=(parallel::detectCores()-1), mc.allow.recursive=T)
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+## Collapse to a data frame
+list.of.fits.sorted <- list.of.fits[order(sapply(list.of.fits,'[[',2))]
+myBestglm.pav <- glm(as.character(list.of.fits.sorted[[1]][3]$model), data=dataset)
+myBestglm.pav
+summary(myBestglm.pav)
+save.image(file='CrystalBallPavDiy.RData')
+```
+

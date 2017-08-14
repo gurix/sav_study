@@ -1,0 +1,82 @@
+---
+title: "Variable selection"
+author: "Markus Graf"
+date: "10 8 2017"
+output: html_document
+---
+```{r}
+library('bestglm')
+library('corrplot')
+library('lm.beta')
+source('prepare_data.R')
+```
+## Definition of available variables
+```{r}
+catecorial_vars <- c('car_category',
+                     'gender',
+                     'car_car_owner',
+                     'innovation')
+
+ordinal_vars <- c('urban_vs_rural_areas_2000',
+                  'community_size_class',
+                  'education',
+                  'income')
+
+interval_vars <- c('implicite_general_acceptance',
+                   'impicit_time',
+                   'impicit_costs',
+                   'impicit_environment',
+                   'impicit_social',
+                   'apf_feelings',
+                   'apf_quantity',
+                   'norm_consequences',
+                   'norm_responsibility',
+                   'norm_personality',
+                   'age',
+                   'context_positive_antizipation',
+                   'context_autonomy',
+                   'context_aversion',
+                   'driving_enjoyment')
+```
+
+## Testing for collinearity
+### Intercorrelation
+```{r}
+Hmisc::rcorr(as.matrix(valid_sessions.pav[,c(interval_vars, ordinal_vars)]))
+corrplot(Hmisc::rcorr(as.matrix(valid_sessions.pav[,c(interval_vars, ordinal_vars)]))$r)
+```
+
+apf_quantity and apf_feelings is correlating to high so we have to exclude the one that's correlate less with the independend variable.
+
+```{r}
+Hmisc::rcorr(as.matrix(valid_sessions[,c('apf_quantity', 'apf_feelings', 'explicit_acceptance')]))
+```
+
+So we exclude apf_quantity.
+
+```{r}
+interval_vars <- interval_vars[!interval_vars %in% c('apf_quantity')]
+```
+
+
+### Variance inflation factor
+```{r}
+vif.pav <- bestglm::vifx(valid_sessions.pav[,c(interval_vars)]); vif.pav
+```
+
+VIF should be less then 10.
+
+```{r}
+1/vif.pav
+```
+
+Tolerance is greater then 0.2
+
+## Searching for the best general linear model
+```{r}
+resbestglm.pav <- bestglm(na.omit(valid_sessions.pav[,c(interval_vars, ordinal_vars, catecorial_vars, 'explicit_acceptance')]))
+summary(resbestglm.pav$BestModel)
+lm.beta(resbestglm.pav$BestModel)
+save(resbestglm.pav, file = 'resbestglm.pav.Rdata')
+```
+
