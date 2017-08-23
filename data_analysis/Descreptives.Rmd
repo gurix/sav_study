@@ -1,0 +1,23 @@
+---
+title: "Descriptives"
+author: "Markus Graf"
+date: "10 8 2017"
+output: html_document
+---
+```{r}
+source('prepare_data.R')
+# Total amount of participants
+nrow(valid_sessions)
+
+# Gender description
+table(valid_sessions$gender)
+prop.table(table(valid_sessions$gender))
+
+# Assigned model
+table(valid_sessions$assigned_model)
+prop.table(table(valid_sessions$assigned_model))
+
+# Age
+psych::describe(valid_sessions$age)
+hist(valid_sessions$age)
+```

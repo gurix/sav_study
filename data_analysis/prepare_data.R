@@ -17,6 +17,10 @@ valid_sessions$fill_in_speed <- difftime(valid_sessions$updated_at, valid_sessio
 valid_sessions$fill_in_speed <- difftime(valid_sessions$updated_at, valid_sessions$created_at)
 valid_sessions <- subset(valid_sessions, fill_in_speed > 5)
 
+# Exclude participants don not fill out their mobility profile properly
+valid_sessions <- subset(valid_sessions, route_distance > 0)
+valid_sessions <- subset(valid_sessions, route_duration > 0)
+
 # Fix empty car_category
 levels(valid_sessions$car_category)[levels(valid_sessions$car_category)==""] <- "none"
 
@@ -79,11 +83,43 @@ valid_sessions$route_costs_difference <- valid_sessions$route_cost - valid_sessi
 valid_sessions$route_ecological_costs_difference <- valid_sessions$route_ecological_costs - valid_sessions$route_model_ecological_costs
 valid_sessions$route_duration_difference <- valid_sessions$route_duration - valid_sessions$route_model_duration
 
+# Log transformation for regression models
+valid_sessions$log_route_costs <- log(valid_sessions$route_costs)
+valid_sessions$log_route_duration <- log(valid_sessions$route_duration)
+valid_sessions$log_route_ecological_costs <- log(valid_sessions$route_ecological_costs)
+
+valid_sessions$log_route_costs_difference <-log(valid_sessions$route_costs_difference + (min(valid_sessions$route_costs_difference) * -1) + 1)
+valid_sessions$log_route_duration_difference <- log(valid_sessions$route_duration_difference + (min(valid_sessions$route_duration_difference) * -1) + 1)
+valid_sessions$log_route_ecological_costs_difference <- log(valid_sessions$route_ecological_costs_difference + (min(valid_sessions$route_ecological_costs_difference) * -1) + 1)
+
+
+# Cut off calculated based on swiss trafic behavior https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/verkehrsverhalten.assetdetail.1840604.html
+valid_sessions$route_duration_cutted_off <- (valid_sessions$route_duration/7) > 90.4
+
 # Level of measurement for some variables
 valid_sessions$education <- as.ordered(valid_sessions$education)
 valid_sessions$income <- as.ordered(valid_sessions$income)
 valid_sessions$community_size_class <- as.ordered(valid_sessions$community_size_class)
 valid_sessions$urban_vs_rural_areas_2000 <- as.ordered(valid_sessions$urban_vs_rural_areas_2000)
+
+### F1 (positive Antizipation)
+valid_sessions$general_context_positive_antizipation <- rowMeans(valid_sessions[,c('questionnaire_context_anticipation_1', 
+                                                                                   'questionnaire_context_anticipation_2', 
+                                                                                   'questionnaire_context_anticipation_3')],na.rm=T)
+### F2 (Unabhängigkeit/Autonomie)
+valid_sessions$general_context_autonomy <- rowMeans(valid_sessions[,c('questionnaire_context_needs_2', 
+                                                                      'questionnaire_context_needs_5',
+                                                                      'questionnaire_context_needs_7', 
+                                                                      'questionnaire_context_needs_8', 
+                                                                      'questionnaire_context_needs_11',
+                                                                      'questionnaire_context_concerns_1')],na.rm=T)
+### F3 (Systemzweifel und Abneigung)
+valid_sessions$general_context_aversion <- rowMeans(valid_sessions[,c('questionnaire_context_concerns_5',
+                                                                      'questionnaire_context_concerns_6')],na.rm=T)
+
+### F4 (Freude am aktiven Fahren)
+valid_sessions$general_context_driving_enjoyment <- rowMeans(valid_sessions[,c('questionnaire_context_needs_12', 
+                                                                               'questionnaire_context_needs_13')],na.rm=T)
 
 
 # Two groups for PAV and SAV

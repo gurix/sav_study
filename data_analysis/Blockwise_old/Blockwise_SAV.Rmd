@@ -1,0 +1,61 @@
+---
+title: "Blockwise Variable Selection SAV"
+author: "Markus Graf"
+date: "10 8 2017"
+output: html_document
+---
+```{r}
+library('corrplot')
+library('corrgram')
+library('lm.beta')
+library('MASS')
+source('prepare_data.R')
+
+# Fileter people having no routing costs, i.e pedestrians
+dataset <- subset(valid_sessions.sav, route_costs > 0)
+```
+
+## Block 1 Context factors
+```{r}
+block1 <- lm(explicit_acceptance ~ general_context_positive_antizipation + general_context_autonomy + general_context_aversion + general_context_driving_enjoyment, data=dataset);summary.lm(block1)
+lm.beta(block1)
+bestglm::vifx(block1$model)
+plot(block1)
+```
+
+## Block 2 Costs
+```{r}
+block2 <- update(block1, . ~ . + log(route_costs) + (log(route_costs_difference + (min(dataset$route_costs_difference)*-1)+1) +  questionnaire_apf_feelings_costs));summary.lm(block2)
+lm.beta(block2)
+bestglm::vifx(block2$model)
+plot(block2)
+```
+
+## Block 3 Duration
+```{r}
+block3 <- update(block2, . ~ . + log(route_duration) + log(route_duration_difference + (min(dataset$route_duration_difference)*-1)+1) + questionnaire_apf_feelings_duration);summary.lm(block3)
+lm.beta(block3)
+bestglm::vifx(block3$model)
+plot(block3)
+```
+
+## Block 4 Environment
+```{r}
+block4 <- update(block3, . ~ . + log(route_ecological_costs) + log(route_ecological_costs_difference + (min(dataset$route_ecological_costs_difference)*-1)+1) + questionnaire_apf_feelings_ecology);summary.lm(block4)
+lm.beta(block4)
+bestglm::vifx(block4$model)
+plot(block4)
+```
+
+## Block 5 Norm and Moral
+```{r}
+block5 <- update(block4, . ~ . + norm_consequences + norm_responsibility + norm_personality);summary.lm(block5)
+lm.beta(block5)
+bestglm::vifx(block5$model)
+plot(block5)
+```
+
+## Compare the models
+```{r}
+anova(block1, block2, block3, block4, block5)
+```

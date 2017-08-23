@@ -1,0 +1,56 @@
+---
+title: "Blockwise Variable Selection SAV and PAV"
+author: "Markus Graf"
+date: "18.8.2017"
+output: html_document
+---
+```{r}
+library('corrplot')
+library('corrgram')
+library('lm.beta')
+library('MASS')
+
+source('prepare_data.R')
+
+# Fileter people having no routing costs, i.e pedestrians
+dataset <- subset(valid_sessions, route_costs > 0)
+
+block1 <- lm(explicit_acceptance ~  log_route_costs + log_route_costs_difference +  questionnaire_apf_feelings_costs, data=dataset)
+
+summary(block1)
+lm.beta(block1)
+bestglm::vifx(block1$model[,sapply(block1$model,is.numeric)])
+plot(block1)
+
+block2 <- update(block1, . ~ . + log_route_duration + log_route_duration_difference  + questionnaire_apf_feelings_duration)
+summary(block2)
+lm.beta(block2)
+bestglm::vifx(block2$model[,sapply(block2$model,is.numeric)])
+plot(block2)
+
+block3 <- update(block2, . ~ . + log_route_ecological_costs + log_route_ecological_costs_difference + questionnaire_apf_feelings_ecology)
+summary(block3)
+lm.beta(block3)
+bestglm::vifx(block3$model[,sapply(block3$model,is.numeric)])
+plot(block3)
+
+block4 <- update(block3, . ~ . + norm_consequences + norm_responsibility + norm_personality)
+summary(block4)
+lm.beta(block4)
+bestglm::vifx(block4$model[,sapply(block4$model,is.numeric)])
+plot(block4)
+
+block5 <- update(block4, . ~ . + general_context_positive_antizipation + general_context_autonomy + general_context_aversion + general_context_driving_enjoyment)
+summary(block5)
+lm.beta(block5)
+bestglm::vifx(block5$model[,sapply(block5$model,is.numeric)])
+plot(block5)
+
+block6 <- update(block5, . ~ . + assigned_model)
+summary(block6)
+lm.beta(block6)
+bestglm::vifx(block6$model[,sapply(block6$model,is.numeric)])
+plot(block6)
+
+anova(block1, block2, block3, block4, block5, block6)
+```

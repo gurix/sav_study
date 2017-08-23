@@ -1,0 +1,20 @@
+---
+title: "Blockwise Variable Selection SAV"
+author: "Markus Graf"
+date: "10 8 2017"
+output: html_document
+---
+```{r}
+library('corrplot')
+library('corrgram')
+library('lm.beta')
+library('MASS')
+source('prepare_data.R')
+options(scipen=999)
+
+lm1 <- lm(explicit_acceptance ~ implicite_general_acceptance + implicit_social + apf_quantity + innovation ,data = valid_sessions)
+summary(lm1)
+plot(lm1)
+bestglm::vifx(lm1$model[,sapply(lm1$model, is.numeric)])
+lm.beta(lm1)
+```

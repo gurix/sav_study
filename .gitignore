@@ -25,3 +25,4 @@ CrystalBall*.html
 sav_*.csv
 item_analysis*.html
 data_analysis/exports
+data_analysis/**/*.html

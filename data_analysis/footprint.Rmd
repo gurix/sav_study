@@ -1,0 +1,74 @@
+---
+title: "Footprint"
+author: "Markus Graf"
+date: "23 8 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source('prepare_data.R')
+```
+
+## Ecological Footprint
+### Total
+```{r}
+emissions_today <- c(Total=sum(valid_sessions$route_ecological_costs),
+                     PAV=sum(valid_sessions.pav$route_ecological_costs),
+                     SAV=sum(valid_sessions.sav$route_ecological_costs))
+
+emissions_future <- c(Total=sum(valid_sessions$route_model_ecological_costs),
+                     PAV=sum(valid_sessions.pav$route_model_ecological_costs),
+                     SAV=sum(valid_sessions.sav$route_model_ecological_costs))
+
+emissions <- rbind(emissions_today, emissions_future)
+emissions <- emissions / 1000 / 1000
+
+emissions
+
+barplot(emissions, beside = T, main='CO2 emissions', ylab = 'Carbon dioxide equivalent in tons', legend=c('Today', '2030'), names.arg = c(paste0('Total (N=', nrow(valid_sessions), ')'), paste0('PAV (n=', nrow(valid_sessions.pav), ')'), paste0('SAV (n=', nrow(valid_sessions.sav), ')')))
+```
+
+### Car owner only
+```{r}
+car_only <- subset(valid_sessions, car_car_owner == 'true')
+car_only.pav <- subset(valid_sessions.pav, car_car_owner == 'true')
+car_only.sav <- subset(valid_sessions.sav, car_car_owner == 'true')
+
+emissions_today <- c(Total=sum(car_only$route_ecological_costs),
+                     PAV=sum(car_only.pav$route_ecological_costs),
+                     SAV=sum(car_only.sav$route_ecological_costs))
+
+emissions_future <- c(Total=sum(car_only$route_model_ecological_costs),
+                     PAV=sum(car_only.pav$route_model_ecological_costs),
+                     SAV=sum(car_only.sav$route_model_ecological_costs))
+
+emissions <- rbind(emissions_today, emissions_future)
+emissions <- emissions / 1000 / 1000
+
+emissions
+
+barplot(emissions, beside = T, main='CO2 emissions for participants owning a car', ylab = 'Carbon dioxide equivalent in tons', legend=c('Today', '2030'), names.arg = c(paste0('Total (N=', nrow(car_only), ')'), paste0('PAV (n=', nrow(car_only.pav), ')'), paste0('SAV (n=', nrow(car_only.sav), ')')))
+```
+
+### Public transportation only
+```{r}
+pt_only <- subset(valid_sessions, car_car_owner == 'false')
+pt_only.pav <- subset(valid_sessions.pav, car_car_owner == 'false')
+pt_only.sav <- subset(valid_sessions.sav, car_car_owner == 'false')
+
+emissions_today <- c(Total=sum(pt_only$route_ecological_costs),
+                     PAV=sum(pt_only.pav$route_ecological_costs),
+                     SAV=sum(pt_only.sav$route_ecological_costs))
+
+emissions_future <- c(Total=sum(pt_only$route_model_ecological_costs),
+                     PAV=sum(pt_only.pav$route_model_ecological_costs),
+                     SAV=sum(pt_only.sav$route_model_ecological_costs))
+
+emissions <- rbind(emissions_today, emissions_future)
+emissions <- emissions / 1000 / 1000
+
+emissions
+
+barplot(emissions, beside = T, main='CO2 emissions for participants not owning a car', ylab = 'Carbon dioxide equivalent in tons', legend=c('Today', '2030'), names.arg = c(paste0('Total (N=', nrow(pt_only), ')'), paste0('PAV (n=', nrow(pt_only.pav), ')'), paste0('SAV (n=', nrow(pt_only.sav), ')')))
+```
